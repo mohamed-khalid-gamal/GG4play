@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin: Manage Download Links</title>
+<!-- Google Fonts: Space Grotesk -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS with Config -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0d59f2",
+                        "background-light": "#f5f6f8",
+                        "background-dark": "#101622",
+                        "surface-dark": "#1a1d24", // Custom surface color for cards
+                        "border-dark": "#2a313d", // Custom border color
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: "Space Grotesk", sans-serif;
+        }
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #101622; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2a313d; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3b4354; 
+        }
+        .glow-primary {
+            box-shadow: 0 0 20px rgba(13, 89, 242, 0.25);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white min-h-screen flex flex-col font-display selection:bg-primary selection:text-white">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-border-dark bg-background-dark px-6 py-3 lg:px-10">
+<div class="flex items-center gap-4 text-white">
+<div class="size-8 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl">token</span>
+</div>
+<h2 class="text-white text-xl font-bold leading-tight tracking-[-0.015em]">Admin Console</h2>
+</div>
+<div class="flex flex-1 justify-end gap-6 items-center">
+<!-- Search -->
+<label class="hidden md:flex flex-col min-w-40 !h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full group focus-within:ring-2 ring-primary/50 transition-all">
+<div class="text-slate-400 flex border-none bg-surface-dark items-center justify-center pl-4 rounded-l-lg border-r-0">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-surface-dark focus:border-none h-full placeholder:text-slate-500 px-4 rounded-l-none border-l-0 pl-2 text-sm font-normal leading-normal" placeholder="Search resources..." value=""/>
+</div>
+</label>
+<!-- Actions -->
+<div class="flex gap-3">
+<button class="flex items-center justify-center overflow-hidden rounded-lg size-10 bg-surface-dark hover:bg-slate-800 text-white transition-colors relative">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+<span class="absolute top-2 right-2 size-2 rounded-full bg-primary animate-pulse"></span>
+</button>
+<button class="flex items-center justify-center overflow-hidden rounded-lg size-10 bg-surface-dark hover:bg-slate-800 text-white transition-colors">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+</button>
+</div>
+<!-- Profile -->
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-10 border border-border-dark" data-alt="Admin user profile picture with a dark futuristic theme" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCNmhcvbTOjld1J4l61xcD-C1o6XHOZ3zBwz0iwf6R304aF9DqNrO6j2wD2w-jPsYG7GwNcV_JNgtKSCwrku2CrDOGh3OIk-kcjDNea2MIad_qTGvHkljc4AMXkK9zNxSN68yeRx64Dkx5c1etYiaCl13qvb71rN6XeW2RwKN9srG52F2OfqRlsyJndyaLABMJZWYeK2HYSFEG1ZHD8VviNKvWQ_fjmhvZNP6pGp59yiLNx5B1Q9xPNQDrMEs_LSOAe4aiLEMSVYJM");'></div>
+</div>
+</header>
+<!-- Main Content Layout -->
+<div class="flex flex-1 w-full justify-center">
+<div class="flex flex-col w-full max-w-[1200px] px-4 py-6 md:px-8 md:py-8 gap-8">
+<!-- Breadcrumbs -->
+<nav class="flex flex-wrap items-center gap-2 text-sm">
+<a class="text-slate-400 hover:text-primary transition-colors font-medium flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[18px]">dashboard</span>
+                    Dashboard
+                </a>
+<span class="text-slate-600 font-medium">/</span>
+<a class="text-slate-400 hover:text-primary transition-colors font-medium" href="#">Games</a>
+<span class="text-slate-600 font-medium">/</span>
+<a class="text-slate-400 hover:text-primary transition-colors font-medium flex items-center gap-2" href="#">
+<div class="size-5 rounded bg-cover bg-center" data-alt="Cyberpunk 2077 game cover thumbnail" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBUep4rVWd1aqHqV2IovQtqi7uQaYfdEn4SdswhRSP50CdkVxFgGsYRdFZTo7yWcfSjShpGNeWpYv7ra3M3otTyoNakznxGJVaruhYD9xZ1NNI_bVYP2lpm4r_M909BJPr9ATX-Xz_ocJZM7AOiPRrmtJ9GkE6JVxP7KGfbLxn0972jbXZUFFrGEsF8XQ-dNcbwFBXhruB_UVpnJBOneDHP47yV99wS_EfyoRHBl66rG4nxA37Swa8xTnSZF7pQSjm9Ehdl8f-FnOY")'></div>
+                    Cyberpunk 2077
+                </a>
+<span class="text-slate-600 font-medium">/</span>
+<span class="text-white font-semibold">Links</span>
+</nav>
+<!-- Page Heading -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div class="flex flex-col gap-2">
+<h1 class="text-white text-4xl md:text-5xl font-bold tracking-tight">Manage Download Links</h1>
+<p class="text-slate-400 text-base max-w-2xl">Configure and monitor mirrors, torrents, and direct download sources for Cyberpunk 2077 v2.1.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center justify-center rounded-lg h-11 px-5 bg-surface-dark border border-border-dark text-white text-sm font-bold hover:bg-slate-800 transition-colors gap-2">
+<span class="material-symbols-outlined text-[20px]">refresh</span>
+<span class="hidden sm:inline">Verify All</span>
+</button>
+<button class="flex items-center justify-center rounded-lg h-11 px-5 bg-primary text-white text-sm font-bold hover:bg-blue-600 transition-all glow-primary gap-2">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span>Add New Source</span>
+</button>
+</div>
+</div>
+<!-- Stats Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- Stat 1 -->
+<div class="flex flex-col gap-1 rounded-xl p-5 bg-surface-dark border border-border-dark relative overflow-hidden group">
+<div class="absolute right-0 top-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl">link</span>
+</div>
+<p class="text-slate-400 text-sm font-medium uppercase tracking-wider">Total Links</p>
+<div class="flex items-baseline gap-2">
+<p class="text-white text-3xl font-bold">12</p>
+<span class="text-emerald-400 text-sm font-medium flex items-center">
+<span class="material-symbols-outlined text-[16px] mr-0.5">trending_up</span>
+                            +2 this week
+                        </span>
+</div>
+</div>
+<!-- Stat 2 -->
+<div class="flex flex-col gap-1 rounded-xl p-5 bg-surface-dark border border-border-dark relative overflow-hidden group">
+<div class="absolute right-0 top-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl">check_circle</span>
+</div>
+<p class="text-slate-400 text-sm font-medium uppercase tracking-wider">Active Sources</p>
+<div class="flex items-baseline gap-2">
+<p class="text-white text-3xl font-bold">10</p>
+<span class="text-slate-400 text-sm font-medium">98% uptime avg</span>
+</div>
+</div>
+<!-- Stat 3 -->
+<div class="flex flex-col gap-1 rounded-xl p-5 bg-surface-dark border border-border-dark relative overflow-hidden group">
+<div class="absolute right-0 top-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl">report_problem</span>
+</div>
+<p class="text-slate-400 text-sm font-medium uppercase tracking-wider">Reported Broken</p>
+<div class="flex items-baseline gap-2">
+<p class="text-white text-3xl font-bold">2</p>
+<span class="text-rose-500 text-sm font-medium flex items-center">
+<span class="material-symbols-outlined text-[16px] mr-0.5">warning</span>
+                            Needs Attention
+                        </span>
+</div>
+</div>
+</div>
+<!-- Table Section -->
+<div class="flex flex-col gap-4">
+<!-- Table Toolbar -->
+<div class="flex flex-wrap items-center justify-between gap-4 p-1">
+<div class="flex items-center gap-2">
+<h3 class="text-white text-lg font-bold">Source List</h3>
+<span class="px-2 py-0.5 rounded-full bg-border-dark text-slate-400 text-xs font-mono">ID: CP2077-EXT</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="flex items-center rounded-lg bg-surface-dark border border-border-dark h-9 px-1">
+<button class="px-3 h-full rounded text-xs font-bold text-white bg-slate-700/50">All</button>
+<button class="px-3 h-full rounded text-xs font-medium text-slate-400 hover:text-white hover:bg-slate-700/30 transition-colors">Direct</button>
+<button class="px-3 h-full rounded text-xs font-medium text-slate-400 hover:text-white hover:bg-slate-700/30 transition-colors">Torrent</button>
+</div>
+</div>
+</div>
+<!-- Main Table -->
+<div class="w-full overflow-hidden rounded-xl border border-border-dark bg-surface-dark shadow-xl">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-[#15181e] border-b border-border-dark text-xs uppercase tracking-wider text-slate-400">
+<th class="px-6 py-4 font-semibold w-[300px]">Source Name</th>
+<th class="px-6 py-4 font-semibold w-[150px]">Type</th>
+<th class="px-6 py-4 font-semibold w-[150px]">File Size</th>
+<th class="px-6 py-4 font-semibold w-[150px]">Version</th>
+<th class="px-6 py-4 font-semibold w-[150px]">Health Status</th>
+<th class="px-6 py-4 font-semibold text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-dark text-sm">
+<!-- Row 1 -->
+<tr class="group hover:bg-white/5 transition-colors">
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-white font-medium flex items-center gap-2">
+<span class="material-symbols-outlined text-blue-400 text-[18px]">dns</span>
+                                                Mirror 1 (US-East)
+                                            </span>
+<span class="text-slate-500 text-xs font-mono mt-1">srv-us-east-01.cdn...</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center rounded-md bg-blue-500/10 px-2 py-1 text-xs font-medium text-blue-400 ring-1 ring-inset ring-blue-500/20">
+                                            Direct .ISO
+                                        </span>
+</td>
+<td class="px-6 py-4 text-slate-300 font-mono">45.2 GB</td>
+<td class="px-6 py-4 text-slate-300">v2.1</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="relative flex h-2.5 w-2.5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+</span>
+<span class="text-emerald-400 font-medium">Online</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2 opacity-60 group-hover:opacity-100 transition-opacity">
+<button class="p-2 rounded-lg hover:bg-slate-700 text-slate-400 hover:text-white transition-colors" title="Copy Link">
+<span class="material-symbols-outlined text-[18px]">content_copy</span>
+</button>
+<button class="p-2 rounded-lg hover:bg-slate-700 text-slate-400 hover:text-white transition-colors" title="Edit">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="group hover:bg-white/5 transition-colors">
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-white font-medium flex items-center gap-2">
+<span class="material-symbols-outlined text-orange-400 text-[18px]">cloud</span>
+                                                Google Drive
+                                            </span>
+<span class="text-slate-500 text-xs font-mono mt-1">drive.google.com/fi...</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center rounded-md bg-orange-500/10 px-2 py-1 text-xs font-medium text-orange-400 ring-1 ring-inset ring-orange-500/20">
+                                            Cloud Storage
+                                        </span>
+</td>
+<td class="px-6 py-4 text-slate-300 font-mono">45.0 GB</td>
+<td class="px-6 py-4 text-slate-300">v2.1</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="relative flex h-2.5 w-2.5">
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+</span>
+<span class="text-emerald-400 font-medium">Online</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2 opacity-60 group-hover:opacity-100 transition-opacity">
+<button class="p-2 rounded-lg hover:bg-slate-700 text-slate-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[18px]">content_copy</span>
+</button>
+<button class="p-2 rounded-lg hover:bg-slate-700 text-slate-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="group hover:bg-white/5 transition-colors">
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-white font-medium flex items-center gap-2">
+<span class="material-symbols-outlined text-red-400 text-[18px]">cloud_off</span>
+                                                Mega Upload
+                                            </span>
+<span class="text-slate-500 text-xs font-mono mt-1">mega.nz/file/x892...</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center rounded-md bg-orange-500/10 px-2 py-1 text-xs font-medium text-orange-400 ring-1 ring-inset ring-orange-500/20">
+                                            Cloud Storage
+                                        </span>
+</td>
+<td class="px-6 py-4 text-slate-300 font-mono">45.0 GB</td>
+<td class="px-6 py-4 text-slate-300">v2.1</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="relative flex h-2.5 w-2.5">
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-rose-500"></span>
+</span>
+<span class="text-rose-500 font-medium">Broken Link</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2 opacity-60 group-hover:opacity-100 transition-opacity">
+<button class="p-2 rounded-lg hover:bg-slate-700 text-slate-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[18px]">content_copy</span>
+</button>
+<button class="p-2 rounded-lg hover:bg-slate-700 text-slate-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="group hover:bg-white/5 transition-colors">
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-white font-medium flex items-center gap-2">
+<span class="material-symbols-outlined text-purple-400 text-[18px]">hub</span>
+                                                Torrent Magnet
+                                            </span>
+<span class="text-slate-500 text-xs font-mono mt-1">magnet:?xt=urn:btih...</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center rounded-md bg-purple-500/10 px-2 py-1 text-xs font-medium text-purple-400 ring-1 ring-inset ring-purple-500/20">
+                                            P2P Magnet
+                                        </span>
+</td>
+<td class="px-6 py-4 text-slate-300 font-mono">44.8 GB</td>
+<td class="px-6 py-4 text-slate-300">v2.1</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="relative flex h-2.5 w-2.5">
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+</span>
+<span class="text-emerald-400 font-medium">Online (400+ Seeds)</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2 opacity-60 group-hover:opacity-100 transition-opacity">
+<button class="p-2 rounded-lg hover:bg-slate-700 text-slate-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[18px]">content_copy</span>
+</button>
+<button class="p-2 rounded-lg hover:bg-slate-700 text-slate-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="group hover:bg-white/5 transition-colors">
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-white font-medium flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-500 text-[18px]">history</span>
+                                                Old Mirror (Deprecated)
+                                            </span>
+<span class="text-slate-500 text-xs font-mono mt-1">srv-backup-04.cdn...</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center rounded-md bg-slate-500/10 px-2 py-1 text-xs font-medium text-slate-400 ring-1 ring-inset ring-slate-500/20">
+                                            Direct
+                                        </span>
+</td>
+<td class="px-6 py-4 text-slate-300 font-mono">42.0 GB</td>
+<td class="px-6 py-4 text-slate-300">v2.0</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="relative flex h-2.5 w-2.5">
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-slate-500"></span>
+</span>
+<span class="text-slate-500 font-medium">Offline</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2 opacity-60 group-hover:opacity-100 transition-opacity">
+<button class="p-2 rounded-lg hover:bg-slate-700 text-slate-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[18px]">content_copy</span>
+</button>
+<button class="p-2 rounded-lg hover:bg-slate-700 text-slate-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="border-t border-border-dark bg-[#15181e] px-4 py-3 sm:px-6">
+<div class="flex items-center justify-between">
+<div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+<div>
+<p class="text-sm text-slate-400">
+                                        Showing <span class="font-medium text-white">1</span> to <span class="font-medium text-white">5</span> of <span class="font-medium text-white">12</span> results
+                                    </p>
+</div>
+<div>
+<nav aria-label="Pagination" class="isolate inline-flex -space-x-px rounded-md shadow-sm">
+<a class="relative inline-flex items-center rounded-l-md px-2 py-2 text-slate-400 ring-1 ring-inset ring-border-dark hover:bg-slate-800 focus:z-20 focus:outline-offset-0" href="#">
+<span class="sr-only">Previous</span>
+<span class="material-symbols-outlined text-[20px]">chevron_left</span>
+</a>
+<a aria-current="page" class="relative z-10 inline-flex items-center bg-primary px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary" href="#">1</a>
+<a class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-slate-400 ring-1 ring-inset ring-border-dark hover:bg-slate-800 focus:z-20 focus:outline-offset-0" href="#">2</a>
+<a class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-slate-400 ring-1 ring-inset ring-border-dark hover:bg-slate-800 focus:z-20 focus:outline-offset-0" href="#">3</a>
+<a class="relative inline-flex items-center rounded-r-md px-2 py-2 text-slate-400 ring-1 ring-inset ring-border-dark hover:bg-slate-800 focus:z-20 focus:outline-offset-0" href="#">
+<span class="sr-only">Next</span>
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</a>
+</nav>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body></html>

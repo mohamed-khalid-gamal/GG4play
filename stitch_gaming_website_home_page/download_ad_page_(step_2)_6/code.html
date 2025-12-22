@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Download Ad Page (Step 2)</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0d59f2",
+                        "background-light": "#f5f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar for gaming feel */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #111318;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #282e39;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3b4354;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#111318] dark:text-white font-display overflow-x-hidden min-h-screen flex flex-col">
+<!-- Header -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#282e39] bg-[#111318] px-4 py-3 md:px-10">
+<div class="flex items-center gap-4 text-white">
+<div class="size-8 text-primary">
+<span class="material-symbols-outlined" style="font-size: 32px;">sports_esports</span>
+</div>
+<h2 class="text-white text-xl font-bold leading-tight tracking-[-0.015em]">CyberGames</h2>
+</div>
+<div class="hidden md:flex flex-1 justify-end gap-8 items-center">
+<nav class="flex items-center gap-9">
+<a class="text-white hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Home</a>
+<a class="text-white hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Games</a>
+<a class="text-white hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Community</a>
+<a class="text-white hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Support</a>
+</nav>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 ring-2 ring-[#282e39]" data-alt="User profile avatar showing a futuristic helmet" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCIUGB7_dA-BWyDVsRLZ2shTrVdTs2is9WMPKoDuyHaRRQySEJX3hvOttdpYiNyed6DjPOMiB1IFp7kneSoCqhRtkpfmQRsvOHnWiF_dpElgKuUrpkilXyL5gRu8EorXNCMYwFLmBxVDivtcKlbANVu3CtGgd2s9793GjyCFjzYsxBnMXG0V8qgJnIMp5OUbtj3OkkfIlTm6Xm_Y4_dzgkiDdlRtixH04MXHGX78eLMwhvsr2b66d_Dk8qcnVMP-E0KWnTvKK3nXJE");'></div>
+</div>
+<!-- Mobile Menu Icon -->
+<div class="md:hidden text-white">
+<span class="material-symbols-outlined">menu</span>
+</div>
+</header>
+<!-- Main Content Layout -->
+<main class="flex-1 w-full max-w-[1200px] mx-auto px-4 md:px-8 py-8 flex flex-col gap-8">
+<!-- Top Leaderboard Ad Placeholder -->
+<div class="w-full flex justify-center">
+<div class="w-full max-w-[728px] h-[90px] bg-[#1b1f27] border-2 border-dashed border-[#282e39] rounded-lg flex flex-col items-center justify-center gap-2 group cursor-pointer hover:border-[#3b4354] transition-colors relative overflow-hidden">
+<!-- Abstract pattern bg for ad -->
+<div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+<span class="material-symbols-outlined text-[#3b4354] group-hover:text-primary transition-colors">ads_click</span>
+<p class="text-[#58627a] text-xs font-mono uppercase tracking-widest z-10">Advertisement Space</p>
+</div>
+</div>
+<!-- Content Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Main Column (Download Flow) -->
+<div class="lg:col-span-8 flex flex-col gap-6">
+<!-- Progress Bar Step 2 -->
+<div class="flex flex-col gap-3 p-4 rounded-xl bg-[#1b1f27] border border-[#282e39] shadow-sm">
+<div class="flex gap-6 justify-between items-center">
+<div class="flex items-center gap-2">
+<span class="flex items-center justify-center size-6 rounded-full bg-primary text-white text-xs font-bold">2</span>
+<p class="text-white text-base font-medium leading-normal">Verification</p>
+</div>
+<p class="text-[#9ca6ba] text-sm font-normal leading-normal">Step 2 of 3</p>
+</div>
+<!-- 66% progress visual -->
+<div class="rounded-full bg-[#282e39] h-2 overflow-hidden">
+<div class="h-full rounded-full bg-primary shadow-[0_0_10px_rgba(13,89,242,0.5)]" style="width: 66%;"></div>
+</div>
+</div>
+<!-- Page Heading & Status -->
+<div class="flex flex-col gap-2 px-1">
+<h1 class="text-white text-3xl md:text-4xl font-bold leading-tight tracking-tight">Your download is almost ready</h1>
+<p class="text-[#9ca6ba] text-base font-normal">Please verify the file details below. Our secure servers are preparing your unique download link.</p>
+</div>
+<!-- Main Action Card -->
+<div class="relative group">
+<!-- Glow effect behind card -->
+<div class="absolute -inset-0.5 bg-gradient-to-r from-primary to-[#6366f1] rounded-xl opacity-20 blur group-hover:opacity-40 transition duration-500"></div>
+<div class="relative flex flex-col md:flex-row items-stretch justify-between gap-6 rounded-xl bg-[#1a1a20] p-6 shadow-xl border border-[#282e39]">
+<!-- File Info -->
+<div class="flex flex-[2_2_0px] flex-col justify-between gap-6">
+<div class="flex gap-4">
+<div class="size-16 rounded-lg bg-[#282e39] flex items-center justify-center shrink-0 text-primary">
+<span class="material-symbols-outlined" style="font-size: 32px;">folder_zip</span>
+</div>
+<div class="flex flex-col gap-1">
+<h3 class="text-white text-xl font-bold leading-tight">CyberWarrior_Setup.exe</h3>
+<div class="flex flex-wrap gap-3 items-center text-sm text-[#9ca6ba]">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs">info</span> v2.4.1</span>
+<span class="size-1 rounded-full bg-[#3b4354]"></span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs">hard_drive</span> 2.4 GB</span>
+<span class="size-1 rounded-full bg-[#3b4354]"></span>
+<span class="flex items-center gap-1 text-emerald-400"><span class="material-symbols-outlined text-xs">verified_user</span> Virus Scanned</span>
+</div>
+</div>
+</div>
+<!-- Timer / Status Area -->
+<div class="flex flex-col gap-3">
+<div class="flex items-center gap-2 text-primary animate-pulse">
+<span class="material-symbols-outlined" style="font-size: 20px;">hourglass_top</span>
+<span class="text-sm font-medium">Link generated successfully</span>
+</div>
+<button class="flex w-full md:w-fit cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg h-12 px-8 bg-primary hover:bg-blue-600 active:scale-95 transition-all text-white text-base font-bold shadow-[0_4px_14px_0_rgba(13,89,242,0.39)]">
+<span>Continue to Download</span>
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<p class="text-xs text-[#58627a]">By clicking continue, you agree to our Terms of Service.</p>
+</div>
+</div>
+<!-- Game Art / Context Image -->
+<div class="w-full md:w-1/3 bg-center bg-no-repeat bg-cover rounded-lg min-h-[160px] md:min-h-full relative overflow-hidden" data-alt="Cyberpunk warrior character standing in neon city rain" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDrzooX6TgBvAYwKJ2LcLfD5Q55g852AVmtxBj63BvRnx1ognKDFga4UMXRZgkynTDS8L2dXC51qEadKq-SKp_U75v1HYb4r1tFMvopukTk-bDnU0XFPHQwqeGPbrNvsN27m9QkbgGosTYw2V0roOgKbyLo47B6Kt8HT4NnLpHjS1qP-Ja0Hpuo3um4tsmQRENsiA9FSAtVBYvjgx93TQYmkBSVaih0jTFQpxi67E2Don-sGJeXe2IpUwww2OCCmfzWDNsSF0O4CME");'>
+<div class="absolute inset-0 bg-gradient-to-t from-[#1a1a20] to-transparent opacity-80"></div>
+<div class="absolute bottom-3 left-3">
+<span class="px-2 py-1 rounded bg-black/50 backdrop-blur-sm text-[10px] text-white font-bold uppercase border border-white/10">Official Installer</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Trust Signals -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-2">
+<div class="flex items-center gap-2 p-3 rounded-lg bg-[#1b1f27]/50 border border-[#282e39]/50">
+<span class="material-symbols-outlined text-[#9ca6ba]">speed</span>
+<div class="flex flex-col">
+<span class="text-white text-xs font-bold">Fast DL</span>
+<span class="text-[#58627a] text-[10px]">Optimized servers</span>
+</div>
+</div>
+<div class="flex items-center gap-2 p-3 rounded-lg bg-[#1b1f27]/50 border border-[#282e39]/50">
+<span class="material-symbols-outlined text-[#9ca6ba]">shield</span>
+<div class="flex flex-col">
+<span class="text-white text-xs font-bold">Secure</span>
+<span class="text-[#58627a] text-[10px]">End-to-end enc.</span>
+</div>
+</div>
+<div class="flex items-center gap-2 p-3 rounded-lg bg-[#1b1f27]/50 border border-[#282e39]/50">
+<span class="material-symbols-outlined text-[#9ca6ba]">history</span>
+<div class="flex flex-col">
+<span class="text-white text-xs font-bold">Resume</span>
+<span class="text-[#58627a] text-[10px]">Supported</span>
+</div>
+</div>
+<div class="flex items-center gap-2 p-3 rounded-lg bg-[#1b1f27]/50 border border-[#282e39]/50">
+<span class="material-symbols-outlined text-[#9ca6ba]">support</span>
+<div class="flex flex-col">
+<span class="text-white text-xs font-bold">24/7</span>
+<span class="text-[#58627a] text-[10px]">Support team</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Side Column (Ad & Secondary) -->
+<div class="lg:col-span-4 flex flex-col gap-6">
+<!-- Side Ad Placeholder -->
+<div class="w-full flex justify-center lg:justify-start">
+<div class="w-[300px] h-[250px] bg-[#1b1f27] border-2 border-dashed border-[#282e39] rounded-lg flex flex-col items-center justify-center gap-2 group cursor-pointer hover:border-[#3b4354] transition-colors relative">
+<div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
+<span class="material-symbols-outlined text-[#3b4354] group-hover:text-primary transition-colors">featured_video</span>
+<p class="text-[#58627a] text-xs font-mono uppercase tracking-widest z-10">Ad (300x250)</p>
+</div>
+</div>
+<!-- Community Card (Filler content that looks nice) -->
+<div class="w-full max-w-[300px] rounded-lg bg-[#111318] border border-[#282e39] p-4 flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<h4 class="text-white font-bold text-sm">Top Games This Week</h4>
+<a class="text-xs text-primary hover:underline" href="#">View All</a>
+</div>
+<div class="flex flex-col gap-3">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded bg-[#282e39] bg-cover bg-center" data-alt="Abstract red galaxy art" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCBojCDyDV7qhOFNoX1YG_GgT-gPJl6XHmay-HdOL_Fe802LsGMg-Ox-r6Y-KKWV3-qmz9EXfOeRG1ugEBqOXoYExADyZekdWqLFGuzVf1jIlFfQ1aeyI5WfXE-qPffywSB3gRae57EUpb1WrBZ0wu8j1u6QKJa-XH36Q2Kk27AkdbnsT0Snyae5XeEyyVZG3yPsIZyfTIH3b-D_HxffAtqj5X4wzrmoYZB0W3xHpkSrK8L9K4E8eOhzarkAiTHEJCLAYH7EZDQuE8");'></div>
+<div class="flex flex-col">
+<span class="text-white text-sm font-medium">Nebula Raiders</span>
+<span class="text-[#58627a] text-xs">RPG • 4.8★</span>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="size-10 rounded bg-[#282e39] bg-cover bg-center" data-alt="Futuristic blue geometric shapes" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDhxRvOsA5dKwnAn07teqXfnkIJFM7Padft4dnIVkxfx3wVAIiTIvCBpauDmyTj-v63YjTI7uHMsoKGUGcPWLi0tDTWK0UGlCWcoN_yhF2q3nuNFse4mZh1s28yOJD97Fo6rlIMqw7Ed5ZsTDAv2Ql6bUL59Bg3UlIObgWDD05AKVQr9momeRMJPioDa55-_3daT_WNLTXOTXME-6trV3a0Yx-vE3HPAyMZDPSQKswUkSzfbvxMoQwYWEfYg9TN-HmSN0xEmTois1Q");'></div>
+<div class="flex flex-col">
+<span class="text-white text-sm font-medium">Circuit Breaker</span>
+<span class="text-[#58627a] text-xs">Puzzle • 4.5★</span>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="size-10 rounded bg-[#282e39] bg-cover bg-center" data-alt="Dark forest texture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAPOaDoGoRyIBusN6AthwzLB-vflY5UXzo3OAncluPcHJHvBXVaGdNa0qjl_pBQVNK8LgdjGTQEQAHv8LHn6IN7dhmUvd8sWkG9xfwSNZC-imMQ2NIdvLOqLU4auoMJu58DMrXZhX5wAIzyPOy-7Zs8ldaTNkXHbXVNyYjWe45-OJNZEzZXSBE9VkX58gucHuzrLzxG5DdeECHFLCfmQWuHOHdakCFOOQd6uWeSBqICYsJYY0zMnxitnm_rilme_4t5Sd3aed_tVGg");'></div>
+<div class="flex flex-col">
+<span class="text-white text-sm font-medium">Void Walker</span>
+<span class="text-[#58627a] text-xs">Action • 4.9★</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="mt-auto border-t border-[#282e39] bg-[#111318] py-8">
+<div class="mx-auto flex max-w-[960px] flex-col gap-8 px-4 md:flex-row md:items-center md:justify-between">
+<div class="flex flex-col gap-2">
+<div class="flex items-center gap-2 text-white">
+<span class="material-symbols-outlined text-primary">sports_esports</span>
+<span class="font-bold">CyberGames</span>
+</div>
+<p class="text-[#9ca6ba] text-sm">The ultimate destination for gaming downloads.</p>
+</div>
+<div class="flex flex-wrap gap-6 text-sm font-medium text-[#9ca6ba]">
+<a class="hover:text-white transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-white transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-white transition-colors" href="#">DMCA</a>
+<a class="hover:text-white transition-colors" href="#">Report Ad</a>
+</div>
+</div>
+<div class="mx-auto max-w-[960px] px-4 mt-8 pt-8 border-t border-[#282e39]/50 text-center">
+<p class="text-[#58627a] text-xs">© 2023 CyberGames Inc. All rights reserved.</p>
+</div>
+</footer>
+</body></html>

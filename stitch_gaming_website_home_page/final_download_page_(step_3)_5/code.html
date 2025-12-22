@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Final Download Page</title>
+<!-- Fonts: Space Grotesk & Noto Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700;900&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0d59f2",
+                        "background-light": "#f5f6f8",
+                        "background-dark": "#101622",
+                        "surface-dark": "#1b1f27",
+                        "border-dark": "#282e39",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom glow for the primary button */
+        .glow-effect {
+            box-shadow: 0 0 20px rgba(13, 89, 242, 0.4);
+            transition: all 0.3s ease;
+        }
+        .glow-effect:hover {
+            box-shadow: 0 0 30px rgba(13, 89, 242, 0.6);
+            transform: translateY(-1px);
+        }
+        
+        /* Subtle mesh gradient background */
+        .mesh-bg {
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(13, 89, 242, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(13, 89, 242, 0.1) 0px, transparent 50%);
+        }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-white min-h-screen flex flex-col overflow-x-hidden mesh-bg">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-border-dark px-6 lg:px-10 py-3 bg-[#111318] z-20">
+<div class="flex items-center gap-4 lg:gap-8">
+<div class="flex items-center gap-4 text-white">
+<div class="size-8 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl">sports_esports</span>
+</div>
+<h2 class="text-white text-xl font-bold leading-tight tracking-[-0.015em] hidden sm:block">GameStore</h2>
+</div>
+<div class="hidden md:flex items-center gap-6 lg:gap-9">
+<a class="text-white text-sm font-medium hover:text-primary transition-colors" href="#">Store</a>
+<a class="text-white text-sm font-medium hover:text-primary transition-colors" href="#">Library</a>
+<a class="text-white text-sm font-medium hover:text-primary transition-colors" href="#">Community</a>
+<a class="text-white text-sm font-medium hover:text-primary transition-colors" href="#">Support</a>
+</div>
+</div>
+<div class="flex flex-1 justify-end gap-4 lg:gap-8">
+<label class="flex flex-col min-w-40 !h-10 max-w-64 hidden sm:flex">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+<div class="text-[#9ca6ba] flex border-none bg-border-dark items-center justify-center pl-4 rounded-l-lg border-r-0">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-border-dark focus:border-none h-full placeholder:text-[#9ca6ba] px-4 rounded-l-none border-l-0 pl-2 text-sm font-normal leading-normal" placeholder="Search games..." value=""/>
+</div>
+</label>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-blue-600 transition-colors">
+<span class="truncate">Sign In</span>
+</button>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-grow flex flex-col items-center justify-center p-4 lg:p-8 relative z-10">
+<div class="max-w-[1024px] w-full flex flex-col gap-8">
+<!-- Page Heading -->
+<div class="text-center space-y-2 mb-4 animate-fade-in-up">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-500/10 text-green-400 text-xs font-bold uppercase tracking-widest border border-green-500/20 mb-2">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+                    Purchase Confirmed
+                </div>
+<h1 class="text-white text-4xl md:text-5xl font-black leading-tight tracking-[-0.033em]">Your download is ready</h1>
+<p class="text-[#9ca6ba] text-lg font-normal">Thank you for purchasing Cyber Odyssey: Ultimate Edition.</p>
+</div>
+<!-- Main Download Card -->
+<div class="@container w-full">
+<div class="flex flex-col md:flex-row items-stretch rounded-xl shadow-2xl bg-[#1b1f27] border border-border-dark overflow-hidden">
+<!-- Game Art -->
+<div class="w-full md:w-2/5 min-h-[250px] md:min-h-[320px] bg-center bg-no-repeat bg-cover relative group" data-alt="Futuristic cyberpunk city street with neon lights at night" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA2N3SL8oj9XJDWLD24lQt4DkTxxZZqzR-sPbGll4R7iOKWozbHuKK8386Hz1NuwAFUNPaPsUYViRq58gAm4dDD-C3UIfQWKUJItgZN741XDcJE7c6lRibAIgY0HsPh-o1YpLfDBPjGheik_fbmMGE8fsary0WDPZr3uoCEaWEWfwFj_qquIShXAizZOhHhIHS1kRGsCRNoSGkRKc8nxCoOu4NLJXv9BKZ9i3mnh1iY4PqwMM0Qxb1rCY8RP2KESkoCaUiLprlFhKk");'>
+<div class="absolute inset-0 bg-gradient-to-t from-[#1b1f27] to-transparent md:bg-gradient-to-r md:from-transparent md:to-[#1b1f27]"></div>
+</div>
+<!-- Content -->
+<div class="flex-1 flex flex-col justify-center p-6 lg:p-10 gap-6">
+<div>
+<div class="flex items-center justify-between mb-2">
+<span class="text-xs font-bold text-primary tracking-widest uppercase">RPG / Action</span>
+<div class="flex items-center gap-1 text-[#9ca6ba] text-xs">
+<span class="material-symbols-outlined text-sm">window</span>
+<span>Windows 10/11</span>
+</div>
+</div>
+<h2 class="text-white text-3xl font-bold leading-tight tracking-tight mb-2">Cyber Odyssey: Ultimate Edition</h2>
+<p class="text-[#9ca6ba] text-sm md:text-base font-normal">Version 2.4.1 • 45.2 GB • Last Updated: Oct 24</p>
+</div>
+<div class="flex flex-col gap-4">
+<!-- Primary Action -->
+<button class="glow-effect flex w-full cursor-pointer items-center justify-center rounded-lg h-14 px-8 bg-primary text-white text-lg font-bold leading-normal tracking-wide hover:bg-blue-600 relative overflow-hidden group">
+<span class="material-symbols-outlined mr-3 text-2xl group-hover:animate-bounce">download</span>
+<span class="truncate">Download Installer (Windows)</span>
+</button>
+<!-- Trust Signal -->
+<div class="flex items-center justify-center gap-2 text-[#9ca6ba] text-xs font-medium bg-[#111318]/50 py-2 rounded-lg border border-white/5">
+<span class="material-symbols-outlined text-green-500 text-sm">verified_user</span>
+<span>Verified Safe: No Malware Detected • 0 VirusTotal Detections</span>
+</div>
+</div>
+<!-- Secondary Links -->
+<div class="flex gap-4 pt-2 justify-center md:justify-start">
+<button class="text-[#9ca6ba] hover:text-white text-sm font-medium underline underline-offset-4 decoration-white/20 hover:decoration-white transition-all">
+                                System Requirements
+                            </button>
+<span class="text-[#9ca6ba]">•</span>
+<button class="text-[#9ca6ba] hover:text-white text-sm font-medium underline underline-offset-4 decoration-white/20 hover:decoration-white transition-all">
+                                Alternative Mirrors
+                            </button>
+<span class="text-[#9ca6ba]">•</span>
+<button class="text-[#9ca6ba] hover:text-white text-sm font-medium underline underline-offset-4 decoration-white/20 hover:decoration-white transition-all">
+                                View Receipt
+                            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Post-Download Instructions -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-8 border-t border-border-dark/50">
+<div class="flex flex-col items-center text-center gap-3 p-4 rounded-lg hover:bg-white/5 transition-colors">
+<div class="size-12 rounded-full bg-border-dark flex items-center justify-center text-white mb-1">
+<span class="material-symbols-outlined">downloading</span>
+</div>
+<h3 class="text-white font-bold text-lg">1. Download</h3>
+<p class="text-[#9ca6ba] text-sm">Save the installer file to your preferred download location.</p>
+</div>
+<div class="flex flex-col items-center text-center gap-3 p-4 rounded-lg hover:bg-white/5 transition-colors">
+<div class="size-12 rounded-full bg-border-dark flex items-center justify-center text-white mb-1">
+<span class="material-symbols-outlined">install_desktop</span>
+</div>
+<h3 class="text-white font-bold text-lg">2. Install</h3>
+<p class="text-[#9ca6ba] text-sm">Run the .exe file and follow the on-screen wizard instructions.</p>
+</div>
+<div class="flex flex-col items-center text-center gap-3 p-4 rounded-lg hover:bg-white/5 transition-colors">
+<div class="size-12 rounded-full bg-border-dark flex items-center justify-center text-white mb-1">
+<span class="material-symbols-outlined">sports_esports</span>
+</div>
+<h3 class="text-white font-bold text-lg">3. Play</h3>
+<p class="text-[#9ca6ba] text-sm">Launch the game from your desktop or library and enjoy.</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="border-t border-border-dark bg-[#111318] text-[#9ca6ba] py-8">
+<div class="max-w-[960px] mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
+<p>© 2024 GameStore Inc. All rights reserved.</p>
+<div class="flex gap-6">
+<a class="hover:text-white transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-white transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-white transition-colors" href="#">Support</a>
+<a class="hover:text-white transition-colors flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-base">chat</span> Discord
+                </a>
+</div>
+</div>
+</footer>
+</body></html>

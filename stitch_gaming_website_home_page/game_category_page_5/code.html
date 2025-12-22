@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Game Category Page</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0d59f2",
+                        "background-light": "#f5f6f8",
+                        "background-dark": "#101622", // Matches theme config
+                        "card-dark": "#1a1a20",
+                        "border-dark": "#282e39",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #101622; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #282e39; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3d4655; 
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white antialiased overflow-x-hidden">
+<div class="relative flex h-auto min-h-screen w-full flex-col">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-border-dark bg-background-dark/95 backdrop-blur-sm px-4 lg:px-10 py-3">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-white">
+<div class="size-8 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined !text-4xl">stadia_controller</span>
+</div>
+<h2 class="text-white text-2xl font-bold leading-tight tracking-[-0.015em]">GameHub</h2>
+</div>
+<div class="hidden lg:flex items-center gap-9">
+<a class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Store</a>
+<a class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Library</a>
+<a class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Community</a>
+<a class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Support</a>
+</div>
+</div>
+<div class="flex flex-1 justify-end gap-4 lg:gap-8">
+<label class="hidden md:flex flex-col min-w-40 !h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full ring-1 ring-border-dark focus-within:ring-primary transition-all">
+<div class="text-[#9ca6ba] flex border-none bg-[#1c212b] items-center justify-center pl-4 rounded-l-lg border-r-0">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-[#1c212b] focus:border-none h-full placeholder:text-[#9ca6ba] px-4 rounded-l-none border-l-0 pl-2 text-sm font-normal leading-normal" placeholder="Search games..." value=""/>
+</div>
+</label>
+<div class="flex gap-2">
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-blue-600 transition-colors">
+<span class="truncate">Sign In</span>
+</button>
+<button class="hidden sm:flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#282e39] text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-[#323946] transition-colors">
+<span class="truncate">Join Now</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Layout Container -->
+<main class="layout-container flex h-full grow flex-col px-4 md:px-10 py-5 lg:px-40">
+<div class="layout-content-container flex flex-col max-w-[1440px] mx-auto w-full flex-1">
+<!-- Breadcrumbs -->
+<div class="flex flex-wrap gap-2 py-4">
+<a class="text-[#9ca6ba] text-sm font-medium leading-normal hover:text-white" href="#">Home</a>
+<span class="text-[#9ca6ba] text-sm font-medium leading-normal">/</span>
+<a class="text-[#9ca6ba] text-sm font-medium leading-normal hover:text-white" href="#">Categories</a>
+<span class="text-[#9ca6ba] text-sm font-medium leading-normal">/</span>
+<span class="text-white text-sm font-medium leading-normal">Action Games</span>
+</div>
+<!-- Hero Section -->
+<div class="@container w-full mb-8">
+<div class="flex min-h-[400px] flex-col gap-6 bg-cover bg-center bg-no-repeat rounded-xl items-start justify-end px-6 pb-10 md:px-12 relative overflow-hidden group" data-alt="Cyberpunk futuristic city skyline with neon lights and rain" style='background-image: linear-gradient(to top, rgba(16, 22, 34, 1) 0%, rgba(16, 22, 34, 0.4) 50%, rgba(0, 0, 0, 0.2) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuDjSllwUJCY2AjS5XbGFnXdAoFnbK3hU_wKoBCgfEhu2QkENmZ54O4SP4kiBJv6cVZIBMfuwHJn3faSoJSGVigXIyoRWS4xlNKC8gvz4x3sImtgxLXzZIm_QMVR1qeKnDllohoGJmsgw2Pyjs65JsNGxB4T605MVLV4YYg2JOY_60RAMKh17ulqXpANQqXvouvGYoQPVncaecY7Pih8XDUANP2rqGQ2ede5364dZbK8eIEb4mXZTcqdcP773ldgDqIsTMXGOIi4hxw");'>
+<!-- Gradient Overlay for text readability -->
+<div class="absolute inset-0 bg-gradient-to-r from-background-dark/90 via-background-dark/40 to-transparent pointer-events-none"></div>
+<div class="flex flex-col gap-4 text-left z-10 max-w-2xl">
+<span class="inline-flex items-center rounded-full bg-primary/20 px-3 py-1 text-xs font-medium text-primary ring-1 ring-inset ring-primary/30 w-fit">
+                                Featured Spotlight
+                            </span>
+<h1 class="text-white text-4xl md:text-5xl lg:text-6xl font-black leading-tight tracking-[-0.033em]">
+                                Cyberpunk 2077: Phantom Liberty
+                            </h1>
+<h2 class="text-gray-200 text-sm md:text-base font-normal leading-relaxed max-w-xl">
+                                Return as cyber-enhanced mercenary V and embark on a high-stakes mission of espionage and intrigue to save the NUSA President.
+                            </h2>
+<div class="flex gap-3 pt-2">
+<button class="flex items-center justify-center rounded-lg h-12 px-6 bg-primary text-white text-base font-bold tracking-[0.015em] hover:bg-blue-600 transition-colors shadow-lg shadow-blue-900/20">
+                                    Play Now
+                                </button>
+<button class="flex items-center justify-center rounded-lg h-12 px-6 bg-white/10 text-white text-base font-bold tracking-[0.015em] hover:bg-white/20 transition-colors backdrop-blur-md">
+<span class="material-symbols-outlined mr-2">add</span>
+                                    Wishlist
+                                </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Split Layout: Filters & Content -->
+<div class="flex flex-col lg:flex-row gap-8">
+<!-- Filter Sidebar -->
+<aside class="w-full lg:w-64 flex-shrink-0 space-y-6">
+<div class="bg-card-dark rounded-xl p-5 border border-border-dark">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-white text-lg font-bold">Filters</h3>
+<button class="text-primary text-xs font-bold hover:underline">Reset All</button>
+</div>
+<!-- Filter Groups using Details/Summary -->
+<div class="space-y-4">
+<details class="group" open="">
+<summary class="flex cursor-pointer items-center justify-between font-medium text-white list-none mb-3">
+<span>Genre</span>
+<span class="transition group-open:rotate-180">
+<span class="material-symbols-outlined text-sm">keyboard_arrow_down</span>
+</span>
+</summary>
+<div class="flex flex-col gap-2 pb-2 pl-1">
+<label class="flex items-center gap-3 cursor-pointer group/item">
+<input checked="" class="h-4 w-4 rounded border-border-dark bg-[#282e39] text-primary focus:ring-primary focus:ring-offset-[#101622]" type="checkbox"/>
+<span class="text-[#9ca6ba] text-sm group-hover/item:text-white transition-colors">Action RPG</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group/item">
+<input class="h-4 w-4 rounded border-border-dark bg-[#282e39] text-primary focus:ring-primary focus:ring-offset-[#101622]" type="checkbox"/>
+<span class="text-[#9ca6ba] text-sm group-hover/item:text-white transition-colors">FPS</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group/item">
+<input class="h-4 w-4 rounded border-border-dark bg-[#282e39] text-primary focus:ring-primary focus:ring-offset-[#101622]" type="checkbox"/>
+<span class="text-[#9ca6ba] text-sm group-hover/item:text-white transition-colors">Battle Royale</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group/item">
+<input class="h-4 w-4 rounded border-border-dark bg-[#282e39] text-primary focus:ring-primary focus:ring-offset-[#101622]" type="checkbox"/>
+<span class="text-[#9ca6ba] text-sm group-hover/item:text-white transition-colors">Hack &amp; Slash</span>
+</label>
+</div>
+</details>
+<div class="h-px w-full bg-border-dark"></div>
+<details class="group" open="">
+<summary class="flex cursor-pointer items-center justify-between font-medium text-white list-none mb-3">
+<span>Platform</span>
+<span class="transition group-open:rotate-180">
+<span class="material-symbols-outlined text-sm">keyboard_arrow_down</span>
+</span>
+</summary>
+<div class="flex flex-col gap-2 pb-2 pl-1">
+<label class="flex items-center gap-3 cursor-pointer group/item">
+<input class="h-4 w-4 rounded border-border-dark bg-[#282e39] text-primary focus:ring-primary focus:ring-offset-[#101622]" type="checkbox"/>
+<span class="text-[#9ca6ba] text-sm group-hover/item:text-white transition-colors">PC (Windows)</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group/item">
+<input class="h-4 w-4 rounded border-border-dark bg-[#282e39] text-primary focus:ring-primary focus:ring-offset-[#101622]" type="checkbox"/>
+<span class="text-[#9ca6ba] text-sm group-hover/item:text-white transition-colors">PlayStation 5</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group/item">
+<input class="h-4 w-4 rounded border-border-dark bg-[#282e39] text-primary focus:ring-primary focus:ring-offset-[#101622]" type="checkbox"/>
+<span class="text-[#9ca6ba] text-sm group-hover/item:text-white transition-colors">Xbox Series X</span>
+</label>
+</div>
+</details>
+<div class="h-px w-full bg-border-dark"></div>
+<details class="group">
+<summary class="flex cursor-pointer items-center justify-between font-medium text-white list-none mb-3">
+<span>Price</span>
+<span class="transition group-open:rotate-180">
+<span class="material-symbols-outlined text-sm">keyboard_arrow_down</span>
+</span>
+</summary>
+<div class="flex flex-col gap-2 pb-2 pl-1">
+<label class="flex items-center gap-3 cursor-pointer group/item">
+<input class="h-4 w-4 border-border-dark bg-[#282e39] text-primary focus:ring-primary focus:ring-offset-[#101622]" name="price" type="radio"/>
+<span class="text-[#9ca6ba] text-sm group-hover/item:text-white transition-colors">Free</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group/item">
+<input class="h-4 w-4 border-border-dark bg-[#282e39] text-primary focus:ring-primary focus:ring-offset-[#101622]" name="price" type="radio"/>
+<span class="text-[#9ca6ba] text-sm group-hover/item:text-white transition-colors">Under $20</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group/item">
+<input class="h-4 w-4 border-border-dark bg-[#282e39] text-primary focus:ring-primary focus:ring-offset-[#101622]" name="price" type="radio"/>
+<span class="text-[#9ca6ba] text-sm group-hover/item:text-white transition-colors">$20 - $60</span>
+</label>
+</div>
+</details>
+</div>
+</div>
+</aside>
+<!-- Main Grid Content -->
+<div class="flex flex-1 flex-col">
+<!-- Header & Toolbar -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
+<div class="flex flex-col gap-1">
+<h2 class="text-white text-3xl font-bold leading-tight">Action Games</h2>
+<p class="text-[#9ca6ba] text-sm font-normal">Explore 2,405 top-rated action titles curated for you.</p>
+</div>
+<!-- Sort Toolbar -->
+<div class="flex items-center gap-2">
+<div class="flex gap-1 bg-card-dark rounded-lg p-1 border border-border-dark">
+<button class="p-2 text-white bg-white/10 rounded hover:bg-white/20 transition-colors" title="Grid View">
+<span class="material-symbols-outlined text-[20px]">grid_view</span>
+</button>
+<button class="p-2 text-[#9ca6ba] hover:text-white hover:bg-white/5 rounded transition-colors" title="List View">
+<span class="material-symbols-outlined text-[20px]">view_list</span>
+</button>
+</div>
+<button class="flex items-center gap-2 h-10 px-4 bg-card-dark border border-border-dark rounded-lg text-white text-sm font-medium hover:bg-[#282e39] transition-colors whitespace-nowrap">
+<span class="material-symbols-outlined text-[20px]">sort</span>
+<span>Sort by: <span class="text-primary font-bold">Popularity</span></span>
+<span class="material-symbols-outlined text-[16px]">keyboard_arrow_down</span>
+</button>
+</div>
+</div>
+<!-- Game Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+<!-- Card 1 -->
+<div class="group relative flex flex-col bg-card-dark rounded-xl overflow-hidden border border-border-dark hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-1">
+<div class="relative aspect-[3/4] overflow-hidden">
+<img alt="Space explorer looking at distant planet" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Space explorer looking at distant planet" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCx1X_eboOiqEadQKeXhEMdpyAgQ0r4mxOgDrEMKBRtMUkuHCL04y6H_Dack0t3tVbtfzbEa3jgrixm2V0I2EOyf22JudIc8vMfqEDirhCSysMmUzw8_h_ujHaFN1r7nO8ZlcsHyG4ttB6wma2AOqvK43J7unrklu8XKa3En_gxnNIONjzrrAIE54USA5kSQwFwHR5FdMdWdGv5pDN7Ug6lHyuk7KpRiuolENPXuwYroys8nb8tn_e8xx4BdXg9bJ8w9x7p4m3IkgU"/>
+<div class="absolute top-2 right-2 bg-black/70 backdrop-blur-sm text-white text-xs font-bold px-2 py-1 rounded">
+                                        -20%
+                                    </div>
+<!-- Hover Overlay -->
+<div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4">
+<button class="w-full h-10 bg-primary text-white text-sm font-bold rounded-lg shadow-lg hover:bg-blue-600 transition-colors transform translate-y-4 group-hover:translate-y-0 duration-300">
+                                            View Details
+                                        </button>
+</div>
+</div>
+<div class="p-4 flex flex-col gap-2 flex-1">
+<div class="flex justify-between items-start">
+<h3 class="text-white text-base font-bold line-clamp-1 group-hover:text-primary transition-colors">Starfield</h3>
+<div class="flex items-center gap-1 text-yellow-400">
+<span class="material-symbols-outlined text-[16px] !leading-none">star</span>
+<span class="text-xs font-bold text-white">4.5</span>
+</div>
+</div>
+<div class="flex items-center gap-2 text-[#9ca6ba] text-xs">
+<span class="bg-[#282e39] px-1.5 py-0.5 rounded">RPG</span>
+<span class="bg-[#282e39] px-1.5 py-0.5 rounded">Space</span>
+</div>
+<div class="mt-auto pt-2 flex items-center justify-between border-t border-border-dark/50">
+<div class="flex items-center gap-2 text-[#9ca6ba]">
+<span class="material-symbols-outlined text-[18px]">desktop_windows</span>
+<span class="material-symbols-outlined text-[18px]">stadia_controller</span>
+</div>
+<span class="text-white font-bold">$69.99</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group relative flex flex-col bg-card-dark rounded-xl overflow-hidden border border-border-dark hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-1">
+<div class="relative aspect-[3/4] overflow-hidden">
+<img alt="Cyberpunk neon city street at night" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Cyberpunk neon city street at night" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB91tbL_4N93xF4cMmNqA74u8nhrrlzcy4TPQtE-w1BEieRB5AjOE13JWmjnTTgcJA4IZcl_RCUW7ewhMWPZoYebuQuspNxHK7aBHBfZJ0Iyuul-Ii79sP4dnfmZ0xMv3OB55kaIRi8vub9QbKEYXFCXM_s1zVtmlIj80LEilrT9_mvvf4M8vhRSPcTgzdkT9RQ-3GgytSasPQKhLb3aNiWMC2-izgmvCC34uPNdcNRnGypPgxWBRLsubruq15Lqq3A5NejxNrAgBM"/>
+<!-- Hover Overlay -->
+<div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4">
+<button class="w-full h-10 bg-primary text-white text-sm font-bold rounded-lg shadow-lg hover:bg-blue-600 transition-colors transform translate-y-4 group-hover:translate-y-0 duration-300">
+                                            View Details
+                                        </button>
+</div>
+</div>
+<div class="p-4 flex flex-col gap-2 flex-1">
+<div class="flex justify-between items-start">
+<h3 class="text-white text-base font-bold line-clamp-1 group-hover:text-primary transition-colors">Cyberpunk 2077</h3>
+<div class="flex items-center gap-1 text-yellow-400">
+<span class="material-symbols-outlined text-[16px] !leading-none">star</span>
+<span class="text-xs font-bold text-white">4.8</span>
+</div>
+</div>
+<div class="flex items-center gap-2 text-[#9ca6ba] text-xs">
+<span class="bg-[#282e39] px-1.5 py-0.5 rounded">Action</span>
+<span class="bg-[#282e39] px-1.5 py-0.5 rounded">Sci-Fi</span>
+</div>
+<div class="mt-auto pt-2 flex items-center justify-between border-t border-border-dark/50">
+<div class="flex items-center gap-2 text-[#9ca6ba]">
+<span class="material-symbols-outlined text-[18px]">desktop_windows</span>
+<span class="material-symbols-outlined text-[18px]">gamepad</span>
+</div>
+<span class="text-white font-bold">$59.99</span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group relative flex flex-col bg-card-dark rounded-xl overflow-hidden border border-border-dark hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-1">
+<div class="relative aspect-[3/4] overflow-hidden">
+<img alt="Dark silhouette of a warrior in a fantasy forest" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Dark silhouette of a warrior in a fantasy forest" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGbONEqMduD9sJpInJYMYvJKOcMqKzl7q4EFlLTpTAHEIb7VWTzmqod_GVLOY-qOKAI179sRZAtaxIGrC5CHZzYJwF1Y5JpGV85RJw0NVHqorahYkGoPgDuyNRJThyzDKNTZVZExHhwoPeA7LZiaqqfaOO3aiLQu6JTfF9Lw8ST3P60h4uCeDUhUn7ocyRu3FDiATiY0Pf83X6qApLYXVm0-Q8kA_HQEiOeQ6j2jCFpXaX_CKnvSwBJ-6A3bvFNcvS2f0LFBS91R4"/>
+<!-- Hover Overlay -->
+<div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4">
+<button class="w-full h-10 bg-primary text-white text-sm font-bold rounded-lg shadow-lg hover:bg-blue-600 transition-colors transform translate-y-4 group-hover:translate-y-0 duration-300">
+                                            View Details
+                                        </button>
+</div>
+</div>
+<div class="p-4 flex flex-col gap-2 flex-1">
+<div class="flex justify-between items-start">
+<h3 class="text-white text-base font-bold line-clamp-1 group-hover:text-primary transition-colors">Elden Ring</h3>
+<div class="flex items-center gap-1 text-yellow-400">
+<span class="material-symbols-outlined text-[16px] !leading-none">star</span>
+<span class="text-xs font-bold text-white">4.9</span>
+</div>
+</div>
+<div class="flex items-center gap-2 text-[#9ca6ba] text-xs">
+<span class="bg-[#282e39] px-1.5 py-0.5 rounded">Souls-like</span>
+<span class="bg-[#282e39] px-1.5 py-0.5 rounded">RPG</span>
+</div>
+<div class="mt-auto pt-2 flex items-center justify-between border-t border-border-dark/50">
+<div class="flex items-center gap-2 text-[#9ca6ba]">
+<span class="material-symbols-outlined text-[18px]">desktop_windows</span>
+<span class="material-symbols-outlined text-[18px]">gamepad</span>
+</div>
+<span class="text-white font-bold">$59.99</span>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="group relative flex flex-col bg-card-dark rounded-xl overflow-hidden border border-border-dark hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-1">
+<div class="relative aspect-[3/4] overflow-hidden">
+<img alt="Abstract low poly landscape in red and blue" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Abstract low poly landscape in red and blue" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRKkdxkrR_Lq2ynjb3FZMzO7zi_wI-zCEgg6l83ZjJw90Ccce6INBq_GrCq2FMMPjJL-z8RG6rGd_IWoFNWnZe4-QSjhV6yRMtKlk4RGXo37dMgsLMnpGdaLNsm4R-7sRZuDsb5Ov4Q3EfRoCjFmu8Gsdc4oYD8z6_CFCdYTSjSd0SjMjuI_-Zno3q6Na6H66w_9yUCjFmcv2qdj8GyjxmE-w157tyuGbOoT-jSpUHMccL1H3BQSTneS1emPdiMJNMXXgU0CF5OUc"/>
+<div class="absolute top-2 right-2 bg-primary text-white text-xs font-bold px-2 py-1 rounded">
+                                        Free
+                                    </div>
+<!-- Hover Overlay -->
+<div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4">
+<button class="w-full h-10 bg-primary text-white text-sm font-bold rounded-lg shadow-lg hover:bg-blue-600 transition-colors transform translate-y-4 group-hover:translate-y-0 duration-300">
+                                            Play Now
+                                        </button>
+</div>
+</div>
+<div class="p-4 flex flex-col gap-2 flex-1">
+<div class="flex justify-between items-start">
+<h3 class="text-white text-base font-bold line-clamp-1 group-hover:text-primary transition-colors">Valorant</h3>
+<div class="flex items-center gap-1 text-yellow-400">
+<span class="material-symbols-outlined text-[16px] !leading-none">star</span>
+<span class="text-xs font-bold text-white">4.4</span>
+</div>
+</div>
+<div class="flex items-center gap-2 text-[#9ca6ba] text-xs">
+<span class="bg-[#282e39] px-1.5 py-0.5 rounded">Shooter</span>
+<span class="bg-[#282e39] px-1.5 py-0.5 rounded">Tac-FPS</span>
+</div>
+<div class="mt-auto pt-2 flex items-center justify-between border-t border-border-dark/50">
+<div class="flex items-center gap-2 text-[#9ca6ba]">
+<span class="material-symbols-outlined text-[18px]">desktop_windows</span>
+</div>
+<span class="text-primary font-bold">Free</span>
+</div>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="group relative flex flex-col bg-card-dark rounded-xl overflow-hidden border border-border-dark hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-1">
+<div class="relative aspect-[3/4] overflow-hidden">
+<img alt="Toy car on a race track" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Toy car on a race track" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzPwEXCbTb3YD6M2WmJly3u-RDMnOTB5ZMDVLDsxEtFZl99i-cgF3eIBDtD560-AsGKzc0sB3iLuHrX7vyLocJutTHpOjzdFgJnQC0JABs2hVk87bIN4Bpr3KXaAp-nxrgNGrmsLIwyNDd6VrOpndETdiHVPg3UpV30uB-_ixILJsnsoDa2J8x3z3M1Rby3ijl4knkHrbNAXz-Xo2YFp8wDtNPavFrEZtH1cE43l2VgW57jT0yycapJWw16ls8RNJ1AVvIdvTjg98"/>
+<!-- Hover Overlay -->
+<div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4">
+<button class="w-full h-10 bg-primary text-white text-sm font-bold rounded-lg shadow-lg hover:bg-blue-600 transition-colors transform translate-y-4 group-hover:translate-y-0 duration-300">
+                                            View Details
+                                        </button>
+</div>
+</div>
+<div class="p-4 flex flex-col gap-2 flex-1">
+<div class="flex justify-between items-start">
+<h3 class="text-white text-base font-bold line-clamp-1 group-hover:text-primary transition-colors">Forza Horizon 5</h3>
+<div class="flex items-center gap-1 text-yellow-400">
+<span class="material-symbols-outlined text-[16px] !leading-none">star</span>
+<span class="text-xs font-bold text-white">4.7</span>
+</div>
+</div>
+<div class="flex items-center gap-2 text-[#9ca6ba] text-xs">
+<span class="bg-[#282e39] px-1.5 py-0.5 rounded">Racing</span>
+<span class="bg-[#282e39] px-1.5 py-0.5 rounded">Open World</span>
+</div>
+<div class="mt-auto pt-2 flex items-center justify-between border-t border-border-dark/50">
+<div class="flex items-center gap-2 text-[#9ca6ba]">
+<span class="material-symbols-outlined text-[18px]">desktop_windows</span>
+<span class="material-symbols-outlined text-[18px]">gamepad</span>
+</div>
+<span class="text-white font-bold">$59.99</span>
+</div>
+</div>
+</div>
+<!-- Card 6 -->
+<div class="group relative flex flex-col bg-card-dark rounded-xl overflow-hidden border border-border-dark hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-1">
+<div class="relative aspect-[3/4] overflow-hidden">
+<img alt="Red light glowing on a futuristic helmet" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Red light glowing on a futuristic helmet" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWV3yaOpUQtal_9R8lBhF5oL-1dZjesBHu2rq0eaIuHWBh_mso4bm7XtxLioYLPHPbbPraAAnlE5hpAr29jYkO5osfsXJl82L8K554nGVAHL0OogLvMZJzfau2PvW7X-Kqrf01kQMVh1ag6v4Nhj29gVjSSTDhQQpqMJ4BYugQlaTAk-JL8ABAB_am15Z7oKVdkz3hllnxplPoNp2SMlO3M4__5bE9h54b_YWtLLEGzckA7jEc26tERv1nQXwhP3CEFVlgLOdNU40"/>
+<!-- Hover Overlay -->
+<div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4">
+<button class="w-full h-10 bg-primary text-white text-sm font-bold rounded-lg shadow-lg hover:bg-blue-600 transition-colors transform translate-y-4 group-hover:translate-y-0 duration-300">
+                                            View Details
+                                        </button>
+</div>
+</div>
+<div class="p-4 flex flex-col gap-2 flex-1">
+<div class="flex justify-between items-start">
+<h3 class="text-white text-base font-bold line-clamp-1 group-hover:text-primary transition-colors">Doom Eternal</h3>
+<div class="flex items-center gap-1 text-yellow-400">
+<span class="material-symbols-outlined text-[16px] !leading-none">star</span>
+<span class="text-xs font-bold text-white">4.8</span>
+</div>
+</div>
+<div class="flex items-center gap-2 text-[#9ca6ba] text-xs">
+<span class="bg-[#282e39] px-1.5 py-0.5 rounded">FPS</span>
+<span class="bg-[#282e39] px-1.5 py-0.5 rounded">Action</span>
+</div>
+<div class="mt-auto pt-2 flex items-center justify-between border-t border-border-dark/50">
+<div class="flex items-center gap-2 text-[#9ca6ba]">
+<span class="material-symbols-outlined text-[18px]">desktop_windows</span>
+<span class="material-symbols-outlined text-[18px]">stadia_controller</span>
+<span class="material-symbols-outlined text-[18px]">gamepad</span>
+</div>
+<span class="text-white font-bold">$39.99</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="mt-12 flex justify-center">
+<nav class="flex items-center gap-2 bg-card-dark rounded-lg p-2 border border-border-dark">
+<button class="flex items-center justify-center w-10 h-10 rounded-lg text-[#9ca6ba] hover:bg-white/5 hover:text-white transition-colors" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="flex items-center justify-center w-10 h-10 rounded-lg bg-primary text-white font-bold shadow-md shadow-primary/20">
+                                    1
+                                </button>
+<button class="flex items-center justify-center w-10 h-10 rounded-lg text-[#9ca6ba] hover:bg-white/5 hover:text-white transition-colors">
+                                    2
+                                </button>
+<button class="flex items-center justify-center w-10 h-10 rounded-lg text-[#9ca6ba] hover:bg-white/5 hover:text-white transition-colors">
+                                    3
+                                </button>
+<div class="flex items-center justify-center w-10 h-10 text-[#9ca6ba]">...</div>
+<button class="flex items-center justify-center w-10 h-10 rounded-lg text-[#9ca6ba] hover:bg-white/5 hover:text-white transition-colors">
+                                    8
+                                </button>
+<button class="flex items-center justify-center w-10 h-10 rounded-lg text-[#9ca6ba] hover:bg-white/5 hover:text-white transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</nav>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

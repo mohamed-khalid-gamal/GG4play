@@ -1,0 +1,162 @@
+<div class="font-display bg-background-dark text-white min-h-screen flex flex-col overflow-x-hidden">
+    <!-- Top Navigation -->
+    <header
+        class="flex items-center justify-between whitespace-nowrap border-b border-solid border-[#282e39] px-6 lg:px-10 py-3 bg-[#111318] z-20">
+        <a routerLink="/" class="flex items-center gap-4 text-white">
+            <div class="size-8 flex items-center justify-center text-primary">
+                <span class="material-symbols-outlined text-3xl">sports_esports</span>
+            </div>
+            <h2 class="text-white text-xl font-bold leading-tight tracking-[-0.015em] hidden sm:block">gg4play</h2>
+        </a>
+        <div class="flex items-center gap-4">
+            <button (click)="goHome()"
+                class="flex items-center justify-center gap-2 rounded-lg h-10 px-4 bg-white/10 hover:bg-white/20 text-white text-sm font-medium transition-colors">
+                <span class="material-symbols-outlined text-[18px]">home</span>
+                <span class="hidden sm:inline">Back to Home</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow flex flex-col items-center justify-center p-4 lg:p-8 relative z-10">
+        @if (isLoading()) {
+        <div class="flex items-center justify-center h-64">
+            <div class="animate-spin">
+                <span class="material-symbols-outlined text-primary text-4xl">progress_activity</span>
+            </div>
+        </div>
+        } @else if (hasValidSession() && game && fileInfo) {
+        <div class="max-w-[1024px] w-full flex flex-col gap-8">
+            <!-- Page Heading -->
+            <div class="text-center space-y-2 mb-4 animate-fade-in-up">
+                <div
+                    class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-500/10 text-green-400 text-xs font-bold uppercase tracking-widest border border-green-500/20 mb-2">
+                    <span class="material-symbols-outlined text-sm">check_circle</span>
+                    Download Ready
+                </div>
+                <h1 class="text-white text-4xl md:text-5xl font-black leading-tight tracking-[-0.033em]">Your download
+                    is ready</h1>
+                <p class="text-[#9ca6ba] text-lg font-normal">Click the button below to start your download.</p>
+            </div>
+
+            <!-- Main Download Card -->
+            <div class="@container w-full">
+                <div
+                    class="flex flex-col md:flex-row items-stretch rounded-xl shadow-2xl bg-[#1b1f27] border border-[#282e39] overflow-hidden">
+                    <!-- Game Art -->
+                    <div class="w-full md:w-2/5 min-h-[250px] md:min-h-[320px] bg-center bg-no-repeat bg-cover relative group"
+                        [style.background-image]="'url(' + (game.bannerImage || game.coverImage) + ')'">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-[#1b1f27] to-transparent md:bg-gradient-to-r md:from-transparent md:to-[#1b1f27]">
+                        </div>
+                    </div>
+
+                    <!-- Content -->
+                    <div class="flex-1 flex flex-col justify-center p-6 lg:p-10 gap-6">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs font-bold text-primary tracking-widest uppercase">{{ game.genre
+                                    }}</span>
+                                @if (game.supportedPlatforms?.includes('windows')) {
+                                <div class="flex items-center gap-1 text-[#9ca6ba] text-xs">
+                                    <span class="material-symbols-outlined text-sm">window</span>
+                                    <span>Windows 10/11</span>
+                                </div>
+                                }
+                            </div>
+                            <h2 class="text-white text-3xl font-bold leading-tight tracking-tight mb-2">{{ game.title }}
+                            </h2>
+                            <p class="text-[#9ca6ba] text-sm md:text-base font-normal">
+                                {{ fileInfo.version }} • {{ fileInfo.size }} • via {{ fileInfo.provider }}
+                            </p>
+                        </div>
+                        <div class="flex flex-col gap-4">
+                            <!-- Primary Action -->
+                            <button (click)="startDownload()" [disabled]="downloadStarted()"
+                                class="glow-effect flex w-full cursor-pointer items-center justify-center rounded-lg h-14 px-8 bg-primary text-white text-lg font-bold leading-normal tracking-wide hover:bg-blue-600 relative overflow-hidden group disabled:opacity-75 disabled:cursor-not-allowed transition-all active:scale-95">
+                                @if (downloadStarted()) {
+                                <span class="material-symbols-outlined mr-3 text-2xl animate-bounce">check</span>
+                                <span class="truncate">Download Started!</span>
+                                } @else {
+                                <span
+                                    class="material-symbols-outlined mr-3 text-2xl group-hover:animate-bounce">download</span>
+                                <span class="truncate">Download Now</span>
+                                }
+                            </button>
+
+                            <!-- Trust Signal -->
+                            <div
+                                class="flex items-center justify-center gap-2 text-[#9ca6ba] text-xs font-medium bg-[#111318]/50 py-2 rounded-lg border border-white/5">
+                                <span class="material-symbols-outlined text-green-500 text-sm">verified_user</span>
+                                <span>Verified Safe: No Malware Detected • 0 VirusTotal Detections</span>
+                            </div>
+                        </div>
+
+                        <!-- Alternative Links -->
+                        @if (allLinks.length > 1) {
+                        <div class="flex flex-col gap-3 pt-4 border-t border-white/5">
+                            <p class="text-slate-400 text-xs uppercase font-bold tracking-wider">Alternative Mirrors</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                @for (altLink of allLinks; track altLink.id) {
+                                @if (altLink.id !== link?.id) {
+                                <app-download-link-card [link]="altLink" [compact]="true"
+                                    (onSelect)="selectAlternativeLink($event)">
+                                </app-download-link-card>
+                                }
+                                }
+                            </div>
+                        </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <!-- Post-Download Instructions -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-8 border-t border-[#282e39]/50">
+                <div
+                    class="flex flex-col items-center text-center gap-3 p-4 rounded-lg hover:bg-white/5 transition-colors">
+                    <div class="size-12 rounded-full bg-[#282e39] flex items-center justify-center text-white mb-1">
+                        <span class="material-symbols-outlined">downloading</span>
+                    </div>
+                    <h3 class="text-white font-bold text-lg">1. Download</h3>
+                    <p class="text-[#9ca6ba] text-sm">Save the installer file to your preferred download location.</p>
+                </div>
+                <div
+                    class="flex flex-col items-center text-center gap-3 p-4 rounded-lg hover:bg-white/5 transition-colors">
+                    <div class="size-12 rounded-full bg-[#282e39] flex items-center justify-center text-white mb-1">
+                        <span class="material-symbols-outlined">install_desktop</span>
+                    </div>
+                    <h3 class="text-white font-bold text-lg">2. Install</h3>
+                    <p class="text-[#9ca6ba] text-sm">Run the installer and follow the on-screen instructions.</p>
+                </div>
+                <div
+                    class="flex flex-col items-center text-center gap-3 p-4 rounded-lg hover:bg-white/5 transition-colors">
+                    <div class="size-12 rounded-full bg-[#282e39] flex items-center justify-center text-white mb-1">
+                        <span class="material-symbols-outlined">sports_esports</span>
+                    </div>
+                    <h3 class="text-white font-bold text-lg">3. Play</h3>
+                    <p class="text-[#9ca6ba] text-sm">Launch the game from your desktop and enjoy!</p>
+                </div>
+            </div>
+        </div>
+        } @else {
+        <div class="flex flex-col items-center justify-center h-64 gap-4">
+            <span class="material-symbols-outlined text-red-500 text-5xl">error</span>
+            <p class="text-white text-lg">Invalid download session</p>
+            <a routerLink="/" class="text-primary hover:underline">Return to Home</a>
+        </div>
+        }
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-[#282e39] bg-[#111318] text-[#9ca6ba] py-6">
+        <div class="max-w-[960px] mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
+            <p>© 2024 gg4play. All rights reserved.</p>
+            <div class="flex gap-6">
+                <a class="hover:text-white transition-colors" href="#">Privacy Policy</a>
+                <a class="hover:text-white transition-colors" href="#">Terms of Service</a>
+                <a class="hover:text-white transition-colors" href="#">Support</a>
+            </div>
+        </div>
+    </footer>
+</div>

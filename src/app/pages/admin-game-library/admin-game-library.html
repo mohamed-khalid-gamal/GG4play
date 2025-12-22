@@ -1,0 +1,272 @@
+<div class="max-w-7xl mx-auto flex flex-col gap-6 h-[calc(100vh-8rem)] min-h-[600px] animate-fade-in">
+    <div class="flex items-center justify-between">
+        <div>
+            <h2 class="text-3xl font-black text-white tracking-tight">Game Library</h2>
+            <p class="text-slate-400">Manage your entire game catalog.</p>
+        </div>
+        <div class="flex gap-3">
+            <button routerLink="/admin/games/new"
+                class="px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded-lg font-bold text-sm shadow-lg shadow-primary/25 transition-all flex items-center gap-2">
+                <span class="material-symbols-outlined text-[20px]">add</span>
+                Add Game
+            </button>
+        </div>
+    </div>
+
+    <div class="flex flex-col lg:flex-row gap-6 flex-1 min-h-0">
+        <!-- Sidebar List -->
+        <div
+            class="w-full lg:w-80 flex flex-col bg-[#1a1f2e] border border-slate-800 rounded-xl overflow-hidden shrink-0">
+            <div class="p-4 border-b border-slate-800">
+                <div class="relative">
+                    <span
+                        class="material-symbols-outlined absolute left-3 top-2.5 text-slate-500 text-[20px]">search</span>
+                    <input type="text" placeholder="Search games..." [ngModel]="searchTerm()"
+                        (ngModelChange)="searchTerm.set($event)"
+                        class="w-full bg-[#111318] border border-slate-700 rounded-lg pl-10 pr-4 py-2 text-sm text-white focus:ring-1 focus:ring-primary focus:border-primary placeholder:text-slate-600">
+                </div>
+                <div class="flex gap-2 mt-3">
+                    <button (click)="filterStatus.set('All')"
+                        class="px-2 py-1 rounded text-xs font-medium transition-colors"
+                        [class.bg-slate-700]="filterStatus() === 'All'" [class.text-white]="filterStatus() === 'All'"
+                        [class.text-slate-400]="filterStatus() !== 'All'">All</button>
+                    <button (click)="filterStatus.set('Active')"
+                        class="px-2 py-1 rounded text-xs font-medium transition-colors"
+                        [class.bg-emerald-500]="filterStatus() === 'Active'"
+                        [class.text-white]="filterStatus() === 'Active'"
+                        [class.text-slate-400]="filterStatus() !== 'Active'">Active</button>
+                    <button (click)="filterStatus.set('Upcoming')"
+                        class="px-2 py-1 rounded text-xs font-medium transition-colors"
+                        [class.bg-blue-500]="filterStatus() === 'Upcoming'"
+                        [class.text-white]="filterStatus() === 'Upcoming'"
+                        [class.text-slate-400]="filterStatus() !== 'Upcoming'">Upcoming</button>
+                </div>
+            </div>
+
+            <div class="flex-1 overflow-y-auto custom-scrollbar">
+                <div *ngFor="let game of filteredGames()" (click)="selectGame(game)"
+                    class="p-4 border-b border-slate-800 cursor-pointer hover:bg-white/5 transition-colors group"
+                    [class.bg-white/5]="selectedGame?.id === game.id" [class.border-l-4]="selectedGame?.id === game.id"
+                    [class.border-l-primary]="selectedGame?.id === game.id"
+                    [class.border-l-transparent]="selectedGame?.id !== game.id">
+                    <div class="flex gap-3">
+                        <div class="w-12 h-16 rounded bg-slate-800 bg-cover bg-center shrink-0"
+                            [style.background-image]="'url(' + game.coverImage + ')'"></div>
+                        <div class="min-w-0 flex-1">
+                            <h4
+                                class="font-bold text-white text-sm truncate group-hover:text-primary transition-colors">
+                                {{ game.title }}</h4>
+                            <div class="flex items-center gap-2 mt-1">
+                                <span class="text-xs text-slate-500">{{ game.downloads | number }} DLs</span>
+                                <span class="w-1 h-1 rounded-full bg-slate-600"></span>
+                                <span
+                                    class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-500 font-medium border border-emerald-500/20"
+                                    *ngIf="game.status === 'Active'">Active</span>
+                                <span
+                                    class="text-[10px] px-1.5 py-0.5 rounded bg-blue-500/10 text-blue-500 font-medium border border-blue-500/20"
+                                    *ngIf="game.status === 'Upcoming'">Upcoming</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Editor Area -->
+        <div class="flex-1 bg-[#1a1f2e] border border-slate-800 rounded-xl overflow-hidden flex flex-col min-h-0"
+            *ngIf="selectedGame; else noSelection">
+            <!-- Toolbar -->
+            <div class="px-6 py-4 border-b border-slate-800 flex justify-between items-center bg-[#1a1f2e]">
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 rounded bg-slate-700 bg-cover bg-center shadow-sm"
+                        [style.background-image]="'url(' + selectedGame.coverImage + ')'"></div>
+                    <div>
+                        <h3 class="font-bold text-white text-lg leading-tight">{{ selectedGame.title }}</h3>
+                        <p class="text-xs text-slate-400 font-mono">{{ selectedGame.id }}</p>
+                    </div>
+                </div>
+                <div class="flex gap-2">
+                    <button [routerLink]="['/admin/games/edit', selectedGame.id]"
+                        class="px-3 py-1.5 rounded-lg bg-indigo-500/10 text-indigo-400 hover:bg-indigo-500/20 transition-colors text-xs font-bold flex items-center gap-2 border border-indigo-500/20">
+                        <span class="material-symbols-outlined text-[16px]">open_in_new</span>
+                        Full Editor
+                    </button>
+                    <button (click)="saveChanges()"
+                        class="px-3 py-1.5 rounded-lg bg-primary hover:bg-primary-dark text-white transition-colors text-xs font-bold flex items-center gap-2 shadow-lg shadow-primary/20">
+                        <span class="material-symbols-outlined text-[16px]">save</span>
+                        Save
+                    </button>
+                    <button (click)="deleteGame(selectedGame)"
+                        class="p-1.5 rounded-lg hover:bg-red-500/10 text-slate-400 hover:text-red-500 transition-colors"
+                        title="Delete Game">
+                        <span class="material-symbols-outlined text-[20px]">delete</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Scrollable Content -->
+            <div class="flex-1 overflow-y-auto custom-scrollbar p-6">
+
+                <div class="space-y-8 max-w-4xl mx-auto">
+                    <!-- Stats Overview -->
+                    <div class="grid grid-cols-4 gap-4">
+                        <div class="bg-[#111318] p-4 rounded-lg border border-slate-700">
+                            <p class="text-xs text-slate-500 uppercase font-bold mb-1">Downloads</p>
+                            <p class="text-xl font-mono text-white">{{ selectedGame.downloads | number }}</p>
+                        </div>
+                        <div class="bg-[#111318] p-4 rounded-lg border border-slate-700">
+                            <p class="text-xs text-slate-500 uppercase font-bold mb-1">Views</p>
+                            <p class="text-xl font-mono text-white">{{ selectedGame.pageViews | number }}</p>
+                        </div>
+                        <div class="bg-[#111318] p-4 rounded-lg border border-slate-700">
+                            <p class="text-xs text-slate-500 uppercase font-bold mb-1">Rating</p>
+                            <div class="flex items-center gap-1 text-amber-400">
+                                <span class="text-xl font-mono text-white">{{ selectedGame.rating }}</span>
+                                <span class="material-symbols-outlined text-[18px]">star</span>
+                            </div>
+                        </div>
+                        <div class="bg-[#111318] p-4 rounded-lg border border-slate-700">
+                            <p class="text-xs text-slate-500 uppercase font-bold mb-1">Status</p>
+                            <span
+                                class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-emerald-500/10 text-emerald-500 border border-emerald-500/20">
+                                {{ selectedGame.status }}
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Quick Metadata -->
+                    <div class="space-y-4">
+                        <h3 class="text-lg font-bold text-white border-b border-slate-800 pb-2">Quick Metadata</h3>
+                        <div class="grid grid-cols-2 gap-6">
+                            <div class="space-y-1">
+                                <label class="block text-sm font-medium text-slate-300">Developer</label>
+                                <input type="text" [value]="selectedGame.developer"
+                                    class="block w-full rounded-lg border-slate-700 bg-[#111318] text-white focus:border-primary focus:ring-primary sm:text-sm px-3 py-2">
+                            </div>
+                            <div class="space-y-1">
+                                <label class="block text-sm font-medium text-slate-300">Genre</label>
+                                <select
+                                    class="block w-full rounded-lg border-slate-700 bg-[#111318] text-white focus:border-primary focus:ring-primary sm:text-sm px-3 py-2">
+                                    <option>{{ selectedGame.genre }}</option>
+                                    <option>Action</option>
+                                    <option>RPG</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="space-y-1">
+                            <label class="block text-sm font-medium text-slate-300">Description</label>
+                            <textarea rows="4"
+                                class="block w-full rounded-lg border-slate-700 bg-[#111318] text-white focus:border-primary focus:ring-primary sm:text-sm px-3 py-2 resize-none custom-scrollbar">{{ selectedGame.description }}</textarea>
+                            <p class="text-xs text-slate-500 text-right">{{ selectedGame.description?.length || 0
+                                }}/2000</p>
+                        </div>
+                    </div>
+
+                    <!-- Versions & Updates -->
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+                            <h3 class="text-lg font-bold text-white">Game Editions & Updates</h3>
+                            <button
+                                class="text-primary text-xs font-bold hover:text-primary-light uppercase tracking-wide flex items-center gap-1">
+                                <span class="material-symbols-outlined text-[16px]">add</span> Add Edition
+                            </button>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div *ngFor="let version of selectedGame.versions"
+                                class="border border-slate-700 rounded-lg overflow-hidden">
+                                <div class="bg-slate-800/50 px-4 py-3 flex justify-between items-center">
+                                    <div class="flex items-center gap-3">
+                                        <span class="material-symbols-outlined text-slate-400">public</span>
+                                        <div>
+                                            <h4 class="font-bold text-white text-sm">{{ version.name }}</h4>
+                                            <p class="text-[10px] text-slate-500 uppercase font-bold">{{
+                                                version.language }} • {{ version.region }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-xs text-slate-400">{{ version.updates?.length || 0 }}
+                                            Updates</span>
+                                        <button class="text-slate-400 hover:text-white"><span
+                                                class="material-symbols-outlined">expand_more</span></button>
+                                    </div>
+                                </div>
+                                <div class="bg-[#111318] p-2 space-y-2">
+                                    <div *ngFor="let update of version.updates"
+                                        class="flex items-center justify-between p-2 hover:bg-white/5 rounded transition-colors group">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-1.5 h-1.5 rounded-full"
+                                                [class.bg-emerald-500]="update.isLatest"
+                                                [class.bg-slate-600]="!update.isLatest"></div>
+                                            <span class="text-sm text-slate-300 font-mono">{{ update.name }}</span>
+                                            <span class="text-xs text-slate-500 border border-slate-700 px-1 rounded">{{
+                                                update.size }}</span>
+                                        </div>
+                                        <div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                            <button class="text-xs text-primary hover:underline">Edit Links</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reviews Section -->
+                    <div class="space-y-4">
+                        <h3 class="text-lg font-bold text-white border-b border-slate-800 pb-2">Recent Reviews</h3>
+                        <div *ngIf="!selectedGame.reviews?.length" class="text-slate-500 text-sm italic">No reviews yet.
+                        </div>
+                        <div class="space-y-4">
+                            <div *ngFor="let review of selectedGame.reviews"
+                                class="bg-[#111318] border border-slate-700 rounded-lg p-4">
+                                <div class="flex justify-between items-start mb-2">
+                                    <div class="flex items-center gap-2">
+                                        <div
+                                            class="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center text-xs font-bold text-white">
+                                            {{ review.nickname.charAt(0) }}
+                                        </div>
+                                        <div>
+                                            <h4 class="text-sm font-bold text-white">{{ review.nickname }}</h4>
+                                            <div class="flex text-amber-400 text-[10px]">
+                                                <span *ngFor="let s of [1,2,3,4,5]"
+                                                    class="material-symbols-outlined text-[12px]"
+                                                    [class.filled-icon]="s <= review.rating">star</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button (click)="deleteReview(review.id)"
+                                        class="text-xs text-red-500 hover:underline">Delete</button>
+                                </div>
+                                <p class="text-sm text-slate-300 mb-3">{{ review.comment }}</p>
+
+                                <div *ngIf="review.adminReply"
+                                    class="bg-[#1a1f2e] border-l-2 border-primary p-3 rounded-r-lg">
+                                    <p class="text-xs text-primary font-bold mb-1">Admin Reply</p>
+                                    <p class="text-sm text-slate-400">{{ review.adminReply.message }}</p>
+                                </div>
+                                <div *ngIf="!review.adminReply" class="mt-2">
+                                    <button
+                                        class="text-xs text-primary font-bold hover:underline flex items-center gap-1">
+                                        <span class="material-symbols-outlined text-[14px]">reply</span> Reply
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <ng-template #noSelection>
+            <div
+                class="flex-1 bg-[#1a1f2e] border border-slate-800 rounded-xl flex flex-col items-center justify-center text-slate-500 p-8 text-center min-h-[400px]">
+                <div class="w-20 h-20 rounded-full bg-slate-800 flex items-center justify-center mb-4">
+                    <span class="material-symbols-outlined text-4xl opacity-50">videogame_asset</span>
+                </div>
+                <h3 class="text-lg font-bold text-white mb-2">No Game Selected</h3>
+                <p class="text-sm max-w-xs mx-auto">Select a game from the sidebar to view details, edit metadata, and
+                    manage update packages.</p>
+            </div>
+        </ng-template>
+    </div>
+</div>

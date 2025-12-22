@@ -1,0 +1,27 @@
+.custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #282e39;
+    border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #3f4756;
+}
+
+.glass-active {
+    background: rgba(13, 89, 242, 0.15);
+    border: 1px solid rgba(13, 89, 242, 0.3);
+    box-shadow: 0 0 15px rgba(13, 89, 242, 0.1);
+}
+
+.progress-bar-bg {
+    background-color: rgba(255, 255, 255, 0.05);
+}

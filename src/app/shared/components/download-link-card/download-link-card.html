@@ -1,0 +1,31 @@
+<a class="group relative flex items-center justify-between px-4 py-3 bg-surface-card hover:bg-surface-card/80 border border-white/5 rounded-lg transition-all overflow-hidden cursor-pointer"
+    [ngClass]="getHoverBorderColor(link.provider)" (click)="handleClick()">
+    <div class="flex items-center gap-3 relative z-10">
+        <span class="w-8 h-8 rounded flex items-center justify-center material-symbols-outlined text-[20px]"
+            [ngClass]="getProviderColor(link.provider)">
+            {{ getProviderIcon(link.provider) }}
+        </span>
+        <div>
+            <div class="text-sm text-white font-bold group-hover:text-primary transition-colors">
+                {{ link.name }}
+            </div>
+            @if (link.description || link.partCount) {
+            <div class="text-[10px] text-slate-500">
+                @if (link.partCount) {
+                Part 1-{{ link.partCount }}
+                }
+                @if (link.description) {
+                {{ link.partCount ? ' • ' : '' }}{{ link.description }}
+                }
+            </div>
+            }
+        </div>
+    </div>
+
+    @if (!compact) {
+    <span
+        class="material-symbols-outlined text-slate-600 group-hover:text-white group-hover:translate-x-1 transition-all text-[18px]">
+        arrow_forward
+    </span>
+    }
+</a>

@@ -1,0 +1,49 @@
+<div class="icon-picker">
+    <!-- Search Input -->
+    <div class="search-container">
+        <span class="search-icon material-symbols-outlined">search</span>
+        <input type="text" [(ngModel)]="search" (input)="onSearch()" placeholder="Search any icon..."
+            class="search-input" />
+        <button *ngIf="search" (click)="clearSearch()" class="clear-btn" type="button">
+            <span class="material-symbols-outlined">close</span>
+        </button>
+        <div *ngIf="isLoading" class="loading-spinner"></div>
+    </div>
+
+    <!-- Results Label -->
+    <div class="results-label">
+        <span *ngIf="search && filteredIcons.length > 0">Found {{ filteredIcons.length }} icons</span>
+        <span *ngIf="search && filteredIcons.length === 0 && !isLoading">No icons found for "{{ search }}"</span>
+        <span *ngIf="!search && !isLoading">Showing {{ filteredIcons.length }} of {{ allIcons.length }} icons</span>
+        <span *ngIf="isLoading">Loading icons...</span>
+    </div>
+
+    <!-- Icons Grid -->
+    <div class="icons-grid-container">
+        <div class="icons-grid">
+            <button *ngFor="let icon of filteredIcons" type="button" (click)="selectIcon(icon)"
+                [class.selected]="isSelected(icon)" [title]="icon.label" class="icon-btn">
+                <i [class]="icon.cssClass"></i>
+            </button>
+        </div>
+
+        <!-- Empty State -->
+        <div *ngIf="!isLoading && filteredIcons.length === 0 && search" class="empty-state">
+            <span class="material-symbols-outlined">search_off</span>
+            <p>No icons match "{{ search }}"</p>
+            <button (click)="clearSearch()" class="reset-btn" type="button">Clear search</button>
+        </div>
+
+        <!-- Error State -->
+        <div *ngIf="loadError" class="empty-state">
+            <span class="material-symbols-outlined">error</span>
+            <p>Failed to load icons</p>
+        </div>
+    </div>
+
+    <!-- Selected Icon Preview -->
+    <div *ngIf="selectedIcon" class="selected-preview">
+        <i [class]="selectedIcon + ' preview-icon'"></i>
+        <code class="selected-class">{{ selectedIcon }}</code>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+[33m❯[39m Building...
+[32m✔[39m Building...
+[35mPrerendered 0 static routes.[39m
+Application bundle generation failed. [3.244 seconds] - 2025-12-22T14:41:54.482Z
+
+[1m[33m[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: RouterLink is not used within the template of AdminSchemaDocsComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/admin-schema-docs/admin-schema-docs.ts:8:28:
+[37m      8 │     imports: [CommonModule, [32mRouterLink[37m],
+        ╵                             [32m~~~~~~~~~~[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: AdPlaceholderComponent is not used within the template of DownloadFinalComponent[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/download-final/download-final.ts:12:38:
+[37m      12 │ ...nModule, RouterLink, [32mAdPlaceholderComponent[37m, DownloadLinkCardCo...
+         ╵                         [32m~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG5002: Invalid ICU message. Missing '}'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/admin-schema-docs/admin-schema-docs.html:158:6:
+[37m      158 │ </div>[32m[37m
+          ╵       [32m^[0m
+
+  Error occurs in the template of component AdminSchemaDocsComponent.
+
+    src/app/pages/admin-schema-docs/admin-schema-docs.ts:9:17:
+[37m      9 │     templateUrl: [32m'./admin-schema-docs.html'[37m,
+        ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG5002: Unexpected character "EOF" (Do you have an unescaped "{" in your template? Use "{{ '{' }}") to escape it.)[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/admin-schema-docs/admin-schema-docs.html:158:6:
+[37m      158 │ </div>[32m[37m
+          ╵       [32m^[0m
+
+  Error occurs in the template of component AdminSchemaDocsComponent.
+
+    src/app/pages/admin-schema-docs/admin-schema-docs.ts:9:17:
+[37m      9 │     templateUrl: [32m'./admin-schema-docs.html'[37m,
+        ╵                  [32m~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m

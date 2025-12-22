@@ -1,0 +1,20 @@
+<div class="flex flex-col gap-2">
+    @if (sponsored) {
+    <span class="text-[10px] uppercase tracking-widest text-[#5f6a80] font-bold">Sponsored</span>
+    }
+    <div class="bg-[#161a22] border-2 border-dashed border-[#282e39] rounded-xl flex flex-col items-center justify-center gap-3 group cursor-pointer hover:border-primary/50 transition-colors relative overflow-hidden"
+        [ngClass]="sizeClasses">
+        <!-- Pattern background -->
+        <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]">
+        </div>
+
+        <!-- Icon -->
+        <div
+            class="w-14 h-14 rounded-full bg-[#282e39] flex items-center justify-center text-[#5f6a80] group-hover:text-primary transition-colors">
+            <span class="material-symbols-outlined" style="font-size: 28px;">ads_click</span>
+        </div>
+
+        <!-- Label -->
+        <p class="text-[#58627a] text-xs font-mono uppercase tracking-widest z-10">{{ label }}</p>
+    </div>
+</div>

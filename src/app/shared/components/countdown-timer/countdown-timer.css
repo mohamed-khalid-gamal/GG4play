@@ -1,0 +1,5 @@
+/* Countdown timer styles */
+:host {
+    display: block;
+    width: 100%;
+}

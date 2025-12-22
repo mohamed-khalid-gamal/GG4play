@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin: Manage Ads - Gaming Zone</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0d59f2",
+                        "background-light": "#f5f6f8",
+                        "background-dark": "#101622",
+                        "surface-dark": "#1a2130", // Custom surface color for better depth
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-body text-gray-900 dark:text-white antialiased overflow-x-hidden">
+<div class="flex h-screen w-full overflow-hidden">
+<!-- Sidebar Navigation -->
+<div class="hidden md:flex flex-col w-72 bg-[#111318] border-r border-gray-800 flex-shrink-0">
+<div class="flex flex-col h-full p-4">
+<div class="flex items-center gap-3 mb-8 px-2">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-primary" data-alt="Gaming Zone Logo - abstract geometric shape" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCjPTfJ_rEBfeKaT_NQ9j0NdHaroK0bSu5MrcCYc4y5fQHiF7gTwplM4QfTIMyodRQKgrxeAq1ZNcC6LDRQwHNgyRbEZNwb0K7-5eMj5DakjF1rR01h38ZKgHZ9kBo1vU0EqN0fbabHQVSq-w52X8iV5EPj0F02RPw4Zu1tHAQKOwFKq1pNOFcV5nlavzj35Pgsf00kkFlEU6fgjqa-vO33R9U6kLCfnLJCzxSmQemwZYHhb7GxZfdPPH2Y_XDUdrPZ70TMq5ODbfM");'></div>
+<div class="flex flex-col">
+<h1 class="text-white text-lg font-display font-bold leading-none">Gaming Zone</h1>
+<p class="text-[#9ca6ba] text-xs font-normal">Admin Console</p>
+</div>
+</div>
+<div class="flex flex-col gap-1 flex-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#9ca6ba] hover:bg-[#282e39] hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">dashboard</span>
+<p class="text-sm font-medium font-display">Dashboard</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/20 text-primary border border-primary/20" href="#">
+<span class="material-symbols-outlined text-[24px] fill-1">campaign</span>
+<p class="text-sm font-medium font-display">Ad Manager</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#9ca6ba] hover:bg-[#282e39] hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">group</span>
+<p class="text-sm font-medium font-display">User Analytics</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#9ca6ba] hover:bg-[#282e39] hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">payments</span>
+<p class="text-sm font-medium font-display">Revenue</p>
+</a>
+<div class="my-4 h-px bg-gray-800 mx-3"></div>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#9ca6ba] hover:bg-[#282e39] hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">settings</span>
+<p class="text-sm font-medium font-display">Settings</p>
+</a>
+</div>
+<div class="flex items-center gap-3 px-3 py-3 mt-auto bg-[#1a202a] rounded-xl border border-gray-800">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-8" data-alt="Admin user profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAU8YM3Z-I0w_2Ix9pXC_btg3iR5i2u1O7msS3EByyZu7RYPp5cG7DowGCjoImPx2TwHK-1VR_U_T2as9r9NFPzXxYsGB62MzF7l49ZosbmGoRdQZukv4AhOd5jhRPK2ect9N56lgM-5tX4o-Vr_SApf4zWefkO1T4ZC2FYEbN0R8SomZPst9OsMM8oSGRUVlVVvX_TR5jhHuPv8_mR7meAjFauZxgMxJpPN2mHW9qRGA56ER9KK_QIP8Ov0rdCk5EIDOat37WJj8E");'></div>
+<div class="flex flex-col">
+<p class="text-white text-sm font-medium">Alex Admin</p>
+<p class="text-[#9ca6ba] text-xs">Super Admin</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col h-full overflow-y-auto bg-background-light dark:bg-background-dark relative">
+<!-- Subtle Background Gradient for Immersion -->
+<div class="absolute inset-0 pointer-events-none overflow-hidden z-0">
+<div class="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px]"></div>
+<div class="absolute bottom-[-10%] left-[-5%] w-[400px] h-[400px] bg-blue-600/5 rounded-full blur-[100px]"></div>
+</div>
+<!-- Content Container -->
+<div class="relative z-10 p-6 lg:p-10 max-w-[1600px] mx-auto w-full flex flex-col gap-6">
+<!-- Page Heading & Actions -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+<div class="flex flex-col gap-1">
+<h1 class="text-white text-3xl md:text-4xl font-display font-bold tracking-tight">Ad Campaign Manager</h1>
+<p class="text-[#9ca6ba] text-base font-normal">Manage active ad units, targeting, and placement inventory.</p>
+</div>
+<button class="flex items-center gap-2 bg-primary hover:bg-blue-600 text-white px-5 py-3 rounded-lg font-medium shadow-[0_0_15px_rgba(13,89,242,0.3)] transition-all">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                        New Campaign
+                    </button>
+</div>
+<!-- Stats Overview -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="flex flex-col gap-2 rounded-xl p-5 bg-surface-dark border border-gray-800/50 relative overflow-hidden group">
+<div class="absolute right-0 top-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-4xl text-primary">visibility</span>
+</div>
+<p class="text-[#9ca6ba] text-sm font-medium">Daily Impressions</p>
+<div class="flex items-baseline gap-2">
+<p class="text-white text-3xl font-display font-bold">1.2M</p>
+<p class="text-[#0bda5e] text-xs font-medium bg-[#0bda5e]/10 px-1.5 py-0.5 rounded flex items-center">
+<span class="material-symbols-outlined text-[14px]">trending_up</span> 12%
+                            </p>
+</div>
+</div>
+<div class="flex flex-col gap-2 rounded-xl p-5 bg-surface-dark border border-gray-800/50 relative overflow-hidden group">
+<div class="absolute right-0 top-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-4xl text-primary">campaign</span>
+</div>
+<p class="text-[#9ca6ba] text-sm font-medium">Active Campaigns</p>
+<div class="flex items-baseline gap-2">
+<p class="text-white text-3xl font-display font-bold">14</p>
+<p class="text-[#9ca6ba] text-xs font-medium bg-gray-700/30 px-1.5 py-0.5 rounded">0%</p>
+</div>
+</div>
+<div class="flex flex-col gap-2 rounded-xl p-5 bg-surface-dark border border-gray-800/50 relative overflow-hidden group">
+<div class="absolute right-0 top-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-4xl text-primary">touch_app</span>
+</div>
+<p class="text-[#9ca6ba] text-sm font-medium">Avg. CTR</p>
+<div class="flex items-baseline gap-2">
+<p class="text-white text-3xl font-display font-bold">3.2%</p>
+<p class="text-[#0bda5e] text-xs font-medium bg-[#0bda5e]/10 px-1.5 py-0.5 rounded flex items-center">
+<span class="material-symbols-outlined text-[14px]">trending_up</span> 0.4%
+                            </p>
+</div>
+</div>
+<div class="flex flex-col gap-2 rounded-xl p-5 bg-surface-dark border border-gray-800/50 relative overflow-hidden group">
+<div class="absolute right-0 top-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-4xl text-primary">attach_money</span>
+</div>
+<p class="text-[#9ca6ba] text-sm font-medium">Est. Revenue</p>
+<div class="flex items-baseline gap-2">
+<p class="text-white text-3xl font-display font-bold">$4,250</p>
+<p class="text-[#0bda5e] text-xs font-medium bg-[#0bda5e]/10 px-1.5 py-0.5 rounded flex items-center">
+<span class="material-symbols-outlined text-[14px]">trending_up</span> 8%
+                            </p>
+</div>
+</div>
+</div>
+<!-- Filters & Search -->
+<div class="flex flex-col lg:flex-row gap-4 bg-surface-dark p-4 rounded-xl border border-gray-800/50">
+<div class="flex-1 relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-[#9ca6ba]">search</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-2.5 bg-[#111318] border border-gray-700 rounded-lg text-white placeholder-[#9ca6ba] focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm font-normal" placeholder="Search campaigns by name, ID, or tag..." type="text"/>
+</div>
+<div class="flex flex-wrap gap-2 items-center">
+<div class="relative group/dropdown">
+<button class="flex items-center gap-2 bg-[#111318] hover:bg-gray-800 text-white px-3 py-2.5 rounded-lg border border-gray-700 text-sm font-medium transition-colors">
+<span>Status: All</span>
+<span class="material-symbols-outlined text-[20px]">expand_more</span>
+</button>
+</div>
+<div class="relative group/dropdown">
+<button class="flex items-center gap-2 bg-[#111318] hover:bg-gray-800 text-white px-3 py-2.5 rounded-lg border border-gray-700 text-sm font-medium transition-colors">
+<span>Placement: All</span>
+<span class="material-symbols-outlined text-[20px]">expand_more</span>
+</button>
+</div>
+<button class="flex items-center justify-center p-2.5 rounded-lg bg-[#111318] border border-gray-700 text-white hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">filter_list</span>
+</button>
+</div>
+</div>
+<!-- Main Content Split: Ad List & Visualizer -->
+<div class="flex flex-col xl:flex-row gap-6 h-full">
+<!-- Ad Inventory List -->
+<div class="flex-1 bg-surface-dark rounded-xl border border-gray-800/50 overflow-hidden flex flex-col">
+<div class="p-4 border-b border-gray-800/50 flex justify-between items-center">
+<h2 class="text-white font-display font-medium text-lg">Active Inventory</h2>
+<button class="text-[#9ca6ba] hover:text-white text-sm font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">download</span> Export CSV
+                            </button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-gray-800/50 bg-[#111318]/50 text-[#9ca6ba] text-xs uppercase tracking-wider font-semibold">
+<th class="p-4 font-medium">Creative / Name</th>
+<th class="p-4 font-medium">Placement</th>
+<th class="p-4 font-medium">Targeting</th>
+<th class="p-4 font-medium text-right">CTR</th>
+<th class="p-4 font-medium text-center">Status</th>
+<th class="p-4 font-medium text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-800/50 text-sm">
+<!-- Row 1 -->
+<tr class="hover:bg-white/5 transition-colors group">
+<td class="p-4">
+<div class="flex gap-3 items-center">
+<div class="w-16 h-10 rounded bg-gray-800 bg-cover bg-center border border-gray-700 shrink-0" data-alt="Dark blue abstract banner for NordVPN ad" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuArxSgczWSuXzvz0_4Y-MUGJCccamjQeaDAnCd8gnat-joW96gHwMJYXZnfVHaCUd_N89BGeRi-HO3axUw8a-ZA0akJjxthhKhaBQeQNjEYSf8FIK4Davi_QyBVMgjpTjK9JL6qVHYrRGigo_jkaH1grNqNF64iaMOE6T7ZIZmp0F6NArXPjxhogSmJtXNCieKmau_6ORrSzK_hKMwQhBCA3z0FMXErci3rFCYm9lgGHVq2L7FevD1-nEbU4-5opJS474_5kWTyqvs");'></div>
+<div class="flex flex-col">
+<span class="text-white font-medium">NordVPN Banner</span>
+<span class="text-[#9ca6ba] text-xs">ID: #49202 • 728x90</span>
+</div>
+</div>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-2 text-white">
+<span class="material-symbols-outlined text-[#9ca6ba] text-[18px]">web_asset</span>
+                                                Download Page Top
+                                            </div>
+</td>
+<td class="p-4">
+<div class="flex flex-wrap gap-1">
+<span class="px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 border border-blue-500/20 text-xs">Desktop</span>
+<span class="px-2 py-0.5 rounded bg-gray-700 text-gray-300 border border-gray-600 text-xs">Global</span>
+</div>
+</td>
+<td class="p-4 text-right">
+<span class="text-white font-bold font-display">2.4%</span>
+<span class="block text-[#0bda5e] text-xs">+0.2%</span>
+</td>
+<td class="p-4 text-center">
+<label class="inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="relative w-9 h-5 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</td>
+<td class="p-4 text-right">
+<button class="text-[#9ca6ba] hover:text-white p-1 rounded hover:bg-gray-700">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-white/5 transition-colors group">
+<td class="p-4">
+<div class="flex gap-3 items-center">
+<div class="w-16 h-10 rounded bg-gray-800 bg-cover bg-center border border-gray-700 shrink-0" data-alt="Colorful MMORPG game character preroll thumbnail" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCBvIuxDuIVGNI4QBn1hedGl6mntVd_nQfxfQLpfviffN54XJY5JJQUrNpD_eLE6skXQ_zOxDQDuuZAB3RE-sMNDIlej2YA6ZmxLlyuXdmyd5B-Jn1M65VUBSMJDhvMl00YeKrXzV5LIAJUFnCxcxrvNeyyNCNGxQXswsKRG8NSW_Yrcn8StavwXGMZ8HB-7K-aBSeBmUx5TSn4etwivLRPeEuH__p-whITkZIzDopmE1dHNfOhaGIV-6IREcooI9dcs8trD1-F8Hs");'></div>
+<div class="flex flex-col">
+<span class="text-white font-medium">MMORPG Video Preroll</span>
+<span class="text-[#9ca6ba] text-xs">ID: #49331 • 1920x1080</span>
+</div>
+</div>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-2 text-white">
+<span class="material-symbols-outlined text-[#9ca6ba] text-[18px]">play_circle</span>
+                                                Counter Page
+                                            </div>
+</td>
+<td class="p-4">
+<div class="flex flex-wrap gap-1">
+<span class="px-2 py-0.5 rounded bg-purple-500/10 text-purple-400 border border-purple-500/20 text-xs">RPG</span>
+<span class="px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 border border-blue-500/20 text-xs">Mobile</span>
+</div>
+</td>
+<td class="p-4 text-right">
+<span class="text-white font-bold font-display">4.1%</span>
+<span class="block text-[#0bda5e] text-xs">+1.1%</span>
+</td>
+<td class="p-4 text-center">
+<label class="inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="relative w-9 h-5 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</td>
+<td class="p-4 text-right">
+<button class="text-[#9ca6ba] hover:text-white p-1 rounded hover:bg-gray-700">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-white/5 transition-colors group">
+<td class="p-4">
+<div class="flex gap-3 items-center">
+<div class="w-16 h-10 rounded bg-gray-800 bg-cover bg-center border border-gray-700 shrink-0" data-alt="Tech gear sale sidebar ad thumbnail" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC5Lv-tuIUixuqV7zaArEcP-zX2Fqu1ZUeRoXw3ptKrOL_Qtn6ke8O3Lr9QC3S7UKiaJNR_U1K0Smp_gMQN4YRa3rA7szqH6w0IYum-G4qsPtcqa8RWExAYcbDTpCOGV8eCmTUQp8smwo5tMP4I5QxfuJM6FWVTBvemG9piOrTifQuNEr1AUFncZO51rzIm4hkqRHgR1tqUfJEkLi0ImADl2uCTFuUoRw5S2MrsZxCPDkm3QCow2Gp4VnXbeMsrB5dK-5hfgNZvjfo");'></div>
+<div class="flex flex-col">
+<span class="text-white font-medium">Gaming Gear Promo</span>
+<span class="text-[#9ca6ba] text-xs">ID: #48110 • 300x600</span>
+</div>
+</div>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-2 text-white">
+<span class="material-symbols-outlined text-[#9ca6ba] text-[18px]">view_sidebar</span>
+                                                Sidebar Right
+                                            </div>
+</td>
+<td class="p-4">
+<div class="flex flex-wrap gap-1">
+<span class="px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 border border-blue-500/20 text-xs">PC</span>
+<span class="px-2 py-0.5 rounded bg-gray-700 text-gray-300 border border-gray-600 text-xs">US Only</span>
+</div>
+</td>
+<td class="p-4 text-right">
+<span class="text-white font-bold font-display">1.8%</span>
+<span class="block text-red-400 text-xs">-0.2%</span>
+</td>
+<td class="p-4 text-center">
+<label class="inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="relative w-9 h-5 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</td>
+<td class="p-4 text-right">
+<button class="text-[#9ca6ba] hover:text-white p-1 rounded hover:bg-gray-700">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-white/5 transition-colors group">
+<td class="p-4">
+<div class="flex gap-3 items-center">
+<div class="w-16 h-10 rounded bg-gray-800 bg-cover bg-center border border-gray-700 shrink-0 opacity-50" data-alt="Crypto exchange mobile banner" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCidJfTpfEqoqPNE9u8inuZtW_moEymUOPSkxTl8j2I0hb03xJBTiEmBHn59QOP4Gmtog33eQQyMN5NUR2BVfHJ5gC7IL0koE9snfeafF_3-ul1h_4ieBKZh3-hmM4iFtbSWcolxreQhdI7ZgJUOXUGDvKvrB2qDhmQ6KSa7jXC2zgdbyCcFqEbA0oExJqzhP0tw08PUI7RHFgU2OHMLzINF6c0Ldn88RdOIQMV3V1FXY5TfgjkdBRiH8dv5KaVdRiVr7sK0aZYhtY");'></div>
+<div class="flex flex-col">
+<span class="text-gray-400 font-medium">Crypto Exchange App</span>
+<span class="text-[#9ca6ba] text-xs">ID: #47500 • 320x50</span>
+</div>
+</div>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-2 text-gray-400">
+<span class="material-symbols-outlined text-[#9ca6ba] text-[18px]">smartphone</span>
+                                                Mobile Sticky Footer
+                                            </div>
+</td>
+<td class="p-4">
+<div class="flex flex-wrap gap-1 opacity-50">
+<span class="px-2 py-0.5 rounded bg-green-500/10 text-green-400 border border-green-500/20 text-xs">Finance</span>
+<span class="px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 border border-blue-500/20 text-xs">Mobile</span>
+</div>
+</td>
+<td class="p-4 text-right">
+<span class="text-gray-500 font-bold font-display">--</span>
+</td>
+<td class="p-4 text-center">
+<span class="inline-flex items-center px-2 py-1 rounded bg-red-500/10 text-red-400 text-xs font-medium border border-red-500/20">
+                                                Error
+                                            </span>
+</td>
+<td class="p-4 text-right">
+<button class="text-[#9ca6ba] hover:text-white p-1 rounded hover:bg-gray-700">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 border-t border-gray-800/50 mt-auto flex justify-between items-center bg-[#111318]/30">
+<p class="text-sm text-[#9ca6ba]">Showing 1-4 of 14 campaigns</p>
+<div class="flex gap-2">
+<button class="px-3 py-1 rounded bg-[#1a202a] border border-gray-700 text-[#9ca6ba] hover:text-white text-sm disabled:opacity-50">Previous</button>
+<button class="px-3 py-1 rounded bg-[#1a202a] border border-gray-700 text-[#9ca6ba] hover:text-white text-sm">Next</button>
+</div>
+</div>
+</div>
+<!-- Right Column: Visualizer & Quick Edit -->
+<div class="w-full xl:w-[380px] flex flex-col gap-6 shrink-0">
+<!-- Mini Map / Placement Visualizer -->
+<div class="bg-surface-dark rounded-xl border border-gray-800/50 p-5 flex flex-col gap-4">
+<div class="flex justify-between items-center">
+<h3 class="text-white font-display font-medium">Placement Visualizer</h3>
+<span class="text-xs text-[#9ca6ba] bg-gray-800 px-2 py-1 rounded">Download Page</span>
+</div>
+<div class="aspect-[4/3] w-full bg-[#111318] rounded-lg border border-gray-700/50 relative p-4 flex flex-col gap-2 overflow-hidden">
+<!-- Mock Website Layout -->
+<div class="w-full h-8 bg-gray-800 rounded opacity-50 mb-2"></div> <!-- Nav -->
+<div class="w-full h-12 bg-primary/20 border-2 border-primary border-dashed rounded flex items-center justify-center relative group cursor-pointer animate-pulse">
+<span class="text-primary text-xs font-bold">Top Banner (Active)</span>
+</div>
+<div class="flex gap-2 flex-1 mt-2">
+<div class="flex-1 bg-gray-800/30 rounded p-2 flex flex-col gap-2">
+<div class="w-3/4 h-4 bg-gray-700 rounded opacity-50"></div>
+<div class="w-1/2 h-4 bg-gray-700 rounded opacity-50"></div>
+<div class="w-full h-32 bg-gray-700/20 rounded mt-2"></div>
+</div>
+<div class="w-1/4 bg-gray-800/30 rounded p-2 flex flex-col gap-2">
+<div class="w-full h-full bg-gray-700/20 border border-gray-600 border-dashed rounded flex items-center justify-center">
+<span class="text-gray-500 text-[10px] text-center">Sidebar<br/>Ad</span>
+</div>
+</div>
+</div>
+</div>
+<p class="text-xs text-[#9ca6ba]">Visual representation of the "Download Page Top" placement currently selected.</p>
+</div>
+<!-- Quick Edit Panel -->
+<div class="bg-surface-dark rounded-xl border border-gray-800/50 p-5 flex flex-col gap-4 flex-1">
+<div class="flex justify-between items-center pb-3 border-b border-gray-800/50">
+<h3 class="text-white font-display font-medium">Quick Edit</h3>
+<button class="text-primary text-sm hover:underline">Full Edit</button>
+</div>
+<div class="flex flex-col gap-4">
+<div>
+<label class="block text-xs font-medium text-[#9ca6ba] mb-1.5 uppercase">Campaign Name</label>
+<input class="w-full bg-[#111318] border border-gray-700 rounded-lg px-3 py-2 text-white text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none" type="text" value="NordVPN Banner"/>
+</div>
+<div>
+<label class="block text-xs font-medium text-[#9ca6ba] mb-1.5 uppercase">Targeting Tags</label>
+<div class="flex flex-wrap gap-2 mb-2">
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-[#111318] border border-gray-700 text-xs text-white">
+                                            Desktop <button class="hover:text-red-400"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-[#111318] border border-gray-700 text-xs text-white">
+                                            Global <button class="hover:text-red-400"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+</div>
+<button class="text-xs text-primary flex items-center gap-1 hover:text-blue-400">
+<span class="material-symbols-outlined text-[14px]">add</span> Add Tag
+                                    </button>
+</div>
+<div>
+<label class="block text-xs font-medium text-[#9ca6ba] mb-1.5 uppercase">Daily Budget Cap</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="text-[#9ca6ba] text-sm">$</span>
+</div>
+<input class="w-full bg-[#111318] border border-gray-700 rounded-lg pl-6 pr-3 py-2 text-white text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none" type="number" value="500"/>
+</div>
+</div>
+</div>
+<div class="mt-auto pt-4 flex gap-3">
+<button class="flex-1 py-2 rounded-lg bg-primary hover:bg-blue-600 text-white text-sm font-medium transition-colors">Save Changes</button>
+<button class="px-3 py-2 rounded-lg border border-gray-700 text-[#9ca6ba] hover:text-white hover:bg-gray-800 transition-colors">
+<span class="material-symbols-outlined text-[20px]">pause</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body></html>

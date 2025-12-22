@@ -1,0 +1,49 @@
+<a [routerLink]="['/game', game.id]"
+    class="group relative flex flex-col gap-3 rounded-xl bg-[#1a202c] p-3 transition-all hover:bg-[#282e39] hover:-translate-y-1 hover:shadow-xl cursor-pointer">
+    <!-- Cover Image -->
+    <div class="w-full aspect-[3/4] bg-center bg-cover rounded-lg relative overflow-hidden"
+        [style.background-image]="'url(' + game.coverImage + ')'">
+
+        <!-- Rating Badge -->
+        @if (game.rating) {
+        <div
+            class="absolute top-2 left-2 bg-black/70 backdrop-blur-sm px-2 py-1 rounded text-xs font-bold text-yellow-400 flex items-center gap-1">
+            <span class="material-symbols-outlined text-[12px] fill-1">star</span>
+            {{ displayRating }}
+        </div>
+        }
+
+        <!-- Status Badge -->
+        @if (game.status !== 'Active') {
+        <div
+            class="absolute top-2 right-2 bg-primary/80 backdrop-blur-sm px-2 py-1 rounded text-[10px] font-bold text-white uppercase">
+            {{ game.status }}
+        </div>
+        }
+
+        <!-- Hover Overlay -->
+        <div
+            class="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
+            <div
+                class="bg-white text-primary rounded-full p-3 transform scale-50 group-hover:scale-100 transition-transform duration-300">
+                <span class="material-symbols-outlined">download</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Info Section -->
+    <div class="flex flex-col gap-1 px-1">
+        <h3 class="text-white text-lg font-bold truncate group-hover:text-primary transition-colors">
+            {{ game.title }}
+        </h3>
+        <div class="flex items-center justify-between text-sm">
+            <span class="text-[#9ca6ba]">{{ game.genre }}</span>
+            @if (game.downloads) {
+            <span class="text-[#9ca6ba] flex items-center gap-1">
+                <span class="material-symbols-outlined text-[14px]">download</span>
+                {{ downloadCount }}
+            </span>
+            }
+        </div>
+    </div>
+</a>

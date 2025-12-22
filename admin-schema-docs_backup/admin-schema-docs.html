@@ -1,0 +1,158 @@
+<div class="max-w-[1200px] mx-auto flex flex-col gap-6 pb-12 animate-fade-in">
+    <!-- Breadcrumbs -->
+    <div class="flex items-center gap-2 text-sm">
+        <a routerLink="/admin/dashboard"
+            class="text-[#9ca6ba] hover:text-primary transition-colors font-medium flex items-center gap-1">
+            <span class="material-symbols-outlined text-[18px]">home</span>
+            Dashboard
+        </a>
+        <span class="text-[#555e70] font-medium">/</span>
+        <span class="text-white font-medium">Data Schema</span>
+    </div>
+
+    <div class="flex flex-col gap-1 mb-4">
+        <h1 class="text-white text-4xl font-bold tracking-tight">System Data Schema</h1>
+        <p class="text-[#9ca6ba] text-base font-normal max-w-2xl">Reference documentation for internal data structures
+            and entity relationships.</p>
+    </div>
+
+    <!-- Schema Sections -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+        <!-- 1. Version Control -->
+        <div class="bg-[#1a1f2e] border border-slate-800 rounded-xl overflow-hidden">
+            <div class="bg-[#232936] px-6 py-4 border-b border-slate-800 flex items-center gap-3">
+                <span class="material-symbols-outlined text-primary">history</span>
+                <h3 class="text-lg font-bold text-white">Version Control</h3>
+            </div>
+            <div class="p-6">
+                <p class="text-sm text-slate-400 mb-4">Handles game versions (editions) and their updates.</p>
+                <div class="space-y-4">
+                    <div class="bg-[#111318] p-4 rounded-lg font-mono text-xs text-slate-300 overflow-x-auto">
+                        <span class="text-purple-400">interface</span> <span class="text-yellow-400">GameVersion</span>
+                        {<br>
+                        &nbsp;&nbsp;id: <span class="text-blue-400">string</span>;<br>
+                        &nbsp;&nbsp;name: <span class="text-blue-400">string</span>; <span class="text-slate-600">//
+                            "Global", "Asia"</span><br>
+                        &nbsp;&nbsp;language: <span class="text-blue-400">string</span>;<br>
+                        &nbsp;&nbsp;updates: <span class="text-yellow-400">GameUpdate</span>[];<br>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Download Links -->
+        <div class="bg-[#1a1f2e] border border-slate-800 rounded-xl overflow-hidden">
+            <div class="bg-[#232936] px-6 py-4 border-b border-slate-800 flex items-center gap-3">
+                <span class="material-symbols-outlined text-emerald-500">cloud_download</span>
+                <h3 class="text-lg font-bold text-white">Download Links</h3>
+            </div>
+            <div class="p-6">
+                <p class="text-sm text-slate-400 mb-4">CDN link sources attached to updates.</p>
+                <div class="space-y-4">
+                    <div class="bg-[#111318] p-4 rounded-lg font-mono text-xs text-slate-300 overflow-x-auto">
+                        <span class="text-purple-400">interface</span> <span class="text-yellow-400">CDNLink</span>
+                        {<br>
+                        &nbsp;&nbsp;id: <span class="text-blue-400">string</span>;<br>
+                        &nbsp;&nbsp;provider: <span class="text-blue-400">'mediafire'</span> | <span
+                            class="text-blue-400">'gdrive'</span> | <span class="text-blue-400">'mega'</span>;<br>
+                        &nbsp;&nbsp;url: <span class="text-blue-400">string</span>;<br>
+                        &nbsp;&nbsp;type: <span class="text-blue-400">'direct'</span> | <span
+                            class="text-blue-400">'torrent'</span> | <span class="text-blue-400">'parts'</span>;<br>
+                        &nbsp;&nbsp;partCount?: <span class="text-blue-400">number</span>;<br>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. User Comments -->
+        <div class="bg-[#1a1f2e] border border-slate-800 rounded-xl overflow-hidden">
+            <div class="bg-[#232936] px-6 py-4 border-b border-slate-800 flex items-center gap-3">
+                <span class="material-symbols-outlined text-amber-500">forum</span>
+                <h3 class="text-lg font-bold text-white">User Comments</h3>
+            </div>
+            <div class="p-6">
+                <p class="text-sm text-slate-400 mb-4">Community interaction and reviews.</p>
+                <div class="space-y-4">
+                    <div class="bg-[#111318] p-4 rounded-lg font-mono text-xs text-slate-300 overflow-x-auto">
+                        <span class="text-purple-400">interface</span> <span class="text-yellow-400">GameReview</span>
+                        {<br>
+                        &nbsp;&nbsp;id: <span class="text-blue-400">string</span>;<br>
+                        &nbsp;&nbsp;nickname: <span class="text-blue-400">string</span>;<br>
+                        &nbsp;&nbsp;rating: <span class="text-blue-400">number</span>; <span class="text-slate-600">//
+                            1-5</span><br>
+                        &nbsp;&nbsp;comment: <span class="text-blue-400">string</span>;<br>
+                        &nbsp;&nbsp;likes: <span class="text-blue-400">number</span>;<br>
+                        &nbsp;&nbsp;adminReply?: {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;message: <span class="text-blue-400">string</span>;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;repliedAt: <span class="text-yellow-400">Date</span>;<br>
+                        &nbsp;&nbsp;};<br>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Analytics -->
+        <div class="bg-[#1a1f2e] border border-slate-800 rounded-xl overflow-hidden">
+            <div class="bg-[#232936] px-6 py-4 border-b border-slate-800 flex items-center gap-3">
+                <span class="material-symbols-outlined text-blue-500">analytics</span>
+                <h3 class="text-lg font-bold text-white">Analytics & Guests</h3>
+            </div>
+            <div class="p-6">
+                <p class="text-sm text-slate-400 mb-4">Tracking metrics and visitor data.</p>
+                <div class="space-y-4">
+                    <div class="bg-[#111318] p-4 rounded-lg font-mono text-xs text-slate-300 overflow-x-auto">
+                        <span class="text-purple-400">interface</span> <span class="text-yellow-400">AdminStats</span>
+                        {<br>
+                        &nbsp;&nbsp;totalDownloads: <span class="text-blue-400">number</span>;<br>
+                        &nbsp;&nbsp;uniqueVisitors: <span class="text-blue-400">number</span>;<br>
+                        &nbsp;&nbsp;adRevenue: <span class="text-blue-400">number</span>;<br>
+                        &nbsp;&nbsp;recentDownloads: <span class="text-blue-400">number</span>;<br>
+                        &nbsp;&nbsp;activeGames: <span class="text-blue-400">number</span>;<br>
+                        }
+                    </div>
+                    <div class="mt-4">
+                        <h4 class="text-white text-sm font-bold mb-2">Guest Analytics</h4>
+                        <div class="bg-[#111318] p-4 rounded-lg font-mono text-xs text-slate-300 overflow-x-auto">
+                            <span class="text-purple-400">interface</span> <span
+                                class="text-yellow-400">GuestSession</span> {<br>
+                            &nbsp;&nbsp;sessionId: <span class="text-blue-400">string</span>;<br>
+                            &nbsp;&nbsp;ipHash: <span class="text-blue-400">string</span>;<br>
+                            &nbsp;&nbsp;geoCountry: <span class="text-blue-400">string</span>;<br>
+                            &nbsp;&nbsp;landingPage: <span class="text-blue-400">string</span>;<br>
+                            &nbsp;&nbsp;duration: <span class="text-blue-400">number</span>;<br>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Forum -->
+        <div class="bg-[#1a1f2e] border border-slate-800 rounded-xl overflow-hidden">
+            <div class="bg-[#232936] px-6 py-4 border-b border-slate-800 flex items-center gap-3">
+                <span class="material-symbols-outlined text-purple-500">groups</span>
+                <h3 class="text-lg font-bold text-white">Forum</h3>
+            </div>
+            <div class="p-6">
+                <p class="text-sm text-slate-400 mb-4">Forum structure (Proposed).</p>
+                <div class="space-y-4">
+                    <div class="bg-[#111318] p-4 rounded-lg font-mono text-xs text-slate-300 overflow-x-auto">
+                        <span class="text-purple-400">interface</span> <span class="text-yellow-400">Topic</span> {<br>
+                        &nbsp;&nbsp;id: <span class="text-blue-400">string</span>;<br>
+                        &nbsp;&nbsp;title: <span class="text-blue-400">string</span>;<br>
+                        &nbsp;&nbsp;authorId: <span class="text-blue-400">string</span>;<br>
+                        &nbsp;&nbsp;categoryId: <span class="text-blue-400">string</span>;<br>
+                        &nbsp;&nbsp;posts: <span class="text-yellow-400">Post</span>[];<br>
+                        &nbsp;&nbsp;isPinned: <span class="text-blue-400">boolean</span>;<br>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,43 @@
+<div class="loader-container" [class.fullscreen]="size === 'fullscreen'">
+    <div class="loader-content" [ngClass]="size">
+        <!-- Outer Glow Ring -->
+        <div class="glow-ring"></div>
+
+        <!-- Main Spinner -->
+        <div class="spinner-wrapper">
+            <div class="spinner">
+                <div class="spinner-blade"></div>
+                <div class="spinner-blade"></div>
+                <div class="spinner-blade"></div>
+                <div class="spinner-blade"></div>
+                <div class="spinner-blade"></div>
+                <div class="spinner-blade"></div>
+                <div class="spinner-blade"></div>
+                <div class="spinner-blade"></div>
+            </div>
+
+            <!-- Center Icon -->
+            <div class="center-icon" *ngIf="showLogo">
+                <i class="fa-solid fa-gamepad"></i>
+            </div>
+        </div>
+
+        <!-- Orbiting Particles -->
+        <div class="particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+
+        <!-- Loading Text -->
+        <div class="loader-text">
+            <span class="text-glow">{{ message }}</span>
+            <div class="loading-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+</div>

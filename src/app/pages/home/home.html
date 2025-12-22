@@ -1,0 +1,50 @@
+<div class="max-w-[1400px] mx-auto flex flex-col gap-10">
+    <!-- Hero Section -->
+    <app-hero *ngIf="heroGame$ | async as heroGame" [game]="heroGame"></app-hero>
+
+    <!-- Categories Section -->
+    <div class="flex flex-col gap-4">
+        <div class="flex items-center justify-between">
+            <h2 class="text-white text-xl font-bold tracking-wide">BROWSE BY GENRE</h2>
+            <div class="flex gap-2">
+                <button class="p-2 rounded-full bg-[#282e39] hover:bg-primary/50 text-white transition-colors"><span
+                        class="material-symbols-outlined text-sm">chevron_left</span></button>
+                <button class="p-2 rounded-full bg-[#282e39] hover:bg-primary/50 text-white transition-colors"><span
+                        class="material-symbols-outlined text-sm">chevron_right</span></button>
+            </div>
+        </div>
+        <div class="flex overflow-x-auto pb-4 gap-4 scrollbar-hide snap-x">
+            <app-category-card *ngFor="let category of categories$ | async" [category]="category"></app-category-card>
+        </div>
+    </div>
+
+    <!-- Trending Section -->
+    <div class="flex flex-col gap-4">
+        <div class="flex items-center justify-between">
+            <h2 class="text-white text-2xl font-bold tracking-tight">TRENDING NOW</h2>
+            <a class="text-primary text-sm font-bold hover:underline" href="#">View All</a>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <app-game-card *ngFor="let game of trendingGames$ | async" [game]="game"></app-game-card>
+        </div>
+    </div>
+
+    <!-- Fresh Arrivals Section -->
+    <div class="flex flex-col gap-4">
+        <h2 class="text-white text-2xl font-bold tracking-tight">FRESH ARRIVALS</h2>
+        <div class="flex flex-col gap-3">
+            <app-game-list-item *ngFor="let game of freshArrivals$ | async" [game]="game"></app-game-list-item>
+        </div>
+    </div>
+
+    <footer class="mt-8 border-t border-white/10 pt-8 pb-4">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-[#9ca6ba] text-sm font-body">
+            <p>© 2024 gg4play. All rights reserved.</p>
+            <div class="flex gap-6">
+                <a class="hover:text-white transition-colors" href="#">Privacy Policy</a>
+                <a class="hover:text-white transition-colors" href="#">Terms of Service</a>
+                <a class="hover:text-white transition-colors" href="#">Support</a>
+            </div>
+        </div>
+    </footer>
+</div>

@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>gg4play Admin: Manage Games</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                colors: {
+                    "primary": "#0d59f2",
+                    "background-light": "#f5f6f8",
+                    "background-dark": "#101622",
+                    "card-dark": "#1b2333",
+                    "card-hover": "#232d40",
+                },
+                fontFamily: {
+                    "display": ["Space Grotesk", "sans-serif"],
+                    "body": ["Noto Sans", "sans-serif"]
+                },
+                borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+            },
+        },
+    }
+</script>
+<style>.custom-scrollbar::-webkit-scrollbar {
+        height: 6px;
+        width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent; 
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #282e39; 
+        border-radius: 4px;
+    }
+    .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .filled-icon {
+        font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display antialiased selection:bg-primary selection:text-white overflow-x-hidden">
+<div class="relative min-h-screen flex flex-col">
+<div class="fixed top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary/10 rounded-full blur-[100px] pointer-events-none z-0"></div>
+<header class="sticky top-0 z-50 w-full border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-[#101622]/90 backdrop-blur-md">
+<div class="flex h-16 items-center px-4 md:px-8 max-w-[1400px] mx-auto w-full justify-between gap-4">
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-3xl">sports_esports</span>
+<h1 class="text-xl font-bold tracking-tight dark:text-white hidden sm:block">gg4play Admin</h1>
+</div>
+</div>
+<nav class="hidden md:flex items-center gap-1">
+<a class="px-4 py-2 text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-white transition-colors rounded-lg" href="#">Dashboard</a>
+<a class="px-4 py-2 text-sm font-medium text-white bg-primary/10 rounded-lg dark:text-white relative" href="#">
+                                Games
+                                <span class="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-primary rounded-full"></span>
+</a>
+<a class="px-4 py-2 text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-white transition-colors rounded-lg" href="#">Users</a>
+<a class="px-4 py-2 text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-white transition-colors rounded-lg" href="#">Analytics</a>
+<a class="px-4 py-2 text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-white transition-colors rounded-lg" href="#">Settings</a>
+</nav>
+<div class="flex items-center gap-3">
+<div class="hidden lg:flex items-center bg-slate-100 dark:bg-card-dark rounded-lg px-3 h-10 w-64 border border-transparent focus-within:border-primary/50 focus-within:ring-1 focus-within:ring-primary/50 transition-all">
+<span class="material-symbols-outlined text-slate-400 text-[20px]">search</span>
+<input class="bg-transparent border-none text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:ring-0 w-full ml-2" placeholder="Search..." type="text"/>
+</div>
+<button class="relative p-2 text-slate-500 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-card-dark rounded-lg transition-colors">
+<span class="material-symbols-outlined text-[24px]">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-[#101622]"></span>
+</button>
+<div class="h-9 w-9 rounded-full bg-cover bg-center ring-2 ring-slate-200 dark:ring-slate-700 cursor-pointer" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDM4e8MR94WG6OKh0B-8Fxk1x5VcjxTe9i2KHVwm4yR-tz5BlNVHupc-3BqPPvUVay0zU8_dv0UBKF-td1HnnHd-AEj5KB3cVimKZEG4fOtKOsYwY-llgrD80jqI3WYhNYprpQWBgJG36xtIUr9x8Ho80g1UHDI9IJqMp1AzelD2uvK8CElWvvPJhqTsusEVA-SPcDB0oe6hu7UGg-D7S4DK93_DaUlwTr2OfpFHx8sfxeoT-IZK9V-fD3DCXGhCXYOExu9lGHN_SI');"></div>
+</div>
+</div>
+</header>
+<main class="flex-1 w-full max-w-[1400px] mx-auto px-4 md:px-8 py-8 z-10">
+<div class="flex flex-col lg:flex-row gap-6 h-[calc(100vh-8rem)] min-h-[600px]">
+<aside class="w-full lg:w-80 flex flex-col gap-4 shrink-0">
+<div class="flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<h2 class="text-xl font-bold dark:text-white">Games</h2>
+<button class="text-primary hover:bg-primary/10 p-1 rounded transition-colors"><span class="material-symbols-outlined">add</span></button>
+</div>
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-slate-400 text-[20px]">search</span>
+<input class="w-full pl-9 pr-3 py-2 bg-white dark:bg-card-dark border border-slate-200 dark:border-slate-700 rounded-lg text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:ring-1 focus:ring-primary focus:border-primary" placeholder="Filter games..." type="text"/>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto custom-scrollbar pr-2 -mr-2 flex flex-col gap-2">
+<div class="group flex items-center gap-3 p-3 bg-primary/10 border border-primary/20 dark:border-primary/30 rounded-lg cursor-pointer transition-all shadow-sm">
+<div class="h-10 w-10 rounded bg-cover bg-center shrink-0" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCJEsUq0zFkFzTfDrY9Wf_nVVwUQsE_J_1Zykuv54Msfl3txaAEzoj-bYRV_s_okDk4ERmJENZgMqQIRa2ZTQH0kYs2gp91359UKIzTJc5tbn5g8Vo-m_5pdMFrhckT1ruz1ytn1Qjkl8tyfDBedvpvW3KyGfhkx5ITQuf2zIHJNg-ln7k5cuEtjEjxMw8migZVy8IyaqttmbZXSkYSi6cYUb48lH7maHw0vvXYsv_rR9ulj6bDKYReOaxsyLZbe3vQRPnboYq9b38');"></div>
+<div class="flex-1 min-w-0">
+<h4 class="font-bold text-sm text-slate-900 dark:text-white truncate">Cyber Odyssey</h4>
+<p class="text-xs text-primary font-medium">Editing...</p>
+</div>
+</div>
+<div class="group flex items-center gap-3 p-3 bg-white dark:bg-card-dark border border-slate-200 dark:border-slate-800 rounded-lg cursor-pointer hover:border-primary/50 transition-all shadow-sm hover:shadow-md">
+<div class="h-10 w-10 rounded bg-cover bg-center shrink-0 opacity-80 group-hover:opacity-100 transition-opacity" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB13cVxEbNNO5J2bSV-iGxzZxPOjuxoU-1O_XS-3bYBOazlxKF6AckJeYbWIzXYzOzeEqFKKe0ICa4F6PJR0b8NBOTHPbrovZAI139s55_gpPHz0uGEMP8hsxJGgcvsVbLQStAddXVAl-3X5TNKLIMbsse8ln0pxQ0fGY2yQZrUUVV7G_uikNSV-6boAec5_e7sSSzUMbKoJ07rnSKuarOl7gGMtiWdghBXNArWlf5YQA-Sx7Qi2mAhw9iT21DAm2fl2ojtGjxpmgo');"></div>
+<div class="flex-1 min-w-0">
+<h4 class="font-bold text-sm text-slate-900 dark:text-slate-300 group-hover:dark:text-white truncate">Void Runner</h4>
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+<p class="text-xs text-slate-500">Beta</p>
+</div>
+</div>
+</div>
+<div class="group flex items-center gap-3 p-3 bg-white dark:bg-card-dark border border-slate-200 dark:border-slate-800 rounded-lg cursor-pointer hover:border-primary/50 transition-all shadow-sm hover:shadow-md">
+<div class="h-10 w-10 rounded bg-cover bg-center shrink-0 opacity-80 group-hover:opacity-100 transition-opacity" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDlTiRf_-eB_zFzgcQ3wLEuI16-wb2FOOKJPeIgf8IxC9dlIADs5bw86jIEhDADpT_ddeOHGzCqnq2R-X-mYSweWoCNFmd8LTFbTErnbbeAqNkIWrZOMmSNfAZLhtdFuN10kgpjHZFzS-yYbioPsKdObPenMa0WC1x6NEgLhJjvJzWb-cdn-xG9eWe5YqQl2X_TxjIWhAejWmFmnWNdl6LSLr1EvXk2ps8j2r6t1m2itTiGd0Fl3nu2HHA9vhnTk1HpqU6DY00NAaE');"></div>
+<div class="flex-1 min-w-0">
+<h4 class="font-bold text-sm text-slate-900 dark:text-slate-300 group-hover:dark:text-white truncate">Legacy Tactics</h4>
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
+<p class="text-xs text-slate-500">Draft</p>
+</div>
+</div>
+</div>
+<div class="group flex items-center gap-3 p-3 bg-white dark:bg-card-dark border border-slate-200 dark:border-slate-800 rounded-lg cursor-pointer hover:border-primary/50 transition-all shadow-sm hover:shadow-md">
+<div class="h-10 w-10 rounded bg-cover bg-center shrink-0 opacity-80 group-hover:opacity-100 transition-opacity" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDh86mhL2Jb_NOzG8fYKsa4md_9WjBamTgPawZAzTQA9_RK-leYgE8ZxYUTx9r1n215FKfpxEwnh2dTJTNThCvObA7WP-T967rOGbrjg3qdte7qMncNe21dC0WUGJ8pI1vzwp4fPAHHH1RbyheWZrR9XXdOnWbBnePSM_MZFaA9qeCb8swxFc7v-_IFjmepET_E8MJXg9ylOE2SJlduC6FFRCr04YM4oMVDl6bmqiXLTRnauQ0u9SGVvMgtC-CbxVCaE-8eRSjck9o');"></div>
+<div class="flex-1 min-w-0">
+<h4 class="font-bold text-sm text-slate-900 dark:text-slate-300 group-hover:dark:text-white truncate">Neo Tokyo Racing</h4>
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-red-500"></span>
+<p class="text-xs text-slate-500">Deprecated</p>
+</div>
+</div>
+</div>
+<div class="group flex items-center gap-3 p-3 bg-white dark:bg-card-dark border border-slate-200 dark:border-slate-800 rounded-lg cursor-pointer hover:border-primary/50 transition-all shadow-sm hover:shadow-md">
+<div class="h-10 w-10 rounded bg-cover bg-center shrink-0 opacity-80 group-hover:opacity-100 transition-opacity" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA659m1s3xxYkUWKtqs7LWyQOE6azJoGOG64Z0PALhx-XKRXP_OkcfjdCPrwU1Intp5xhR7lICMJlXKwnul4nCE1GJK2svfAzYUUX71Cv9-FEAM4qCHQNFXjpo68FQRvq7cx4gxtIPq4wJ9uqU1X7X7zeyhwtxR1D2DBNeXSV5pDyQxvm_l9z1vIIKzZtoGMo901rCyl1i1lALa5HeN8a3zuKDezLohcHloPOfCHyElz4YfWASth5xyUJGCIZ7IRDi2klUnGPqsQsw');"></div>
+<div class="flex-1 min-w-0">
+<h4 class="font-bold text-sm text-slate-900 dark:text-slate-300 group-hover:dark:text-white truncate">Aether Chronicles</h4>
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+<p class="text-xs text-slate-500">Live</p>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<section class="flex-1 flex flex-col bg-white dark:bg-card-dark rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+<div class="px-6 py-4 border-b border-slate-200 dark:border-slate-800 flex flex-wrap gap-4 items-center justify-between bg-slate-50/50 dark:bg-card-dark/50 backdrop-blur">
+<div>
+<div class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 mb-1">
+<span>Games</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span>Editing</span>
+</div>
+<h2 class="text-xl font-bold dark:text-white flex items-center gap-2">
+                            Cyber Odyssey
+                            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 uppercase border border-emerald-500/20">Live</span>
+</h2>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-2 text-sm font-medium text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10 rounded-lg transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+<span>Delete</span>
+</button>
+<button class="px-5 py-2 text-sm font-medium text-white bg-primary hover:bg-primary/90 shadow-lg shadow-primary/20 rounded-lg transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">save</span>
+<span>Save Changes</span>
+</button>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto custom-scrollbar p-6">
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-8">
+<div class="xl:col-span-4 space-y-6">
+<div>
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Game Thumbnail</label>
+<div class="relative w-full aspect-[4/3] rounded-lg bg-slate-100 dark:bg-[#101622] border-2 border-dashed border-slate-300 dark:border-slate-700 overflow-hidden group cursor-pointer hover:border-primary transition-colors">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCJEsUq0zFkFzTfDrY9Wf_nVVwUQsE_J_1Zykuv54Msfl3txaAEzoj-bYRV_s_okDk4ERmJENZgMqQIRa2ZTQH0kYs2gp91359UKIzTJc5tbn5g8Vo-m_5pdMFrhckT1ruz1ytn1Qjkl8tyfDBedvpvW3KyGfhkx5ITQuf2zIHJNg-ln7k5cuEtjEjxMw8migZVy8IyaqttmbZXSkYSi6cYUb48lH7maHw0vvXYsv_rR9ulj6bDKYReOaxsyLZbe3vQRPnboYq9b38');"></div>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-white">
+<span class="material-symbols-outlined text-3xl mb-1">cloud_upload</span>
+<span class="text-xs font-medium">Click to change</span>
+</div>
+</div>
+<p class="text-xs text-slate-500 mt-2">Recommended: 800x600px, JPG/PNG. Max 2MB.</p>
+</div>
+<div class="bg-background-light dark:bg-[#101622] rounded-lg p-4 border border-slate-200 dark:border-slate-700/50">
+<h4 class="text-sm font-bold text-slate-900 dark:text-white mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary">info</span>
+                                    Metadata
+                                </h4>
+<div class="space-y-3">
+<div>
+<label class="text-xs text-slate-500 block mb-1">Internal ID</label>
+<code class="text-xs font-mono bg-white dark:bg-card-dark px-2 py-1 rounded border border-slate-200 dark:border-slate-700 block w-full select-all">83920-AFX-22</code>
+</div>
+<div>
+<label class="text-xs text-slate-500 block mb-1">Last Updated</label>
+<p class="text-sm text-slate-700 dark:text-slate-300">Oct 24, 2023 by Admin</p>
+</div>
+<div>
+<label class="text-xs text-slate-500 block mb-1">Total Downloads</label>
+<p class="text-sm text-slate-700 dark:text-slate-300 font-mono">842,051</p>
+</div>
+</div>
+</div>
+</div>
+<div class="xl:col-span-8 space-y-8">
+<div class="space-y-4">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="space-y-1">
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300">Title</label>
+<input class="block w-full rounded-lg border-slate-200 dark:border-slate-700 bg-white dark:bg-[#101622] text-slate-900 dark:text-white focus:border-primary focus:ring-primary sm:text-sm px-3 py-2.5 shadow-sm" type="text" value="Cyber Odyssey"/>
+</div>
+<div class="space-y-1">
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300">Category</label>
+<div class="relative">
+<select class="block w-full rounded-lg border-slate-200 dark:border-slate-700 bg-white dark:bg-[#101622] text-slate-900 dark:text-white focus:border-primary focus:ring-primary sm:text-sm px-3 py-2.5 shadow-sm appearance-none">
+<option selected="">Role Playing Game (RPG)</option>
+<option>Action</option>
+<option>Strategy</option>
+<option>Adventure</option>
+</select>
+<span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+<span class="material-symbols-outlined text-slate-400 text-[20px]">expand_more</span>
+</span>
+</div>
+</div>
+</div>
+<div class="space-y-1">
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300">Description</label>
+<textarea class="block w-full rounded-lg border-slate-200 dark:border-slate-700 bg-white dark:bg-[#101622] text-slate-900 dark:text-white focus:border-primary focus:ring-primary sm:text-sm px-3 py-2.5 shadow-sm resize-none custom-scrollbar" rows="5">Experience a dystopian future where humanity struggles for survival in neon-lit mega cities. Cyber Odyssey offers an immersive open-world experience with deep character customization, branching storylines, and intense tactical combat. Master the art of hacking and cybernetic augmentation to uncover the truth behind the corporations ruling the world.</textarea>
+<p class="text-xs text-slate-500 text-right">340/2000 characters</p>
+</div>
+</div>
+<div class="border-t border-slate-200 dark:border-slate-700 pt-6">
+<div class="flex items-center justify-between mb-6">
+<div>
+<h3 class="text-lg font-bold dark:text-white">Game Editions</h3>
+<p class="text-xs text-slate-500 mt-1">Manage regional versions and update packages.</p>
+</div>
+<button class="px-3 py-2 text-sm bg-primary hover:bg-primary/90 text-white rounded-lg font-medium transition-colors flex items-center gap-2 shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+                                    Add Edition
+                                </button>
+</div>
+<div class="space-y-6">
+<div class="bg-background-light dark:bg-[#101622] rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+<div class="px-4 py-3 bg-white dark:bg-card-dark border-b border-slate-200 dark:border-slate-700 flex items-center justify-between group cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-500 dark:text-indigo-400">
+<span class="material-symbols-outlined text-[20px]">public</span>
+</div>
+<div>
+<h4 class="font-bold text-sm text-slate-900 dark:text-white">Global Edition</h4>
+<p class="text-xs text-slate-500">ID: GE-8832 • 3 Updates</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-400 transition-colors" title="Edit Edition">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-400 transition-colors">
+<span class="material-symbols-outlined text-[20px]">expand_less</span>
+</button>
+</div>
+</div>
+<div class="p-4 space-y-4">
+<div class="flex justify-end">
+<button class="text-xs font-medium text-primary hover:bg-primary/10 px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">upload</span> New Update Package
+                                        </button>
+</div>
+<div class="bg-white dark:bg-card-dark rounded-lg border border-primary/40 shadow-sm relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-primary"></div>
+<div class="p-4 border-b border-slate-100 dark:border-slate-800/50 flex flex-wrap items-center justify-between gap-4 bg-slate-50/50 dark:bg-card-dark/50">
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-2">
+<span class="text-xs font-bold text-slate-500 uppercase">Ver</span>
+<input class="w-20 bg-white dark:bg-[#101622] border border-slate-200 dark:border-slate-700 rounded px-2 py-1 text-xs font-bold text-slate-900 dark:text-white focus:ring-1 focus:ring-primary focus:border-primary" type="text" value="2.4.1"/>
+</div>
+<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 uppercase border border-emerald-500/20">Live Build</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-xs text-slate-400 flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">calendar_today</span> Oct 24, 2023</span>
+<div class="h-4 w-px bg-slate-200 dark:bg-slate-700"></div>
+<button class="text-slate-400 hover:text-red-500 transition-colors" title="Delete Update"><span class="material-symbols-outlined text-[16px]">delete</span></button>
+</div>
+</div>
+<div class="p-4 space-y-4">
+<div class="space-y-1">
+<label class="text-xs font-medium text-slate-500 uppercase tracking-wider">Update Notes</label>
+<textarea class="block w-full rounded-lg border-slate-200 dark:border-slate-700 bg-background-light dark:bg-[#101622] text-slate-900 dark:text-white text-xs focus:border-primary focus:ring-primary px-3 py-2 shadow-sm resize-none custom-scrollbar" rows="2">Patch fixes for multiplayer connectivity and optimized rendering pipeline.</textarea>
+</div>
+<div class="bg-background-light dark:bg-[#101622] rounded-lg p-3 border border-slate-200 dark:border-slate-700/50">
+<div class="flex items-center justify-between mb-3">
+<label class="text-xs font-bold text-slate-700 dark:text-slate-300 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary">cloud_download</span>
+                                                    Download Servers
+                                                </label>
+<button class="text-[10px] bg-primary/10 hover:bg-primary/20 text-primary px-2 py-1 rounded transition-colors flex items-center gap-1 font-medium">
+<span class="material-symbols-outlined text-[12px]">add_link</span> Add Link
+                                                </button>
+</div>
+<div class="space-y-2">
+<div class="grid grid-cols-12 gap-2 items-start group">
+<div class="col-span-12 sm:col-span-4 md:col-span-3">
+<div class="relative">
+<span class="absolute left-2.5 top-1/2 -translate-y-1/2 material-symbols-outlined text-slate-400 text-[14px]">dns</span>
+<input class="w-full bg-white dark:bg-card-dark border border-slate-200 dark:border-slate-700 rounded-md py-1.5 pl-8 pr-2 text-xs text-slate-900 dark:text-white focus:ring-1 focus:ring-primary focus:border-primary transition-colors" placeholder="Server Name" type="text" value="Mediafire"/>
+</div>
+</div>
+<div class="col-span-10 sm:col-span-7 md:col-span-8">
+<div class="relative">
+<span class="absolute left-2.5 top-1/2 -translate-y-1/2 material-symbols-outlined text-slate-400 text-[14px]">link</span>
+<input class="w-full bg-white dark:bg-card-dark border border-slate-200 dark:border-slate-700 rounded-md py-1.5 pl-8 pr-8 text-xs font-mono text-slate-600 dark:text-slate-400 focus:text-slate-900 focus:dark:text-white focus:ring-1 focus:ring-primary focus:border-primary transition-colors" placeholder="https://" type="text" value="https://www.mediafire.com/file/cyber-odyssey-v2.4.1.zip"/>
+<a class="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined text-[14px]">open_in_new</span></a>
+</div>
+</div>
+<div class="col-span-2 sm:col-span-1 flex justify-end">
+<button class="p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 rounded transition-colors">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-12 gap-2 items-start group">
+<div class="col-span-12 sm:col-span-4 md:col-span-3">
+<div class="relative">
+<span class="absolute left-2.5 top-1/2 -translate-y-1/2 material-symbols-outlined text-slate-400 text-[14px]">dns</span>
+<input class="w-full bg-white dark:bg-card-dark border border-slate-200 dark:border-slate-700 rounded-md py-1.5 pl-8 pr-2 text-xs text-slate-900 dark:text-white focus:ring-1 focus:ring-primary focus:border-primary transition-colors" placeholder="Server Name" type="text" value="Google Drive"/>
+</div>
+</div>
+<div class="col-span-10 sm:col-span-7 md:col-span-8">
+<div class="relative">
+<span class="absolute left-2.5 top-1/2 -translate-y-1/2 material-symbols-outlined text-slate-400 text-[14px]">link</span>
+<input class="w-full bg-white dark:bg-card-dark border border-slate-200 dark:border-slate-700 rounded-md py-1.5 pl-8 pr-8 text-xs font-mono text-slate-600 dark:text-slate-400 focus:text-slate-900 focus:dark:text-white focus:ring-1 focus:ring-primary focus:border-primary transition-colors" placeholder="https://" type="text" value="https://drive.google.com/file/d/1A2b3C4d5E6f7G8h9I0j/view"/>
+<a class="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined text-[14px]">open_in_new</span></a>
+</div>
+</div>
+<div class="col-span-2 sm:col-span-1 flex justify-end">
+<button class="p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 rounded transition-colors">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-card-dark rounded-lg p-3 border border-slate-200 dark:border-slate-800 flex items-center justify-between group hover:border-slate-300 dark:hover:border-slate-700 transition-all cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 px-2 py-1 rounded text-xs font-mono font-medium">v2.4.0</div>
+<div>
+<p class="text-sm font-medium text-slate-900 dark:text-white">Previous Stable</p>
+<p class="text-[10px] text-slate-400">Sep 12, 2023 • 2 Servers</p>
+</div>
+</div>
+<div class="flex items-center gap-2 opacity-60 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 hover:bg-slate-100 dark:hover:bg-slate-700 rounded text-slate-400 transition-colors"><span class="material-symbols-outlined text-[18px]">edit</span></button>
+<span class="material-symbols-outlined text-[20px] text-slate-300 dark:text-slate-600">expand_more</span>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-background-light dark:bg-[#101622] rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden opacity-90">
+<div class="px-4 py-3 bg-white dark:bg-card-dark border-b border-slate-200 dark:border-slate-700 flex items-center justify-between group cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="p-1.5 rounded-lg bg-emerald-500/10 text-emerald-500 dark:text-emerald-400">
+<span class="material-symbols-outlined text-[20px]">translate</span>
+</div>
+<div>
+<h4 class="font-bold text-sm text-slate-900 dark:text-white">Arabic Edition</h4>
+<p class="text-xs text-slate-500">ID: AE-9921 • 1 Update</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-400 transition-colors">
+<span class="material-symbols-outlined text-[20px]">expand_more</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="border-t border-slate-200 dark:border-slate-700 pt-6">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-lg font-bold dark:text-white">User Reviews &amp; Comments</h3>
+<div class="flex items-center gap-2">
+<span class="text-sm text-slate-500 dark:text-slate-400">Sort by:</span>
+<select class="bg-transparent border-none text-sm font-medium text-slate-900 dark:text-white focus:ring-0 cursor-pointer p-0 pr-6">
+<option>Newest First</option>
+<option>Lowest Rating</option>
+<option>Highest Rating</option>
+</select>
+</div>
+</div>
+<div class="space-y-3">
+<div class="bg-white dark:bg-card-dark rounded-xl p-4 border border-slate-200 dark:border-slate-800 flex flex-col gap-3 group hover:border-slate-300 dark:hover:border-slate-700 transition-all">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-indigo-500 flex items-center justify-center text-xs font-bold text-white">JD</div>
+<div>
+<p class="text-sm font-bold dark:text-white">JohnDoe_99</p>
+<div class="flex items-center text-amber-400 text-[14px]">
+<span class="material-symbols-outlined filled-icon text-[16px]">star</span>
+<span class="material-symbols-outlined filled-icon text-[16px]">star</span>
+<span class="material-symbols-outlined filled-icon text-[16px]">star</span>
+<span class="material-symbols-outlined filled-icon text-[16px]">star</span>
+<span class="material-symbols-outlined filled-icon text-[16px]">star</span>
+</div>
+</div>
+</div>
+<span class="text-xs text-slate-400">2 hours ago</span>
+</div>
+<p class="text-sm text-slate-600 dark:text-slate-300">Absolutely loving the new update! The cyberpunk aesthetic is top-notch. Had a few frame drops in the city center but overall smooth.</p>
+<div class="flex justify-end gap-2 pt-2 border-t border-slate-100 dark:border-slate-800/50">
+<button class="text-xs font-medium text-slate-500 hover:text-primary transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">edit</span> Edit Content
+                                    </button>
+<button class="text-xs font-medium text-red-500 hover:text-red-600 transition-colors flex items-center gap-1 bg-red-50 dark:bg-red-500/10 px-2 py-1 rounded">
+<span class="material-symbols-outlined text-[16px]">delete</span> Delete Review
+                                    </button>
+</div>
+</div>
+<div class="bg-white dark:bg-card-dark rounded-xl p-4 border border-slate-200 dark:border-slate-800 flex flex-col gap-3 group hover:border-slate-300 dark:hover:border-slate-700 transition-all">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center text-xs font-bold text-white">xX</div>
+<div>
+<p class="text-sm font-bold dark:text-white">xX_Slayer_Xx</p>
+<div class="flex items-center text-amber-400 text-[14px]">
+<span class="material-symbols-outlined filled-icon text-[16px]">star</span>
+<span class="material-symbols-outlined text-[16px]">star</span>
+<span class="material-symbols-outlined text-[16px]">star</span>
+<span class="material-symbols-outlined text-[16px]">star</span>
+<span class="material-symbols-outlined text-[16px]">star</span>
+</div>
+</div>
+</div>
+<span class="text-xs text-slate-400">1 day ago</span>
+</div>
+<p class="text-sm text-slate-600 dark:text-slate-300">Keeps crashing on launch. Fix your game devs!!! Unplayable state right now.</p>
+<div class="flex justify-end gap-2 pt-2 border-t border-slate-100 dark:border-slate-800/50">
+<button class="text-xs font-medium text-slate-500 hover:text-primary transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">reply</span> Reply
+                                    </button>
+<button class="text-xs font-medium text-slate-500 hover:text-primary transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">edit</span> Edit
+                                    </button>
+<button class="text-xs font-medium text-red-500 hover:text-red-600 transition-colors flex items-center gap-1 bg-red-50 dark:bg-red-500/10 px-2 py-1 rounded">
+<span class="material-symbols-outlined text-[16px]">delete</span> Delete Review
+                                    </button>
+</div>
+</div>
+<div class="bg-white dark:bg-card-dark rounded-xl p-4 border border-slate-200 dark:border-slate-800 flex flex-col gap-3 group hover:border-slate-300 dark:hover:border-slate-700 transition-all">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-emerald-600 flex items-center justify-center text-xs font-bold text-white">PL</div>
+<div>
+<p class="text-sm font-bold dark:text-white">ProLamer</p>
+<div class="flex items-center text-amber-400 text-[14px]">
+<span class="material-symbols-outlined filled-icon text-[16px]">star</span>
+<span class="material-symbols-outlined filled-icon text-[16px]">star</span>
+<span class="material-symbols-outlined filled-icon text-[16px]">star</span>
+<span class="material-symbols-outlined filled-icon text-[16px]">star</span>
+<span class="material-symbols-outlined text-[16px]">star</span>
+</div>
+</div>
+</div>
+<span class="text-xs text-slate-400">3 days ago</span>
+</div>
+<p class="text-sm text-slate-600 dark:text-slate-300">Decent game, but the grind is real. Needs better balancing in the late game economy.</p>
+<div class="flex justify-end gap-2 pt-2 border-t border-slate-100 dark:border-slate-800/50">
+<button class="text-xs font-medium text-slate-500 hover:text-primary transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">edit</span> Edit Content
+                                    </button>
+<button class="text-xs font-medium text-red-500 hover:text-red-600 transition-colors flex items-center gap-1 bg-red-50 dark:bg-red-500/10 px-2 py-1 rounded">
+<span class="material-symbols-outlined text-[16px]">delete</span> Delete Review
+                                    </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+</div>
+</body></html>

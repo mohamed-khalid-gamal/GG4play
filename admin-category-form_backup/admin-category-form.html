@@ -1,0 +1,102 @@
+<div class="max-w-4xl mx-auto flex flex-col gap-8 pb-10 animate-fade-in">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+            <div class="flex items-center gap-2 text-sm text-slate-500 mb-2">
+                <a routerLink="/admin/dashboard" class="hover:text-primary transition-colors">Dashboard</a>
+                <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+                <a routerLink="/admin/categories" class="hover:text-primary transition-colors">Categories</a>
+                <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+                <span class="text-white">New Category</span>
+            </div>
+            <h1 class="text-3xl font-bold text-white tracking-tight">Add New Category</h1>
+        </div>
+        <div class="flex gap-3">
+            <button routerLink="/admin/categories"
+                class="px-4 py-2.5 rounded-lg bg-[#2b3548] text-white text-sm font-bold hover:bg-[#343e52] transition-colors border border-slate-700">
+                Cancel
+            </button>
+            <button (click)="saveCategory()"
+                class="px-6 py-2.5 rounded-lg bg-primary hover:bg-primary-dark text-white text-sm font-bold shadow-lg shadow-primary/25 transition-all flex items-center gap-2">
+                <span class="material-symbols-outlined text-[20px]">save</span>
+                <span>Save Category</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Left Column: Icon & Color -->
+        <div class="space-y-6">
+            <div class="bg-[#1a1f2e] border border-slate-800 rounded-xl p-5">
+                <h3 class="text-white font-bold mb-4 flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary">palette</span> Appearance
+                </h3>
+
+                <div class="space-y-4">
+                    <!-- Icon Preview -->
+                    <div
+                        class="flex flex-col items-center justify-center p-6 bg-[#111318] rounded-lg border border-slate-700">
+                        <div class="w-16 h-16 rounded-xl flex items-center justify-center text-3xl transition-colors mb-2"
+                            [ngClass]="category.color || 'bg-slate-800 text-white'">
+                            <i [class]="'fa-solid ' + (category.icon || 'fa-gamepad')"></i>
+                        </div>
+                        <span class="text-xs text-slate-500 uppercase font-bold tracking-wider">Preview</span>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-2">Color Theme</label>
+                        <div class="grid grid-cols-5 gap-2">
+                            <button *ngFor="let color of colors" (click)="category.color = color.class"
+                                class="w-8 h-8 rounded-full transition-transform hover:scale-110 focus:ring-2 ring-offset-2 ring-offset-[#1a1f2e]"
+                                [class.ring-2]="category.color === color.class"
+                                [class.ring-white]="category.color === color.class" [style.backgroundColor]="color.hex"
+                                [title]="color.name">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Details & Icon Picker -->
+        <div class="lg:col-span-2 space-y-6">
+            <div class="bg-[#1a1f2e] border border-slate-800 rounded-xl p-6 space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-bold text-slate-300 mb-1">Category Name</label>
+                        <input type="text" [(ngModel)]="category.name" placeholder="e.g. Action RPG"
+                            class="w-full bg-[#111318] border border-slate-700 rounded-lg px-4 py-3 text-white focus:ring-1 focus:ring-primary focus:border-primary placeholder:text-slate-600">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-slate-300 mb-1">Slug</label>
+                        <input type="text" [(ngModel)]="category.slug" placeholder="e.g. action-rpg"
+                            class="w-full bg-[#111318] border border-slate-700 rounded-lg px-4 py-3 text-white focus:ring-1 focus:ring-primary focus:border-primary placeholder:text-slate-600">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-bold text-slate-300 mb-1">Description</label>
+                    <textarea [(ngModel)]="category.description" rows="3" placeholder="Category description..."
+                        class="w-full bg-[#111318] border border-slate-700 rounded-lg px-4 py-3 text-white focus:ring-1 focus:ring-primary focus:border-primary placeholder:text-slate-600 resize-none custom-scrollbar"></textarea>
+                </div>
+
+                <!-- Icon Picker -->
+                <div>
+                    <label class="block text-sm font-bold text-slate-300 mb-3">Select Icon (FontAwesome)</label>
+                    <div
+                        class="p-4 bg-[#111318] border border-slate-700 rounded-lg h-60 overflow-y-auto custom-scrollbar">
+                        <div class="grid grid-cols-6 sm:grid-cols-8 gap-2">
+                            <button *ngFor="let icon of faIcons" (click)="category.icon = icon"
+                                class="aspect-square rounded flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-700 transition-all"
+                                [class.bg-primary]="category.icon === icon" [class.text-white]="category.icon === icon"
+                                [class.hover:bg-primary]="category.icon === icon">
+                                <i [class]="'fa-solid ' + icon + ' text-xl'"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-2">Selected: <span class="font-mono text-primary">{{
+                            category.icon }}</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,387 @@
+@if (isLoading()) {
+<div class="flex items-center justify-center h-[50vh]">
+    <div class="animate-spin">
+        <span class="material-symbols-outlined text-primary text-4xl">progress_activity</span>
+    </div>
+</div>
+} @else if (game(); as game) {
+<!-- Hero Banner -->
+<div class="relative w-full h-[450px] lg:h-[550px] overflow-hidden group -mx-4 lg:-mx-8 -mt-4 lg:-mt-8">
+    <div class="absolute inset-0 bg-cover bg-center transition-transform duration-[20s] group-hover:scale-105"
+        [style.background-image]="'url(' + (game.bannerImage || game.coverImage) + ')'">
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-t from-background-dark via-background-dark/90 to-transparent"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-background-dark via-background-dark/70 to-transparent"></div>
+    <div class="relative h-full max-w-[1600px] mx-auto px-4 md:px-8 flex flex-col justify-end pb-12 lg:pb-16">
+        <!-- Breadcrumb -->
+        <div class="flex items-center gap-2 mb-4 text-sm">
+            <a class="text-slate-400 hover:text-primary transition-colors" routerLink="/">Home</a>
+            <span class="text-slate-600">/</span>
+            <span class="text-white font-medium">{{ game.title }}</span>
+        </div>
+
+        <!-- Tags -->
+        <div class="flex flex-wrap items-center gap-3 mb-4">
+            <span
+                class="px-3 py-1 rounded bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider border border-primary/20 backdrop-blur-sm">
+                {{ game.genre }}
+            </span>
+            @if (game.currentVersion) {
+            <div
+                class="flex items-center gap-1.5 px-3 py-1 rounded bg-green-500/10 text-green-400 text-xs font-bold border border-green-500/20 backdrop-blur-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                {{ game.currentVersion }}
+            </div>
+            }
+        </div>
+
+        <!-- Title -->
+        <h1
+            class="text-white font-display text-4xl lg:text-6xl font-black leading-[0.95] tracking-tighter drop-shadow-2xl mb-4">
+            {{ game.title }}
+        </h1>
+
+        <!-- Stats -->
+        <div class="flex flex-wrap items-center gap-6 text-slate-400 text-sm md:text-base font-medium">
+            @if (game.rating) {
+            <div class="flex items-center gap-2 bg-white/5 backdrop-blur px-3 py-1.5 rounded-lg border border-white/10">
+                <span class="material-symbols-outlined text-yellow-400 text-[20px] fill-1">star</span>
+                <span class="font-bold text-white">{{ displayRating() }}</span>
+                @if (game.ratingCount) {
+                <span class="text-slate-500 text-xs">({{ game.ratingCount | number }})</span>
+                }
+            </div>
+            }
+            @if (game.releaseDate) {
+            <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-[20px]">calendar_month</span>
+                <span>{{ formatDate(game.releaseDate) }}</span>
+            </div>
+            }
+            <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-[20px]">apartment</span>
+                <span>{{ game.developer }}</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="max-w-[1600px] mx-auto mt-8">
+    <div class="grid grid-cols-1 xl:grid-cols-12 gap-8">
+        <!-- Left Column -->
+        <div class="xl:col-span-8 flex flex-col gap-8">
+
+            <!-- Screenshot Gallery -->
+            @if (game.screenshots && game.screenshots.length > 0) {
+            <div
+                class="bg-surface-card/80 backdrop-blur-sm border border-white/5 rounded-xl p-1.5 shadow-2xl shadow-black/50">
+                <div class="aspect-video w-full rounded-lg bg-black relative overflow-hidden">
+                    @if (selectedScreenshot(); as screenshot) {
+                    <div class="absolute inset-0 bg-cover bg-center transition-all duration-500"
+                        [style.background-image]="'url(' + screenshot.url + ')'">
+                    </div>
+                    }
+                    <div
+                        class="absolute bottom-4 right-4 bg-black/80 backdrop-blur text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-2 border border-white/10">
+                        <span class="material-symbols-outlined text-[16px]">photo_library</span>
+                        {{ game.screenshots.length }} Screenshots
+                    </div>
+                </div>
+                <div class="grid grid-cols-4 gap-1.5 mt-1.5">
+                    @for (screenshot of game.screenshots; track screenshot.id; let i = $index) {
+                    <button (click)="selectScreenshot(i)"
+                        class="aspect-video rounded overflow-hidden border-2 relative transition-all"
+                        [class.border-primary]="selectedScreenshotIndex() === i"
+                        [class.border-transparent]="selectedScreenshotIndex() !== i"
+                        [class.opacity-60]="selectedScreenshotIndex() !== i">
+                        <img [alt]="screenshot.caption || 'Screenshot'" class="w-full h-full object-cover"
+                            [src]="screenshot.thumbnail || screenshot.url" />
+                    </button>
+                    }
+                </div>
+            </div>
+            }
+
+            <!-- About Section -->
+            <section>
+                <div class="flex items-center gap-3 mb-5 border-b border-white/10 pb-3">
+                    <span class="material-symbols-outlined text-primary text-3xl">info</span>
+                    <h3 class="text-2xl font-display font-bold text-white">About the Game</h3>
+                </div>
+                <div class="prose prose-invert prose-slate max-w-none text-slate-300 leading-relaxed">
+                    <p>{{ game.description }}</p>
+                </div>
+            </section>
+
+            <!-- Ad Space -->
+            <app-ad-placeholder size="banner" label="Advertisement Space"></app-ad-placeholder>
+
+            <!-- System Requirements -->
+            @if (game.minimumRequirements || game.recommendedRequirements) {
+            <section class="bg-surface-card border border-white/5 rounded-xl p-6 lg:p-8">
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-primary text-3xl">memory</span>
+                        <h3 class="text-xl font-display font-bold text-white">System Requirements</h3>
+                    </div>
+                    <div class="flex bg-surface-darker p-1 rounded-lg border border-white/5">
+                        <button (click)="platformTab.set('windows')"
+                            class="px-4 py-1.5 rounded text-sm font-bold transition-colors"
+                            [class.bg-primary]="platformTab() === 'windows'"
+                            [class.text-white]="platformTab() === 'windows'"
+                            [class.text-slate-400]="platformTab() !== 'windows'">
+                            Windows
+                        </button>
+                        <button (click)="platformTab.set('linux')"
+                            class="px-4 py-1.5 rounded text-sm font-medium transition-colors"
+                            [class.bg-primary]="platformTab() === 'linux'"
+                            [class.text-white]="platformTab() === 'linux'"
+                            [class.text-slate-400]="platformTab() !== 'linux'">
+                            Linux
+                        </button>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 relative">
+                    <div class="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-white/5 -translate-x-1/2">
+                    </div>
+
+                    <!-- Minimum -->
+                    @if (game.minimumRequirements; as min) {
+                    <div>
+                        <h4
+                            class="text-slate-400 font-bold mb-6 uppercase text-xs tracking-widest flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-slate-500"></span> Minimum
+                        </h4>
+                        <ul class="space-y-4">
+                            <li class="grid grid-cols-3 gap-2 border-b border-white/5 pb-3">
+                                <span class="text-slate-500 text-xs font-bold uppercase pt-1">OS</span>
+                                <span class="col-span-2 text-slate-200 text-sm font-medium">{{ min.os }}</span>
+                            </li>
+                            <li class="grid grid-cols-3 gap-2 border-b border-white/5 pb-3">
+                                <span class="text-slate-500 text-xs font-bold uppercase pt-1">Processor</span>
+                                <span class="col-span-2 text-slate-200 text-sm font-medium">{{ min.processor }}</span>
+                            </li>
+                            <li class="grid grid-cols-3 gap-2 border-b border-white/5 pb-3">
+                                <span class="text-slate-500 text-xs font-bold uppercase pt-1">Memory</span>
+                                <span class="col-span-2 text-slate-200 text-sm font-medium">{{ min.memory }}</span>
+                            </li>
+                            <li class="grid grid-cols-3 gap-2">
+                                <span class="text-slate-500 text-xs font-bold uppercase pt-1">Graphics</span>
+                                <span class="col-span-2 text-slate-200 text-sm font-medium">{{ min.graphics }}</span>
+                            </li>
+                        </ul>
+                    </div>
+                    }
+
+                    <!-- Recommended -->
+                    @if (game.recommendedRequirements; as rec) {
+                    <div>
+                        <h4
+                            class="text-green-400 font-bold mb-6 uppercase text-xs tracking-widest flex items-center gap-2">
+                            <span
+                                class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.5)]"></span>
+                            Recommended
+                        </h4>
+                        <ul class="space-y-4">
+                            <li class="grid grid-cols-3 gap-2 border-b border-white/5 pb-3">
+                                <span class="text-slate-500 text-xs font-bold uppercase pt-1">OS</span>
+                                <span class="col-span-2 text-white text-sm font-bold">{{ rec.os }}</span>
+                            </li>
+                            <li class="grid grid-cols-3 gap-2 border-b border-white/5 pb-3">
+                                <span class="text-slate-500 text-xs font-bold uppercase pt-1">Processor</span>
+                                <span class="col-span-2 text-white text-sm font-bold">{{ rec.processor }}</span>
+                            </li>
+                            <li class="grid grid-cols-3 gap-2 border-b border-white/5 pb-3">
+                                <span class="text-slate-500 text-xs font-bold uppercase pt-1">Memory</span>
+                                <span class="col-span-2 text-white text-sm font-bold">{{ rec.memory }}</span>
+                            </li>
+                            <li class="grid grid-cols-3 gap-2">
+                                <span class="text-slate-500 text-xs font-bold uppercase pt-1">Graphics</span>
+                                <span class="col-span-2 text-white text-sm font-bold">{{ rec.graphics }}</span>
+                            </li>
+                        </ul>
+                    </div>
+                    }
+                </div>
+            </section>
+            }
+
+            <!-- Downloads Section -->
+            <section id="downloads">
+                <div class="flex items-center justify-between mb-6 border-b border-white/10 pb-4">
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-primary text-3xl">cloud_download</span>
+                        <h3 class="text-2xl font-display font-bold text-white">Available Versions</h3>
+                    </div>
+                    <div
+                        class="hidden sm:flex items-center gap-2 px-3 py-1 bg-blue-500/10 text-blue-400 rounded-full border border-blue-500/20 text-xs font-bold">
+                        <span class="material-symbols-outlined text-[16px]">verified</span>
+                        <span>Direct & Torrent Links</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-col gap-6">
+                    @for (version of game.versions; track version.id) {
+                    <div class="bg-surface-card border border-white/5 rounded-xl overflow-hidden shadow-lg">
+                        <!-- Version Header -->
+                        <div
+                            class="bg-gradient-to-r from-surface-darker to-surface-card p-4 border-b border-white/5 flex items-center justify-between">
+                            <div class="flex items-center gap-4">
+                                <div
+                                    class="w-12 h-12 rounded-lg bg-primary/20 flex items-center justify-center text-primary ring-1 ring-primary/30">
+                                    <span class="material-symbols-outlined text-[28px]">{{ version.icon || 'public'
+                                        }}</span>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-bold text-white">{{ version.name }}</h4>
+                                    <p class="text-xs text-slate-400">{{ version.description || version.language }}</p>
+                                </div>
+                            </div>
+                            <span
+                                class="bg-surface-dark px-3 py-1 rounded text-xs text-slate-400 font-mono border border-white/5">
+                                ID: {{ version.id }}
+                            </span>
+                        </div>
+
+                        <!-- Updates Timeline -->
+                        <div class="p-6 space-y-6 bg-surface-darker/50">
+                            @for (update of version.updates; track update.id) {
+                            <div class="relative pl-8" [class.border-l-2]="true"
+                                [class.border-primary/30]="update.isLatest" [class.border-white/5]="!update.isLatest">
+                                <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-background-dark border-2"
+                                    [class.border-primary]="update.isLatest" [class.ring-4]="update.isLatest"
+                                    [class.ring-primary/20]="update.isLatest"
+                                    [class.border-white/10]="!update.isLatest">
+                                </div>
+
+                                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+                                    <div>
+                                        <div class="flex items-center gap-3 mb-1">
+                                            <h5 class="font-bold text-lg" [class.text-white]="update.isLatest"
+                                                [class.text-slate-300]="!update.isLatest">
+                                                {{ update.name }}
+                                            </h5>
+                                            @if (update.isLatest) {
+                                            <span
+                                                class="px-2 py-0.5 rounded text-[10px] font-bold bg-primary text-white uppercase tracking-wide shadow-sm shadow-primary/50">
+                                                Latest
+                                            </span>
+                                            }
+                                        </div>
+                                        <div class="flex items-center gap-3 text-xs text-slate-500 font-mono">
+                                            <span>{{ update.size }}</span>
+                                            <span>•</span>
+                                            <span>{{ formatDate(update.releaseDate) }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- CDN Links -->
+                                <div class="bg-surface-dark rounded-xl p-4 border border-white/5">
+                                    <span
+                                        class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-3 block flex items-center gap-2">
+                                        <span class="material-symbols-outlined text-[14px]">dns</span> Select Download
+                                        Server
+                                    </span>
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                                        @for (link of update.cdnLinks; track link.id) {
+                                        <app-download-link-card [link]="link" (onSelect)="startDownload(update, link)">
+                                        </app-download-link-card>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            }
+                        </div>
+                    </div>
+                    }
+                </div>
+            </section>
+        </div>
+
+        <!-- Right Column (Sidebar) -->
+        <aside class="xl:col-span-4 space-y-6">
+            <app-ad-placeholder size="rect" label="Sponsored Ad" [sponsored]="true"></app-ad-placeholder>
+
+            <div class="sticky top-24 z-30 space-y-6">
+                <!-- Quick Action Card -->
+                <div
+                    class="bg-surface-card rounded-xl border border-white/5 shadow-2xl shadow-black/50 overflow-hidden">
+                    <div class="bg-gradient-to-r from-primary/20 to-surface-card p-5 border-b border-white/5">
+                        <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary">bolt</span> Quick Download
+                        </h3>
+                    </div>
+                    <div class="p-5 flex flex-col gap-4">
+                        <button (click)="quickDownload()"
+                            class="w-full h-14 bg-gradient-to-r from-primary to-blue-600 hover:from-blue-500 hover:to-blue-700 text-white font-bold rounded-lg shadow-lg shadow-primary/20 flex items-center justify-center gap-3 transition-all transform active:scale-95 text-lg group">
+                            <span class="material-symbols-outlined group-hover:animate-bounce">download</span>
+                            Download {{ game.currentVersion || 'Latest' }}
+                        </button>
+                        <div class="text-center">
+                            <p class="text-xs text-slate-400">Trusted by {{ formatDownloads(game.downloads) }}+ Gamers
+                            </p>
+                        </div>
+                        <div class="mt-2 pt-4 border-t border-white/5 grid grid-cols-2 gap-4">
+                            <div class="text-center">
+                                <div class="text-white font-bold">{{ game.totalSize || 'N/A' }}</div>
+                                <div class="text-xs text-slate-500">File Size</div>
+                            </div>
+                            <div class="text-center border-l border-white/5">
+                                <div class="text-green-400 font-bold">Safe</div>
+                                <div class="text-xs text-slate-500">Virus Check</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Game Info Card -->
+                <div class="bg-surface-card rounded-xl border border-white/5 p-5">
+                    <h4 class="text-white font-bold mb-4 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-slate-400 text-[20px]">info</span> Game Info
+                    </h4>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex justify-between items-center py-2 border-b border-white/5">
+                            <span class="text-slate-400">Developer</span>
+                            <span class="text-white font-medium">{{ game.developer }}</span>
+                        </div>
+                        @if (game.publisher) {
+                        <div class="flex justify-between items-center py-2 border-b border-white/5">
+                            <span class="text-slate-400">Publisher</span>
+                            <span class="text-white font-medium">{{ game.publisher }}</span>
+                        </div>
+                        }
+                        @if (game.releaseDate) {
+                        <div class="flex justify-between items-center py-2 border-b border-white/5">
+                            <span class="text-slate-400">Release Date</span>
+                            <span class="text-white font-medium">{{ formatDate(game.releaseDate) }}</span>
+                        </div>
+                        }
+                        @if (game.lastUpdated) {
+                        <div class="flex justify-between items-center py-2">
+                            <span class="text-slate-400">Last Update</span>
+                            <span class="text-green-400 font-medium">{{ getRelativeTime(game.lastUpdated) }}</span>
+                        </div>
+                        }
+                    </div>
+
+                    @if (game.tags && game.tags.length > 0) {
+                    <div class="mt-5">
+                        <p class="text-slate-400 text-xs uppercase font-bold mb-3 tracking-wider">Tags</p>
+                        <div class="flex flex-wrap gap-2">
+                            @for (tag of game.tags; track tag) {
+                            <span
+                                class="px-2.5 py-1 bg-surface-darker text-slate-300 rounded text-xs hover:text-white hover:bg-primary/20 hover:border-primary/30 border border-transparent cursor-pointer transition-all">
+                                {{ tag }}
+                            </span>
+                            }
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+        </aside>
+    </div>
+</div>
+}

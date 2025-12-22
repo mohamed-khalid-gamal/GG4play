@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>gg4play</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0d59f2",
+                        "background-light": "#f5f6f8",
+                        "background-dark": "#101622",
+                        "surface": "#1a202c",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2d3748; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4a5568; 
+        }
+    </style>
+</head>
+<body class="bg-background-dark text-white font-display h-screen w-full flex overflow-hidden selection:bg-primary selection:text-white">
+<aside class="hidden lg:flex w-64 flex-col border-r border-white/5 bg-[#111318] flex-shrink-0 z-20">
+<div class="flex flex-col h-full p-4 justify-between">
+<div class="flex flex-col gap-8">
+<div class="px-3 pt-2">
+<span class="text-xs font-bold text-[#525a6b] uppercase tracking-wider">Menu</span>
+</div>
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary transition-all hover:bg-primary/20 group" href="#">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">home</span>
+<p class="text-sm font-medium leading-normal">Home</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#9ca6ba] hover:bg-white/5 hover:text-white transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">category</span>
+<p class="text-sm font-medium leading-normal">Categories</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#9ca6ba] hover:bg-white/5 hover:text-white transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">trending_up</span>
+<p class="text-sm font-medium leading-normal">Trending</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#9ca6ba] hover:bg-white/5 hover:text-white transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">new_releases</span>
+<p class="text-sm font-medium leading-normal">Fresh Arrivals</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#9ca6ba] hover:bg-white/5 hover:text-white transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">reviews</span>
+<p class="text-sm font-medium leading-normal">Reviews</p>
+</a>
+</nav>
+</div>
+<div class="flex flex-col gap-2">
+<div class="px-3 py-4 border-t border-white/5 mt-2">
+<p class="text-xs text-[#525a6b]">gg4play v2.4.0</p>
+</div>
+</div>
+</div>
+</aside>
+<div class="flex-1 flex flex-col h-full overflow-hidden relative">
+<div class="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-primary/10 via-background-dark/0 to-background-dark/0 opacity-50 z-0"></div>
+<header class="flex items-center justify-between whitespace-nowrap border-b border-white/5 bg-[#111318]/80 backdrop-blur-md px-6 py-4 z-10 sticky top-0">
+<div class="flex items-center gap-8 w-full max-w-3xl">
+<div class="flex items-center gap-3 text-white cursor-pointer select-none">
+<div class="size-8 text-primary">
+<svg fill="currentColor" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M39.475 21.6262C40.358 21.4363 40.6863 21.5589 40.7581 21.5934C40.7876 21.655 40.8547 21.857 40.8082 22.3336C40.7408 23.0255 40.4502 24.0046 39.8572 25.2301C38.6799 27.6631 36.5085 30.6631 33.5858 33.5858C30.6631 36.5085 27.6632 38.6799 25.2301 39.8572C24.0046 40.4502 23.0255 40.7407 22.3336 40.8082C21.8571 40.8547 21.6551 40.7875 21.5934 40.7581C21.5589 40.6863 21.4363 40.358 21.6262 39.475C21.8562 38.4054 22.4689 36.9657 23.5038 35.2817C24.7575 33.2417 26.5497 30.9744 28.7621 28.762C30.9744 26.5497 33.2417 24.7574 35.2817 23.5037C36.9657 22.4689 38.4054 21.8562 39.475 21.6262ZM4.41189 29.2403L18.7597 43.5881C19.8813 44.7097 21.4027 44.9179 22.7217 44.7893C24.0585 44.659 25.5148 44.1631 26.9723 43.4579C29.9052 42.0387 33.2618 39.5667 36.4142 36.4142C39.5667 33.2618 42.0387 29.9052 43.4579 26.9723C44.1631 25.5148 44.659 24.0585 44.7893 22.7217C44.9179 21.4027 44.7097 19.8813 43.5881 18.7597L29.2403 4.41187C27.8527 3.02428 25.8765 3.02573 24.2861 3.36776C22.6081 3.72863 20.7334 4.58419 18.8396 5.74801C16.4978 7.18716 13.9881 9.18353 11.5858 11.5858C9.18354 13.988 7.18717 16.4978 5.74802 18.8396C4.58421 20.7334 3.72865 22.6081 3.36778 24.2861C3.02574 25.8765 3.02429 27.8527 4.41189 29.2403Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-white text-xl font-bold tracking-tight hidden sm:block">gg4play</h2>
+</div>
+<div class="flex-1 relative group/search max-w-md hidden md:block">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-[#9ca6ba]">search</span>
+</div>
+<input class="w-full h-11 bg-[#282e39]/50 border border-transparent focus:border-primary/50 text-white rounded-xl pl-10 pr-4 placeholder:text-[#9ca6ba] focus:ring-2 focus:ring-primary/20 focus:bg-[#282e39] transition-all text-sm font-body" placeholder="Search games, genres, tags..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="lg:hidden flex items-center justify-center size-10 rounded-full hover:bg-white/10 text-white transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</header>
+<main class="flex-1 overflow-y-auto z-0 p-4 lg:p-8 scroll-smooth pb-20">
+<div class="max-w-[1400px] mx-auto flex flex-col gap-10">
+<div class="@container w-full rounded-2xl overflow-hidden relative group">
+<div class="flex min-h-[500px] flex-col gap-6 bg-cover bg-center bg-no-repeat justify-end p-8 md:p-12 relative transition-transform duration-700 hover:scale-[1.01]" data-alt="Futuristic cyberpunk city skyline at night with neon signs" style='background-image: linear-gradient(to top, rgba(16, 22, 34, 1) 0%, rgba(16, 22, 34, 0.6) 50%, rgba(16, 22, 34, 0.2) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuBZ5bEh6Pu5I-FpUlo_Dc07sw-tqUN5TqPul1XzXV4K0UJxUUK1PaSzSr0LIhQCPhYt1w-w73EGyeyEaCyoT6q-nFQ6P75vSm7AjRkk85zBuXx0rEV_8dtgmqTcdhxev2BJFAlgkXT3ftiBc_kfgFydsCKpJUTQgBJ0oJQ-pFL0O84etTWDjv3GqW4tTuTbax2pMI_z_odpHk4fIZiFqW1XRs5GfUrFMhRDB2G87PQVnvrW1UxEqk8fCcY7QoHSUuvH6mEws1rh1aU");'>
+<div class="absolute inset-0 bg-gradient-to-r from-background-dark/80 via-transparent to-transparent z-0"></div>
+<div class="flex flex-col gap-4 text-left relative z-10 max-w-2xl animate-fade-in-up">
+<span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 border border-primary/30 w-fit backdrop-blur-sm">
+<span class="size-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-primary text-xs font-bold uppercase tracking-wider">Early Access</span>
+</span>
+<h1 class="text-white text-5xl md:text-6xl font-black leading-[0.9] tracking-tighter drop-shadow-lg">
+                                CYBER<br/>REVOLUTION <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-500">2077</span>
+</h1>
+<p class="text-gray-300 text-lg font-normal leading-relaxed max-w-lg drop-shadow-md font-body">
+                                Experience the future of open-world RPGs. Immerse yourself in a neon-soaked metropolis where every choice shapes your destiny.
+                            </p>
+<div class="flex flex-wrap gap-4 mt-2">
+<button class="flex items-center justify-center gap-2 h-12 px-8 rounded-lg bg-primary hover:bg-blue-600 text-white text-base font-bold tracking-wide transition-all hover:shadow-[0_0_20px_rgba(13,89,242,0.5)] transform hover:-translate-y-0.5">
+<span class="material-symbols-outlined text-[20px]">download</span>
+<span>Download Now</span>
+</button>
+<button class="flex items-center justify-center gap-2 h-12 px-6 rounded-lg bg-white/10 hover:bg-white/20 text-white text-base font-bold tracking-wide backdrop-blur-md transition-all">
+<span class="material-symbols-outlined text-[20px]">play_arrow</span>
+<span>Watch Trailer</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<h2 class="text-white text-xl font-bold tracking-wide">BROWSE BY GENRE</h2>
+<div class="flex gap-2">
+<button class="p-2 rounded-full bg-[#282e39] hover:bg-primary/50 text-white transition-colors"><span class="material-symbols-outlined text-sm">chevron_left</span></button>
+<button class="p-2 rounded-full bg-[#282e39] hover:bg-primary/50 text-white transition-colors"><span class="material-symbols-outlined text-sm">chevron_right</span></button>
+</div>
+</div>
+<div class="flex overflow-x-auto pb-4 gap-4 scrollbar-hide snap-x">
+<div class="flex-none snap-start group cursor-pointer relative overflow-hidden rounded-xl w-48 h-24 bg-[#282e39]">
+<div class="absolute inset-0 bg-cover bg-center opacity-60 group-hover:opacity-40 group-hover:scale-110 transition-all duration-500" data-alt="Action game explosion scene" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBB1Ox-1t7iGVXwwZha_dp25BXvZP8MO5iLnVGA2jSHPa11Valj9k9h2OPzrQJB0ervV6reMczMsVI-r3wGCxMeIqHk72WEXqSQWU7dUOF3i31G1gd1oxQvjBTMoHEehqcanNnlPcqDP3pyoeJV4IxgxyvE-d6-bC3GLvKZBrf8a3mnqoL0OD5-irRMC8aWxDPaImnHhl0tv0kbKmsOnP4scJGcMuxzq6n3LWhMvU6Dba_iigqKn_C1tBf0cr9h5hKW5Zf07WHpNc8");'></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+<div class="absolute bottom-3 left-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">swords</span>
+<span class="text-white font-bold tracking-wide">Action</span>
+</div>
+</div>
+<div class="flex-none snap-start group cursor-pointer relative overflow-hidden rounded-xl w-48 h-24 bg-[#282e39]">
+<div class="absolute inset-0 bg-cover bg-center opacity-60 group-hover:opacity-40 group-hover:scale-110 transition-all duration-500" data-alt="RPG fantasy landscape" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAwNpliBOfwzM5Pv_a4v0flrjWVZvEAzCf9U6pq1tYJjMFNJn8zZaXUN-Jp9eu3CaZhsokXO3RT4Co4gv7ugIvzeBnFgu2ufNRIOffwLaqPWud1jBZEQa1iT50CP5BhmewsRTotBvMbc2wkosUz0tfZ8zORj__0zSfkO_cLkzvKCzRtzAPT0gzkuiJSw41As0j0sXNWToBVivtdhTP1rXb2JBnbrP_uBCeL2oEjQP5KUOXdEPbZnjL8viSnXzoP4HiX1bJqXTjTHH8");'></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+<div class="absolute bottom-3 left-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-purple-500">auto_fix</span>
+<span class="text-white font-bold tracking-wide">RPG</span>
+</div>
+</div>
+<div class="flex-none snap-start group cursor-pointer relative overflow-hidden rounded-xl w-48 h-24 bg-[#282e39]">
+<div class="absolute inset-0 bg-cover bg-center opacity-60 group-hover:opacity-40 group-hover:scale-110 transition-all duration-500" data-alt="Racing car blurred motion" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAuP7NyRguVug_qfcTcIeGk8367ma_KFrlBJuxUAdphl_Wo32GmCZDav0LFBaJ-e0_7xxZBHdSM8tEggDPwZzz7kn--LuONsw3s1VDNgyCMYRNRgDeK2A_36cNnybR7TdvNMcYsagu-fyU1jFDn-Hdyvlmx3Uv5pjGfCooItX-c5ivs5l-mhVQN41BTPOhel5QLO_sZKfr54JHDRPOLe3ZjTwnr17j_5ANmx98NyzVwynLiNpvZ_OO-ijFcA9c0q1hGIJhy7XNB-Y8");'></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+<div class="absolute bottom-3 left-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-yellow-500">sports_esports</span>
+<span class="text-white font-bold tracking-wide">Racing</span>
+</div>
+</div>
+<div class="flex-none snap-start group cursor-pointer relative overflow-hidden rounded-xl w-48 h-24 bg-[#282e39]">
+<div class="absolute inset-0 bg-cover bg-center opacity-60 group-hover:opacity-40 group-hover:scale-110 transition-all duration-500" data-alt="Strategy game map view" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCcKcGhp5VOUaTK3jNXetr0yRH6SteidWWO6uUZyTdKWtVyT__pNxtOwR2HnlwvPvKIljFusziGj2FuHSr825iOegEdSUzkLT6H4Vtr1JOrr1FOLgO7RwEapoq1yNc1Tf7SiChaIAdRA73iiPv_E50nKs65f5CObUYp20vhqkZ0tWIuc2Wcrs0ikrZarI9ls-di11V1eh3w2C4Thq_Feg5cln5tjwFpyoSxbTSrW_nq_HxfvTw1e1sJgFTivKI9_xheU5u0rTekeXw");'></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+<div class="absolute bottom-3 left-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-green-500">psychology</span>
+<span class="text-white font-bold tracking-wide">Strategy</span>
+</div>
+</div>
+<div class="flex-none snap-start group cursor-pointer relative overflow-hidden rounded-xl w-48 h-24 bg-[#282e39]">
+<div class="absolute inset-0 bg-cover bg-center opacity-60 group-hover:opacity-40 group-hover:scale-110 transition-all duration-500" data-alt="Horror game dark corridor" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD0ZXs1ovfWGnMCG2NV4_O98fHCeu9UUbc1F4WbAEiv-yeGrQ24Ac3OWrm_wBFSitJrz_rmflpZzTczYdB7T9paGimxczVUDApDlYiiOYN0W2AyeoIIksImP6gX-zKXgVRwRN371esbUv6xiYF1D9SrjSL1r0X9xPtcjDFHpGXoIVNUBbCV-MO6uTRUcM-cPiUp9E-GYajvKS8oMwNype0DtjzNco3kLQKkySJ_U517uPODds8vOO9Pb8CVXVywYDr0iNLFiEEOYl4");'></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+<div class="absolute bottom-3 left-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-red-500">skull</span>
+<span class="text-white font-bold tracking-wide">Horror</span>
+</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<h2 class="text-white text-2xl font-bold tracking-tight">TRENDING NOW</h2>
+<a class="text-primary text-sm font-bold hover:underline" href="#">View All</a>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="group relative flex flex-col gap-3 rounded-xl bg-[#1a202c] p-3 transition-all hover:bg-[#282e39] hover:-translate-y-1 hover:shadow-xl">
+<div class="w-full aspect-[3/4] bg-center bg-cover rounded-lg relative overflow-hidden" data-alt="Space battle scene cover art" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCsPwsOJmnLf3W72JcCsG_UO8tjR-BqCc3UM7hK9b7uiuSfN4ADvPaGm64x9-hUAPYq5Bf2rWakmzWWJ9StKfQOdLX-CDAxTbnmIuUMZHmfqNnaX13QCcv3HYDxTZ18R7sUk1mJ8cgy5gRoW5hYE2Jb7l1Xeo-Xii8kX2Dhq6I2Kp6Uc_MF6L8yHuqmYLo1FrXczwfBs3LtRebr-F1gInL3bVRQa65O-kjy1hEqZw1lpeL4zvLvjZI0MYZnmUUZarbPNJAf6B1RB9k");'>
+<div class="absolute top-2 left-2 bg-black/70 backdrop-blur-sm px-2 py-1 rounded text-xs font-bold text-yellow-400 flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] fill">star</span> 4.8
+                                </div>
+<div class="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
+<button class="bg-white text-primary rounded-full p-3 transform scale-50 group-hover:scale-100 transition-transform duration-300">
+<span class="material-symbols-outlined">download</span>
+</button>
+</div>
+</div>
+<div class="flex flex-col gap-1 px-1">
+<h3 class="text-white text-lg font-bold truncate group-hover:text-primary transition-colors">Galactic Wars</h3>
+<div class="flex items-center justify-between text-sm">
+<span class="text-[#9ca6ba]">Action RPG</span>
+</div>
+</div>
+</div>
+<div class="group relative flex flex-col gap-3 rounded-xl bg-[#1a202c] p-3 transition-all hover:bg-[#282e39] hover:-translate-y-1 hover:shadow-xl">
+<div class="w-full aspect-[3/4] bg-center bg-cover rounded-lg relative overflow-hidden" data-alt="Fantasy knight artwork cover art" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCpGISmorf96oPtttlpT97K55xoHKqzg01uZ_1qHFszXz0CsZRWsTOGBADfVO-j785gQRllDacV5CKeFCRT4vrgTUiotJJhV8ksODifNkDSFig6OTYtNDVKiisafhf8NmlP6ace6cdDzaTCD0fKq-ooY1NpyPGCY07DiTo2znAHg-fF57_JMt3R9x8AWBa-6PUhBIW1Qzi80mXrDm7wpx-utaD6nyWtI1LBbh9CAmvw4psbHrC1HdKdH9lyrQxKOrZIfMbDMNKf0KA");'>
+<div class="absolute top-2 left-2 bg-black/70 backdrop-blur-sm px-2 py-1 rounded text-xs font-bold text-yellow-400 flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] fill">star</span> 4.9
+                                </div>
+<div class="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
+<button class="bg-white text-primary rounded-full p-3 transform scale-50 group-hover:scale-100 transition-transform duration-300">
+<span class="material-symbols-outlined">download</span>
+</button>
+</div>
+</div>
+<div class="flex flex-col gap-1 px-1">
+<h3 class="text-white text-lg font-bold truncate group-hover:text-primary transition-colors">Elden Realm</h3>
+<div class="flex items-center justify-between text-sm">
+<span class="text-[#9ca6ba]">Adventure</span>
+</div>
+</div>
+</div>
+<div class="group relative flex flex-col gap-3 rounded-xl bg-[#1a202c] p-3 transition-all hover:bg-[#282e39] hover:-translate-y-1 hover:shadow-xl">
+<div class="w-full aspect-[3/4] bg-center bg-cover rounded-lg relative overflow-hidden" data-alt="Sci-fi spaceship corridor cover art" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCFA_1PlrqaT-tpxQo5oqGjsx_dg99xIRpxqsOVXRgp3z01ysumYhsG7x1DWO7AFXTRAuib6pH5Qe0HRHFXKM1HjgtdEZ_MjUZcOCHVyoujG4wdBO32jZG-rJyBQdaWwIthyXlY9L7ZcI-Hx7iTITlzBdocn1QxqBCjmBCvXlv6dU8KbeT6_a5gITOAlb7gpvWvyXAcVvZkJVcdpddQNf8vZJBglMJOfs5YJ-ZO31tyqYD8BE0vt5fTc14r9L5kaNOEFT8EvIcjEx8");'>
+<div class="absolute top-2 left-2 bg-black/70 backdrop-blur-sm px-2 py-1 rounded text-xs font-bold text-yellow-400 flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] fill">star</span> 4.5
+                                </div>
+<div class="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
+<button class="bg-white text-primary rounded-full p-3 transform scale-50 group-hover:scale-100 transition-transform duration-300">
+<span class="material-symbols-outlined">download</span>
+</button>
+</div>
+</div>
+<div class="flex flex-col gap-1 px-1">
+<h3 class="text-white text-lg font-bold truncate group-hover:text-primary transition-colors">Star Odyssey</h3>
+<div class="flex items-center justify-between text-sm">
+<span class="text-[#9ca6ba]">Simulation</span>
+</div>
+</div>
+</div>
+<div class="group relative flex flex-col gap-3 rounded-xl bg-[#1a202c] p-3 transition-all hover:bg-[#282e39] hover:-translate-y-1 hover:shadow-xl">
+<div class="w-full aspect-[3/4] bg-center bg-cover rounded-lg relative overflow-hidden" data-alt="Neon sports car racing cover art" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDVOBTYFXjZTaieV8DACxOL9IdpXiATmBRR5PJmuqqmcSivu0Mrc5GOdH8H_tdzVw1VWeGl6agmv1mOlxXFPPmsQDAQ6TmsxVNeXycSSNfQdyrSgwVEKqO5vG7JdWV53I7VQSPYVIyhKZ_1ix4jtWFQWXfrqumj1YCYgsLeJg9GPUMHP4KaVvJopJjp06X4UbzRjDnpRMBrujVqcRlD21vloCApbebwVhSaKNqVC0gukmPOme11Fi3zSZlMMoRN-0EJ8ZWC0DZTXBc");'>
+<div class="absolute top-2 left-2 bg-black/70 backdrop-blur-sm px-2 py-1 rounded text-xs font-bold text-yellow-400 flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] fill">star</span> 4.2
+                                </div>
+<div class="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
+<button class="bg-white text-primary rounded-full p-3 transform scale-50 group-hover:scale-100 transition-transform duration-300">
+<span class="material-symbols-outlined">download</span>
+</button>
+</div>
+</div>
+<div class="flex flex-col gap-1 px-1">
+<h3 class="text-white text-lg font-bold truncate group-hover:text-primary transition-colors">Nitro Speed</h3>
+<div class="flex items-center justify-between text-sm">
+<span class="text-[#9ca6ba]">Racing</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<h2 class="text-white text-2xl font-bold tracking-tight">FRESH ARRIVALS</h2>
+<div class="flex flex-col gap-3">
+<div class="flex items-center gap-4 p-4 rounded-xl bg-[#1a202c] hover:bg-[#202735] transition-colors group">
+<div class="w-24 h-16 rounded-lg bg-cover bg-center shrink-0" data-alt="Dark forest with fog" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAuluf04R9f5CcDBYdNH3YNir2nvrm-WEUoFncBmVZanNlcPARQt1quen1qUNC2aP9WnLCcJZ4zUgO_njR6XaoVtiTdMS09oHE-2y8Vm_Om7gxjSG3aZGHw32LFkk_xK2Fg9-S-jNNDkpI6ORDaxuv-Y1XEqNwZzOeuEyNB7LR8aoFsEg5aMN268Vb3-UPyLhsiVPFtcc79uH2WJnvEfHRmdLzNR2GwVxkAmqNSbm8Jw1We8QYvHpabi7Jhp5RuZqQUpxlqNu_C7uI");'></div>
+<div class="flex-1 min-w-0">
+<h4 class="text-white font-bold truncate group-hover:text-primary transition-colors">Shadows of the Deep</h4>
+<div class="flex items-center gap-2 mt-1">
+<span class="px-2 py-0.5 rounded bg-white/5 text-[10px] text-[#9ca6ba] uppercase font-bold tracking-wider">Horror</span>
+<span class="px-2 py-0.5 rounded bg-white/5 text-[10px] text-[#9ca6ba] uppercase font-bold tracking-wider">Multiplayer</span>
+</div>
+</div>
+<div class="text-right hidden sm:block">
+<p class="text-[#525a6b] text-xs">2 hours ago</p>
+</div>
+<button class="size-10 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined">download</span>
+</button>
+</div>
+<div class="flex items-center gap-4 p-4 rounded-xl bg-[#1a202c] hover:bg-[#202735] transition-colors group">
+<div class="w-24 h-16 rounded-lg bg-cover bg-center shrink-0" data-alt="Abstract colorful low poly landscape" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBXKWGNkco_im-CVyiO3bmfhdjuLIwiiPRzRNZ02Sad3_bXJu8TrJ9RmI4I0JqZfA7fKCyMiKyq7UkJzdcCfHOt3AgdzF_Wq7O6GXnYLirs3fFNHPtgKBRTAzjpbW-GHjmxVPKwv5QNY7Lc5KOLUl06nDKhlSA1YywvPwtIKmA50llMhBVG9cuGxNb8L5uP3LHh_tccCffEZEd4TBCAl-vRjAVzXjMtJerMYlIFwjpFWtaLeap1nimBfC3qu5vGCChhxO2M-xaPeUk");'></div>
+<div class="flex-1 min-w-0">
+<h4 class="text-white font-bold truncate group-hover:text-primary transition-colors">Pixel Kingdoms</h4>
+<div class="flex items-center gap-2 mt-1">
+<span class="px-2 py-0.5 rounded bg-white/5 text-[10px] text-[#9ca6ba] uppercase font-bold tracking-wider">Indie</span>
+<span class="px-2 py-0.5 rounded bg-white/5 text-[10px] text-[#9ca6ba] uppercase font-bold tracking-wider">Strategy</span>
+</div>
+</div>
+<div class="text-right hidden sm:block">
+<p class="text-[#525a6b] text-xs">5 hours ago</p>
+</div>
+<button class="size-10 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined">download</span>
+</button>
+</div>
+<div class="flex items-center gap-4 p-4 rounded-xl bg-[#1a202c] hover:bg-[#202735] transition-colors group">
+<div class="w-24 h-16 rounded-lg bg-cover bg-center shrink-0" data-alt="Futuristic mech warrior robot" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuALBQRBwB83WI9rdiwFS_hzatgEsE5NAXjizwFNDYE7lcMMp1E-ZDiIB-zS-tm6xt9mCCYmeeYi01YwMiI79JqBTDG_jLOyVBvT2DXvJmZFyAABpX8Valog5NseYsnHCwpBWfWiHkYiMvCN40QPJJXzP9nhKGRvN_QYWtDEbQWbRLPI4UE6BrNrExXw9GkvXk0zAriLq-0lrHdbqeRQxzkXPwicogSprhUFn9T0mXIn0YqN-22Mcs7AiiVzZkdA27-TG8AYZ47queE");'></div>
+<div class="flex-1 min-w-0">
+<h4 class="text-white font-bold truncate group-hover:text-primary transition-colors">Mech Assault VR</h4>
+<div class="flex items-center gap-2 mt-1">
+<span class="px-2 py-0.5 rounded bg-white/5 text-[10px] text-[#9ca6ba] uppercase font-bold tracking-wider">VR</span>
+<span class="px-2 py-0.5 rounded bg-white/5 text-[10px] text-[#9ca6ba] uppercase font-bold tracking-wider">Action</span>
+</div>
+</div>
+<div class="text-right hidden sm:block">
+<p class="text-[#525a6b] text-xs">1 day ago</p>
+</div>
+<button class="size-10 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined">download</span>
+</button>
+</div>
+</div>
+</div>
+<footer class="mt-8 border-t border-white/10 pt-8 pb-4">
+<div class="flex flex-col md:flex-row justify-between items-center gap-4 text-[#9ca6ba] text-sm font-body">
+<p>© 2024 gg4play. All rights reserved.</p>
+<div class="flex gap-6">
+<a class="hover:text-white transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-white transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-white transition-colors" href="#">Support</a>
+</div>
+</div>
+</footer>
+</div>
+</main>
+</div>
+
+</body></html>

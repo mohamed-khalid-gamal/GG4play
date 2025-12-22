@@ -1,0 +1,10 @@
+<div class="flex-none snap-start group cursor-pointer relative overflow-hidden rounded-xl w-48 h-24 bg-[#282e39]">
+    <div class="absolute inset-0 bg-cover bg-center opacity-60 group-hover:opacity-40 group-hover:scale-110 transition-all duration-500"
+        [style.background-image]="'url(' + category.image + ')'">
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+    <div class="absolute bottom-3 left-3 flex items-center gap-2">
+        <span class="material-symbols-outlined" [ngClass]="category.color">{{ category.icon }}</span>
+        <span class="text-white font-bold tracking-wide">{{ category.name }}</span>
+    </div>
+</div>

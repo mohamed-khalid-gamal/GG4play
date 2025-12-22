@@ -1,0 +1,162 @@
+<div
+    class="flex h-screen w-full bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display overflow-hidden selection:bg-primary selection:text-white">
+    <aside class="w-64 flex-shrink-0 flex flex-col border-r border-slate-800 bg-[#0b0e14] hidden md:flex">
+        <div class="h-16 flex items-center px-6 border-b border-slate-800 gap-3">
+            <div
+                class="size-8 rounded bg-gradient-to-br from-primary to-purple-600 flex items-center justify-center shadow-lg shadow-primary/20">
+                <span class="material-symbols-outlined text-white text-[20px]">sports_esports</span>
+            </div>
+            <h1 class="text-white text-lg font-bold tracking-wide"><span class="text-primary">gg4play</span> Admin</h1>
+        </div>
+        <div class="flex-1 overflow-y-auto custom-scrollbar p-4 flex flex-col gap-6">
+            <div class="flex flex-col gap-1">
+                <p class="px-3 text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Main Menu</p>
+                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all group cursor-pointer"
+                    routerLink="/admin/dashboard" routerLinkActive="bg-primary text-white shadow-lg shadow-primary/20"
+                    [routerLinkActiveOptions]="{exact: true}" [class.text-slate-400]="!rla1.isActive"
+                    [class.hover:text-white]="!rla1.isActive" [class.hover:bg-white/5]="!rla1.isActive"
+                    #rla1="routerLinkActive">
+                    <span class="material-symbols-outlined filled">dashboard</span>
+                    <span class="text-sm font-medium">Overview</span>
+                </a>
+                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all group cursor-pointer"
+                    routerLink="/admin/games" routerLinkActive="bg-primary text-white shadow-lg shadow-primary/20"
+                    [class.text-slate-400]="!rla2.isActive" [class.hover:text-white]="!rla2.isActive"
+                    [class.hover:bg-white/5]="!rla2.isActive" #rla2="routerLinkActive">
+                    <span
+                        class="material-symbols-outlined group-hover:text-primary transition-colors">sports_esports</span>
+                    <span class="text-sm font-medium">Game Library</span>
+                </a>
+                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all group cursor-pointer"
+                    routerLink="/admin/categories" routerLinkActive="bg-primary text-white shadow-lg shadow-primary/20"
+                    [class.text-slate-400]="!rla3.isActive" [class.hover:text-white]="!rla3.isActive"
+                    [class.hover:bg-white/5]="!rla3.isActive" #rla3="routerLinkActive">
+                    <span class="material-symbols-outlined group-hover:text-primary transition-colors">category</span>
+                    <span class="text-sm font-medium">Categories</span>
+                </a>
+                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all group cursor-pointer"
+                    routerLink="/admin/versions" routerLinkActive="bg-primary text-white shadow-lg shadow-primary/20"
+                    [class.text-slate-400]="!rla4.isActive" [class.hover:text-white]="!rla4.isActive"
+                    [class.hover:bg-white/5]="!rla4.isActive" #rla4="routerLinkActive">
+                    <span class="material-symbols-outlined group-hover:text-primary transition-colors">schema</span>
+                    <span class="text-sm font-medium">Version Control</span>
+                </a>
+                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all group cursor-pointer"
+                    routerLink="/admin/links" routerLinkActive="bg-primary text-white shadow-lg shadow-primary/20"
+                    [class.text-slate-400]="!rla5.isActive" [class.hover:text-white]="!rla5.isActive"
+                    [class.hover:bg-white/5]="!rla5.isActive" #rla5="routerLinkActive">
+                    <span class="material-symbols-outlined group-hover:text-primary transition-colors">link</span>
+                    <span class="text-sm font-medium">Download Links</span>
+                </a>
+                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all group cursor-pointer"
+                    routerLink="/admin/comments" routerLinkActive="bg-primary text-white shadow-lg shadow-primary/20"
+                    [class.text-slate-400]="!rla6.isActive" [class.hover:text-white]="!rla6.isActive"
+                    [class.hover:bg-white/5]="!rla6.isActive" #rla6="routerLinkActive">
+                    <span class="material-symbols-outlined group-hover:text-primary transition-colors">forum</span>
+                    <span class="text-sm font-medium">User Comments</span>
+                </a>
+                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all group cursor-pointer"
+                    routerLink="/admin/analytics" routerLinkActive="bg-primary text-white shadow-lg shadow-primary/20"
+                    [class.text-slate-400]="!rla7.isActive" [class.hover:text-white]="!rla7.isActive"
+                    [class.hover:bg-white/5]="!rla7.isActive" #rla7="routerLinkActive">
+                    <span class="material-symbols-outlined group-hover:text-primary transition-colors">analytics</span>
+                    <span class="text-sm font-medium">Guest Analytics</span>
+                </a>
+                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all group cursor-pointer"
+                    routerLink="/admin/schema" routerLinkActive="bg-primary text-white shadow-lg shadow-primary/20"
+                    [class.text-slate-400]="!rlaSchema.isActive" [class.hover:text-white]="!rlaSchema.isActive"
+                    [class.hover:bg-white/5]="!rlaSchema.isActive" #rlaSchema="routerLinkActive">
+                    <span
+                        class="material-symbols-outlined group-hover:text-primary transition-colors">data_object</span>
+                    <span class="text-sm font-medium">Data Schema</span>
+                </a>
+            </div>
+            <div class="flex flex-col gap-1">
+                <p class="px-3 text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Operations</p>
+                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all group cursor-pointer"
+                    routerLink="/admin/ads" routerLinkActive="bg-primary text-white shadow-lg shadow-primary/20"
+                    [class.text-slate-400]="!rla8.isActive" [class.hover:text-white]="!rla8.isActive"
+                    [class.hover:bg-white/5]="!rla8.isActive" #rla8="routerLinkActive">
+                    <span class="material-symbols-outlined group-hover:text-primary transition-colors">campaign</span>
+                    <span class="text-sm font-medium">Ad Manager</span>
+                </a>
+                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all group cursor-pointer"
+                    routerLink="/admin/logs" routerLinkActive="bg-primary text-white shadow-lg shadow-primary/20"
+                    [class.text-slate-400]="!rla9.isActive" [class.hover:text-white]="!rla9.isActive"
+                    [class.hover:bg-white/5]="!rla9.isActive" #rla9="routerLinkActive">
+                    <span
+                        class="material-symbols-outlined group-hover:text-primary transition-colors">receipt_long</span>
+                    <span class="text-sm font-medium">System Logs</span>
+                </a>
+                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all group cursor-pointer"
+                    routerLink="/admin/settings" routerLinkActive="bg-primary text-white shadow-lg shadow-primary/20"
+                    [class.text-slate-400]="!rla10.isActive" [class.hover:text-white]="!rla10.isActive"
+                    [class.hover:bg-white/5]="!rla10.isActive" #rla10="routerLinkActive">
+                    <span class="material-symbols-outlined group-hover:text-primary transition-colors">settings</span>
+                    <span class="text-sm font-medium">Settings</span>
+                </a>
+            </div>
+            <div class="mt-auto p-4 rounded-xl bg-card-dark border border-slate-800">
+                <div class="flex items-center gap-2 mb-2">
+                    <div class="size-2 rounded-full bg-accent-green animate-pulse"></div>
+                    <span class="text-xs font-bold text-white">System Online</span>
+                </div>
+                <div class="w-full bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                    <div class="bg-primary h-full w-[85%] rounded-full"></div>
+                </div>
+                <div class="flex justify-between mt-1">
+                    <span class="text-[10px] text-slate-500">CPU Usage</span>
+                    <span class="text-[10px] text-slate-300 font-mono">85%</span>
+                </div>
+            </div>
+        </div>
+    </aside>
+    <div class="flex-1 flex flex-col h-full overflow-hidden relative">
+        <header
+            class="h-16 flex items-center justify-between px-6 border-b border-slate-800 bg-[#101622]/80 backdrop-blur-md sticky top-0 z-20">
+            <button class="md:hidden text-slate-400 hover:text-white">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+            <div class="hidden md:flex flex-1 max-w-lg">
+                <div class="relative w-full group">
+                    <span
+                        class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-primary transition-colors material-symbols-outlined">search</span>
+                    <input
+                        class="w-full bg-[#181e29] border border-slate-800 rounded-lg pl-10 pr-4 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all"
+                        placeholder="Search games, stats, or logs..." type="text" />
+                </div>
+            </div>
+            <div class="flex items-center gap-4 ml-auto">
+                <button
+                    class="relative text-slate-400 hover:text-white transition-colors p-2 rounded-lg hover:bg-white/5">
+                    <span class="material-symbols-outlined">notifications</span>
+                    <span
+                        class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border-2 border-[#101622]"></span>
+                </button>
+                <div class="h-8 w-[1px] bg-slate-800 mx-1"></div>
+                <button class="flex items-center gap-3 pl-2 pr-1 py-1 rounded-lg hover:bg-white/5 transition-colors">
+                    <div class="text-right hidden sm:block">
+                        <p class="text-sm font-bold text-white leading-tight">Alex C.</p>
+                        <p class="text-xs text-slate-500">Super Admin</p>
+                    </div>
+                    <div class="size-9 rounded-full bg-slate-700 bg-cover bg-center border border-slate-600"
+                        data-alt="Admin profile picture"
+                        style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAizHr0cBj41ETWz2D2iFILFDXJ6W1eDqodvwaWQTdRSLH_TTDO4qcF6APXNoj5xJxcEbbE3qRBx3UbDVyJvl1Ys2ksGxj8L051gdAsCmNwr1fJF9y8r3m4TI5yqKNZeMRa8JYuol7jDAlZndUfLZKWAP38MTdogtL2sWv_OBH3ssn_geJUH2AvYo6IuECWpEj_C7dPYRnoUBsaVJvWWCD_wT78Ehz2Ck24H61SiEH4DwojR4AZjakQQuOenERMKIj6jvBl8Ei6SPc');">
+                    </div>
+                </button>
+            </div>
+        </header>
+        <main class="flex-1 overflow-y-auto custom-scrollbar p-6 lg:p-10">
+            <router-outlet></router-outlet>
+            <footer
+                class="mt-12 border-t border-slate-800 pt-6 flex flex-col md:flex-row justify-between items-center text-slate-500 text-sm">
+                <p>© 2024 gg4play Admin. All rights reserved.</p>
+                <div class="flex gap-4 mt-2 md:mt-0">
+                    <a class="hover:text-white" href="#">Support</a>
+                    <a class="hover:text-white" href="#">Docs</a>
+                    <a class="hover:text-white" href="#">Privacy</a>
+                </div>
+            </footer>
+        </main>
+    </div>
+</div>
