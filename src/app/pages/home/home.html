@@ -1,6 +1,6 @@
 <div class="max-w-[1400px] mx-auto flex flex-col gap-10">
     <!-- Hero Section -->
-    <app-hero *ngIf="heroGame$ | async as heroGame" [game]="heroGame"></app-hero>
+    <app-hero *ngIf="heroGame" [game]="heroGame"></app-hero>
 
     <!-- Categories Section -->
     <div class="flex flex-col gap-4">
@@ -14,7 +14,7 @@
             </div>
         </div>
         <div class="flex overflow-x-auto pb-4 gap-4 scrollbar-hide snap-x">
-            <app-category-card *ngFor="let category of categories$ | async" [category]="category"></app-category-card>
+            <app-category-card *ngFor="let category of categories" [category]="category"></app-category-card>
         </div>
     </div>
 
@@ -25,7 +25,7 @@
             <a class="text-primary text-sm font-bold hover:underline" href="#">View All</a>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <app-game-card *ngFor="let game of trendingGames$ | async" [game]="game"></app-game-card>
+            <app-game-card *ngFor="let game of trendingGames" [game]="game"></app-game-card>
         </div>
     </div>
 
@@ -33,7 +33,7 @@
     <div class="flex flex-col gap-4">
         <h2 class="text-white text-2xl font-bold tracking-tight">FRESH ARRIVALS</h2>
         <div class="flex flex-col gap-3">
-            <app-game-list-item *ngFor="let game of freshArrivals$ | async" [game]="game"></app-game-list-item>
+            <app-game-list-item *ngFor="let game of freshArrivals" [game]="game"></app-game-list-item>
         </div>
     </div>
 

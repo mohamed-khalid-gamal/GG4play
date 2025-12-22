@@ -1,1 +1,9 @@
-<router-outlet />
+<!-- Fullscreen Loader - Shows during initial data load -->
+@if (loadingService.isLoading()) {
+<app-loader size="fullscreen" message="Loading GG4play..." />
+}
+
+<!-- Main Content - Hidden while loading -->
+<div [class.hidden]="loadingService.isLoading()">
+  <router-outlet />
+</div>
