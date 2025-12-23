@@ -14,7 +14,7 @@
             </span>
             <span *ngIf="!game.tags?.length"
                 class="px-2 py-0.5 rounded bg-white/5 text-[10px] text-[#9ca6ba] uppercase font-bold tracking-wider">
-                {{ game.genre }}
+                {{ game.genres[0] || 'Game' }}
             </span>
         </div>
     </div>

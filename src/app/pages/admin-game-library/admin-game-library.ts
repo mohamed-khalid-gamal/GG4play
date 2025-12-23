@@ -36,7 +36,7 @@ export class AdminGameLibraryComponent {
         game.title.toLowerCase().includes(term) ||
         game.developer.toLowerCase().includes(term);
       const matchesStatus = status === 'All' || game.status === status;
-      const matchesGenre = genre === 'All' || game.genre === genre;
+      const matchesGenre = genre === 'All' || game.genres.includes(genre);
 
       return matchesTerm && matchesStatus && matchesGenre;
     });

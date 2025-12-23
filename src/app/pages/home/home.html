@@ -1,4 +1,4 @@
-<div class="max-w-[1400px] mx-auto flex flex-col gap-10">
+<div class="max-w-[1400px] mx-auto flex flex-col gap-10 animate-fade-in">
     <!-- Hero Section -->
     <app-hero *ngIf="heroGame" [game]="heroGame"></app-hero>
 
@@ -24,7 +24,7 @@
             <h2 class="text-white text-2xl font-bold tracking-tight">TRENDING NOW</h2>
             <a class="text-primary text-sm font-bold hover:underline" href="#">View All</a>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 stagger-grid">
             <app-game-card *ngFor="let game of trendingGames" [game]="game"></app-game-card>
         </div>
     </div>
@@ -32,7 +32,7 @@
     <!-- Fresh Arrivals Section -->
     <div class="flex flex-col gap-4">
         <h2 class="text-white text-2xl font-bold tracking-tight">FRESH ARRIVALS</h2>
-        <div class="flex flex-col gap-3">
+        <div class="flex flex-col gap-3 stagger-list">
             <app-game-list-item *ngFor="let game of freshArrivals" [game]="game"></app-game-list-item>
         </div>
     </div>

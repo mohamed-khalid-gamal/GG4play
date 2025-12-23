@@ -147,7 +147,7 @@
                                 <label class="block text-sm font-medium text-slate-300">Genre</label>
                                 <select
                                     class="block w-full rounded-lg border-slate-700 bg-[#111318] text-white focus:border-primary focus:ring-primary sm:text-sm px-3 py-2">
-                                    <option>{{ selectedGame.genre }}</option>
+                                    <option>{{ selectedGame.genres[0] || 'Select Genre' }}</option>
                                     <option>Action</option>
                                     <option>RPG</option>
                                 </select>

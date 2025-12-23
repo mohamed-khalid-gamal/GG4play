@@ -37,7 +37,7 @@
             {{ game.title }}
         </h3>
         <div class="flex items-center justify-between text-sm">
-            <span class="text-[#9ca6ba]">{{ game.genre }}</span>
+            <span class="text-[#9ca6ba]">{{ game.genres[0] || 'Game' }}</span>
             @if (game.downloads) {
             <span class="text-[#9ca6ba] flex items-center gap-1">
                 <span class="material-symbols-outlined text-[14px]">download</span>

@@ -86,14 +86,16 @@
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-slate-300 mb-1">Primary Genre</label>
-                        <select [(ngModel)]="gameRequest.genre"
+                        <select [ngModel]="gameRequest.genres![0]" (ngModelChange)="gameRequest.genres = [$event]"
                             class="w-full bg-[#111318] border border-slate-700 rounded-lg px-3 py-2.5 text-sm text-white focus:ring-1 focus:ring-primary focus:border-primary">
-                            <option>Action RPG</option>
-                            <option>FPS</option>
-                            <option>Strategy</option>
-                            <option>Adventure</option>
-                            <option>Simulation</option>
-                            <option>Sports</option>
+                            <option value="action">Action</option>
+                            <option value="rpg">RPG</option>
+                            <option value="strategy">Strategy</option>
+                            <option value="adventure">Adventure</option>
+                            <option value="simulation">Simulation</option>
+                            <option value="sports">Sports</option>
+                            <option value="racing">Racing</option>
+                            <option value="horror">Horror</option>
                         </select>
                     </div>
                 </div>

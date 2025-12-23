@@ -26,7 +26,8 @@ export class AdminGameFormComponent {
     title: '',
     description: '',
     status: 'Active',
-    genre: 'Action RPG',
+    platforms: ['pc'],
+    genres: ['action'],
     minimumRequirements: {
       os: 'Windows 10',
       processor: '',
@@ -38,7 +39,6 @@ export class AdminGameFormComponent {
     downloads: 0,
     versions: [],
     screenshots: [],
-    categories: [],
     tags: []
   };
 
@@ -62,7 +62,8 @@ export class AdminGameFormComponent {
           ...game,
           versions: game.versions || [],
           screenshots: game.screenshots || [],
-          categories: game.categories || [],
+          platforms: game.platforms || [],
+          genres: game.genres || [],
           tags: game.tags || []
         };
       }

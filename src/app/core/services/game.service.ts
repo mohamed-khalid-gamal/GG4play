@@ -1,6 +1,6 @@
 import { Injectable, signal, computed } from '@angular/core';
 import {
-    Game, Category, GameVersion, GameUpdate, CDNLink,
+    Game, Category, Genre, Platform, GameVersion, GameUpdate, CDNLink,
     GameStatus, DownloadState, AdminStats
 } from '../../shared/models/game.model';
 import { Observable, of } from 'rxjs';
@@ -10,10 +10,26 @@ import { Observable, of } from 'rxjs';
 })
 export class GameService {
 
-    // Categories data
-    private categories: Category[] = [
+    // Platforms data (Main Categories - Devices/Consoles)
+    private platforms: Platform[] = [
+        { id: 'pc', name: 'PC', slug: 'pc', shortName: 'PC', icon: 'computer', color: 'text-blue-500', order: 1 },
+        { id: 'ps5', name: 'PlayStation 5', slug: 'ps5', shortName: 'PS5', icon: 'sports_esports', color: 'text-indigo-500', order: 2 },
+        { id: 'ps4', name: 'PlayStation 4', slug: 'ps4', shortName: 'PS4', icon: 'sports_esports', color: 'text-blue-600', order: 3 },
+        { id: 'ps3', name: 'PlayStation 3', slug: 'ps3', shortName: 'PS3', icon: 'sports_esports', color: 'text-slate-500', order: 4 },
+        { id: 'ps2', name: 'PlayStation 2', slug: 'ps2', shortName: 'PS2', icon: 'sports_esports', color: 'text-slate-600', order: 5 },
+        { id: 'ps1', name: 'PlayStation 1', slug: 'ps1', shortName: 'PS1', icon: 'sports_esports', color: 'text-slate-700', order: 6 },
+        { id: 'xbox-series', name: 'Xbox Series X|S', slug: 'xbox-series', shortName: 'XSX', icon: 'sports_esports', color: 'text-green-500', order: 7 },
+        { id: 'xbox-one', name: 'Xbox One', slug: 'xbox-one', shortName: 'XB1', icon: 'sports_esports', color: 'text-green-600', order: 8 },
+        { id: 'xbox-360', name: 'Xbox 360', slug: 'xbox-360', shortName: 'X360', icon: 'sports_esports', color: 'text-green-700', order: 9 },
+        { id: 'switch', name: 'Nintendo Switch', slug: 'switch', shortName: 'NSW', icon: 'sports_esports', color: 'text-red-500', order: 10 },
+        { id: 'android', name: 'Android', slug: 'android', shortName: 'APK', icon: 'android', color: 'text-lime-500', order: 11 },
+        { id: 'ios', name: 'iOS', slug: 'ios', shortName: 'iOS', icon: 'phone_iphone', color: 'text-slate-400', order: 12 },
+    ];
+
+    // Genres data (Subcategories - Game Types)
+    private genres: Genre[] = [
         {
-            id: 'cat-1',
+            id: 'action',
             name: 'Action',
             slug: 'action',
             icon: 'swords',
@@ -23,7 +39,7 @@ export class GameService {
             gameCount: 45
         },
         {
-            id: 'cat-2',
+            id: 'rpg',
             name: 'RPG',
             slug: 'rpg',
             icon: 'auto_fix',
@@ -33,7 +49,7 @@ export class GameService {
             gameCount: 38
         },
         {
-            id: 'cat-3',
+            id: 'racing',
             name: 'Racing',
             slug: 'racing',
             icon: 'sports_motorsports',
@@ -43,7 +59,7 @@ export class GameService {
             gameCount: 22
         },
         {
-            id: 'cat-4',
+            id: 'strategy',
             name: 'Strategy',
             slug: 'strategy',
             icon: 'psychology',
@@ -53,7 +69,7 @@ export class GameService {
             gameCount: 28
         },
         {
-            id: 'cat-5',
+            id: 'horror',
             name: 'Horror',
             slug: 'horror',
             icon: 'skull',
@@ -63,7 +79,7 @@ export class GameService {
             gameCount: 15
         },
         {
-            id: 'cat-6',
+            id: 'adventure',
             name: 'Adventure',
             slug: 'adventure',
             icon: 'explore',
@@ -71,8 +87,31 @@ export class GameService {
             description: 'Exploration and story-driven quests',
             image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuB13cVxEbNNO5J2bSV-iGxzZxPOjuxoU-1O_XS-3bYBOazlxKF6AckJeYbWIzXYzOzeEqFKKe0ICa4F6PJR0b8NBOTHPbrovZAI139s55_gpPHz0uGEMP8hsxJGgcvsVbLQStAddXVAl-3X5TNKLIMbsse8ln0pxQ0fGY2yQZrUUVV7G_uikNSV-6boAec5_e7sSSzUMbKoJ07rnSKuarOl7gGMtiWdghBXNArWlf5YQA-Sx7Qi2mAhw9iT21DAm2fl2ojtGjxpmgo',
             gameCount: 32
+        },
+        {
+            id: 'sports',
+            name: 'Sports',
+            slug: 'sports',
+            icon: 'sports_soccer',
+            color: 'text-emerald-500',
+            description: 'Sports simulations and competitions',
+            gameCount: 18
+        },
+        {
+            id: 'simulation',
+            name: 'Simulation',
+            slug: 'simulation',
+            icon: 'precision_manufacturing',
+            color: 'text-orange-500',
+            description: 'Realistic simulations and management',
+            gameCount: 12
         }
     ];
+
+    // Backward compatibility alias
+    private get categories(): Genre[] {
+        return this.genres;
+    }
 
     // Full games data with versions, updates, and CDN links
     private games: Game[] = [
@@ -88,8 +127,8 @@ export class GameService {
             ratingCount: 12500,
             downloads: 125000,
             pageViews: 450000,
-            genre: 'Action RPG',
-            categories: ['cat-1', 'cat-2'],
+            platforms: ['pc', 'ps5', 'ps4'],
+            genres: ['action', 'rpg'],
             tags: ['Open World', 'Sci-Fi', 'FPS', 'Story Rich', 'Cyberpunk'],
             releaseDate: new Date('2077-11-14'),
             lastUpdated: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000), // 2 days ago
@@ -212,8 +251,8 @@ export class GameService {
             ratingCount: 8900,
             downloads: 89000,
             pageViews: 320000,
-            genre: 'Action RPG',
-            categories: ['cat-1', 'cat-2'],
+            platforms: ['pc', 'ps5', 'ps4'],
+            genres: ['action', 'rpg'],
             tags: ['Space', 'Strategy', 'Multiplayer'],
             releaseDate: new Date('2024-03-15'),
             lastUpdated: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000),
@@ -259,8 +298,8 @@ export class GameService {
             ratingCount: 6200,
             downloads: 85000,
             pageViews: 210000,
-            genre: 'Racing',
-            categories: ['cat-3'],
+            platforms: ['pc', 'ps5', 'ps4', 'xbox-series'],
+            genres: ['racing'],
             tags: ['Racing', 'Arcade', 'Multiplayer'],
             releaseDate: new Date('2024-01-20'),
             status: 'Active',
@@ -285,8 +324,8 @@ export class GameService {
             ratingCount: 3200,
             downloads: 45000,
             pageViews: 120000,
-            genre: 'Strategy',
-            categories: ['cat-4'],
+            platforms: ['pc'],
+            genres: ['strategy'],
             tags: ['Strategy', 'Sci-Fi', 'Turn-Based'],
             status: 'Active',
             developer: 'Tactical Games',
@@ -310,8 +349,8 @@ export class GameService {
             ratingCount: 2800,
             downloads: 32000,
             pageViews: 95000,
-            genre: 'Adventure',
-            categories: ['cat-6'],
+            platforms: ['pc', 'ps5', 'xbox-series'],
+            genres: ['adventure'],
             tags: ['Adventure', 'Puzzle', 'Story'],
             status: 'Upcoming',
             developer: 'Quest Studios',
@@ -330,8 +369,8 @@ export class GameService {
             ratingCount: 1500,
             downloads: 12000,
             pageViews: 45000,
-            genre: 'Horror',
-            categories: ['cat-5'],
+            platforms: ['pc', 'ps5', 'ps4'],
+            genres: ['horror'],
             tags: ['Horror', 'Multiplayer', 'Survival'],
             releaseDate: new Date(Date.now() - 2 * 60 * 60 * 1000),
             status: 'Active',
@@ -356,8 +395,8 @@ export class GameService {
             ratingCount: 980,
             downloads: 8000,
             pageViews: 25000,
-            genre: 'Indie',
-            categories: ['cat-4'],
+            platforms: ['pc', 'switch'],
+            genres: ['strategy', 'simulation'],
             tags: ['Indie', 'Strategy', 'Pixel Art'],
             releaseDate: new Date(Date.now() - 5 * 60 * 60 * 1000),
             status: 'Active',
@@ -382,8 +421,8 @@ export class GameService {
             ratingCount: 1200,
             downloads: 15000,
             pageViews: 60000,
-            genre: 'Action',
-            categories: ['cat-1'],
+            platforms: ['pc'],
+            genres: ['action', 'simulation'],
             tags: ['VR', 'Action', 'Mech', 'Simulation'],
             releaseDate: new Date(Date.now() - 24 * 60 * 60 * 1000),
             status: 'Active',
@@ -401,7 +440,62 @@ export class GameService {
 
     constructor() { }
 
-    // === Category Methods ===
+    // === Platform Methods (Main Categories) ===
+
+    getPlatforms(): Observable<Platform[]> {
+        return of(this.platforms.sort((a, b) => a.order - b.order));
+    }
+
+    getPlatformBySlug(slug: string): Observable<Platform | undefined> {
+        return of(this.platforms.find(p => p.slug === slug));
+    }
+
+    getPlatformById(id: string): Observable<Platform | undefined> {
+        return of(this.platforms.find(p => p.id === id));
+    }
+
+    getGamesByPlatform(platformId: string): Observable<Game[]> {
+        return of(this.games.filter(g => g.platforms.includes(platformId)));
+    }
+
+    getGamesByPlatformSlug(slug: string): Observable<Game[]> {
+        const platform = this.platforms.find(p => p.slug === slug);
+        if (!platform) return of([]);
+        return of(this.games.filter(g => g.platforms.includes(platform.id)));
+    }
+
+    // === Genre Methods (Subcategories) ===
+
+    getGenres(): Observable<Genre[]> {
+        return of(this.genres);
+    }
+
+    getGenreBySlug(slug: string): Observable<Genre | undefined> {
+        return of(this.genres.find(g => g.slug === slug));
+    }
+
+    getGenreById(id: string): Observable<Genre | undefined> {
+        return of(this.genres.find(g => g.id === id));
+    }
+
+    getGamesByGenre(genreId: string): Observable<Game[]> {
+        return of(this.games.filter(g => g.genres.includes(genreId)));
+    }
+
+    getGamesByGenreSlug(slug: string): Observable<Game[]> {
+        const genre = this.genres.find(g => g.slug === slug);
+        if (!genre) return of([]);
+        return of(this.games.filter(g => g.genres.includes(genre.id)));
+    }
+
+    // Combined filter: games by platform AND genre
+    getGamesByPlatformAndGenre(platformId: string, genreId: string): Observable<Game[]> {
+        return of(this.games.filter(g =>
+            g.platforms.includes(platformId) && g.genres.includes(genreId)
+        ));
+    }
+
+    // === Category Methods (Legacy - uses genres) ===
 
     getCategories(): Observable<Category[]> {
         return of(this.categories);
@@ -426,13 +520,13 @@ export class GameService {
     }
 
     getGamesByCategory(categoryId: string): Observable<Game[]> {
-        return of(this.games.filter(g => g.categories.includes(categoryId)));
+        return of(this.games.filter(g => g.genres.includes(categoryId)));
     }
 
     getGamesByCategorySlug(slug: string): Observable<Game[]> {
         const category = this.categories.find(c => c.slug === slug);
         if (!category) return of([]);
-        return of(this.games.filter(g => g.categories.includes(category.id)));
+        return of(this.games.filter(g => g.genres.includes(category.id)));
     }
 
     getFeaturedGame(): Observable<Game | undefined> {
@@ -473,7 +567,8 @@ export class GameService {
         const lowerQuery = query.toLowerCase();
         return of(this.games.filter(g =>
             g.title.toLowerCase().includes(lowerQuery) ||
-            g.genre.toLowerCase().includes(lowerQuery) ||
+            g.genres.some(genreId => genreId.toLowerCase().includes(lowerQuery)) ||
+            g.platforms.some(platformId => platformId.toLowerCase().includes(lowerQuery)) ||
             g.tags?.some(t => t.toLowerCase().includes(lowerQuery)) ||
             g.developer?.toLowerCase().includes(lowerQuery)
         ));

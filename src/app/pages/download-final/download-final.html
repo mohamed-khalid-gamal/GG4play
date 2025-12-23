@@ -55,9 +55,10 @@
                     <div class="flex-1 flex flex-col justify-center p-6 lg:p-10 gap-6">
                         <div>
                             <div class="flex items-center justify-between mb-2">
-                                <span class="text-xs font-bold text-primary tracking-widest uppercase">{{ game.genre
+                                <span class="text-xs font-bold text-primary tracking-widest uppercase">{{ game.genres[0]
+                                    || 'Game'
                                     }}</span>
-                                @if (game.supportedPlatforms?.includes('windows')) {
+                                @if (game.platforms?.includes('pc')) {
                                 <div class="flex items-center gap-1 text-[#9ca6ba] text-xs">
                                     <span class="material-symbols-outlined text-sm">window</span>
                                     <span>Windows 10/11</span>

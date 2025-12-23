@@ -77,8 +77,8 @@ export interface Game {
     pageViews?: number;
 
     // Categorization
-    genre: string;
-    categories: string[]; // Category IDs
+    platforms: string[];    // Platform IDs (e.g., ['pc', 'ps5', 'ps4'])
+    genres: string[];       // Genre IDs (formerly categories)
     tags?: string[];
 
     // Dates
@@ -112,17 +112,34 @@ export interface Game {
     totalSize?: string; // e.g., "68 GB"
 }
 
-// Category
-export interface Category {
+// Platform (Main Category - Device/Console)
+export interface Platform {
+    id: string;
+    name: string;           // "PlayStation 5"
+    slug: string;           // "ps5"
+    shortName: string;      // "PS5"
+    icon: string;           // Material icon name
+    color?: string;         // Tailwind class
+    image?: string;
+    order: number;          // Display order
+    gameCount?: number;
+}
+
+// Genre (Subcategory - Game Type)
+export interface Genre {
     id: string;
     name: string;
     slug: string;
-    icon: string; // Material symbol name
+    icon: string;           // Material symbol name
     image?: string;
-    color?: string; // Tailwind class like text-red-500
+    color?: string;         // Tailwind class like text-red-500
     description?: string;
     gameCount?: number;
 }
+
+// Legacy alias for backward compatibility
+export type Category = Genre;
+
 
 // Download State (for tracking user's download progress)
 export interface DownloadState {

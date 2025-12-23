@@ -1,6 +1,7 @@
 <div
     class="flex h-screen w-full bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display overflow-hidden selection:bg-primary selection:text-white">
-    <aside class="w-64 flex-shrink-0 flex flex-col border-r border-slate-800 bg-[#0b0e14] hidden md:flex">
+    <!-- Desktop Sidebar -->
+    <aside class="w-64 flex-shrink-0 flex-col border-r border-slate-800 bg-[#0b0e14] hidden md:flex">
         <div class="h-16 flex items-center px-6 border-b border-slate-800 gap-3">
             <div
                 class="size-8 rounded bg-gradient-to-br from-primary to-purple-600 flex items-center justify-center shadow-lg shadow-primary/20">
@@ -111,10 +112,161 @@
             </div>
         </div>
     </aside>
+
+    <!-- Mobile Sidebar Overlay -->
+    @if (isMobileMenuOpen()) {
+    <div class="fixed inset-0 z-40 md:hidden">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm sidebar-backdrop" (click)="closeMobileMenu()">
+        </div>
+        <!-- Sidebar Panel -->
+        <aside
+            class="absolute left-0 top-0 h-full w-72 flex flex-col border-r border-slate-800 bg-[#0b0e14] shadow-2xl sidebar-panel">
+            <div class="h-16 flex items-center justify-between px-6 border-b border-slate-800">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="size-8 rounded bg-gradient-to-br from-primary to-purple-600 flex items-center justify-center shadow-lg shadow-primary/20">
+                        <span class="material-symbols-outlined text-white text-[20px]">sports_esports</span>
+                    </div>
+                    <h1 class="text-white text-lg font-bold tracking-wide"><span class="text-primary">gg4play</span>
+                        Admin</h1>
+                </div>
+                <button class="text-slate-400 hover:text-white p-1 rounded-lg hover:bg-white/10 transition-colors"
+                    (click)="closeMobileMenu()">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <div class="flex-1 overflow-y-auto custom-scrollbar p-4 flex flex-col gap-6">
+                <div class="flex flex-col gap-1">
+                    <p class="px-3 text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Main Menu</p>
+                    <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all group cursor-pointer"
+                        routerLink="/admin/dashboard"
+                        routerLinkActive="bg-primary text-white shadow-lg shadow-primary/20"
+                        [routerLinkActiveOptions]="{exact: true}" [class.text-slate-400]="!mrla1.isActive"
+                        [class.hover:text-white]="!mrla1.isActive" [class.hover:bg-white/5]="!mrla1.isActive"
+                        #mrla1="routerLinkActive" (click)="closeMobileMenu()">
+                        <span class="material-symbols-outlined filled">dashboard</span>
+                        <span class="text-sm font-medium">Overview</span>
+                    </a>
+                    <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all group cursor-pointer"
+                        routerLink="/admin/games" routerLinkActive="bg-primary text-white shadow-lg shadow-primary/20"
+                        [class.text-slate-400]="!mrla2.isActive" [class.hover:text-white]="!mrla2.isActive"
+                        [class.hover:bg-white/5]="!mrla2.isActive" #mrla2="routerLinkActive"
+                        (click)="closeMobileMenu()">
+                        <span
+                            class="material-symbols-outlined group-hover:text-primary transition-colors">sports_esports</span>
+                        <span class="text-sm font-medium">Game Library</span>
+                    </a>
+                    <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all group cursor-pointer"
+                        routerLink="/admin/categories"
+                        routerLinkActive="bg-primary text-white shadow-lg shadow-primary/20"
+                        [class.text-slate-400]="!mrla3.isActive" [class.hover:text-white]="!mrla3.isActive"
+                        [class.hover:bg-white/5]="!mrla3.isActive" #mrla3="routerLinkActive"
+                        (click)="closeMobileMenu()">
+                        <span
+                            class="material-symbols-outlined group-hover:text-primary transition-colors">category</span>
+                        <span class="text-sm font-medium">Categories</span>
+                    </a>
+                    <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all group cursor-pointer"
+                        routerLink="/admin/versions"
+                        routerLinkActive="bg-primary text-white shadow-lg shadow-primary/20"
+                        [class.text-slate-400]="!mrla4.isActive" [class.hover:text-white]="!mrla4.isActive"
+                        [class.hover:bg-white/5]="!mrla4.isActive" #mrla4="routerLinkActive"
+                        (click)="closeMobileMenu()">
+                        <span class="material-symbols-outlined group-hover:text-primary transition-colors">schema</span>
+                        <span class="text-sm font-medium">Version Control</span>
+                    </a>
+                    <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all group cursor-pointer"
+                        routerLink="/admin/links" routerLinkActive="bg-primary text-white shadow-lg shadow-primary/20"
+                        [class.text-slate-400]="!mrla5.isActive" [class.hover:text-white]="!mrla5.isActive"
+                        [class.hover:bg-white/5]="!mrla5.isActive" #mrla5="routerLinkActive"
+                        (click)="closeMobileMenu()">
+                        <span class="material-symbols-outlined group-hover:text-primary transition-colors">link</span>
+                        <span class="text-sm font-medium">Download Links</span>
+                    </a>
+                    <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all group cursor-pointer"
+                        routerLink="/admin/comments"
+                        routerLinkActive="bg-primary text-white shadow-lg shadow-primary/20"
+                        [class.text-slate-400]="!mrla6.isActive" [class.hover:text-white]="!mrla6.isActive"
+                        [class.hover:bg-white/5]="!mrla6.isActive" #mrla6="routerLinkActive"
+                        (click)="closeMobileMenu()">
+                        <span class="material-symbols-outlined group-hover:text-primary transition-colors">forum</span>
+                        <span class="text-sm font-medium">User Comments</span>
+                    </a>
+                    <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all group cursor-pointer"
+                        routerLink="/admin/analytics"
+                        routerLinkActive="bg-primary text-white shadow-lg shadow-primary/20"
+                        [class.text-slate-400]="!mrla7.isActive" [class.hover:text-white]="!mrla7.isActive"
+                        [class.hover:bg-white/5]="!mrla7.isActive" #mrla7="routerLinkActive"
+                        (click)="closeMobileMenu()">
+                        <span
+                            class="material-symbols-outlined group-hover:text-primary transition-colors">analytics</span>
+                        <span class="text-sm font-medium">Guest Analytics</span>
+                    </a>
+                    <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all group cursor-pointer"
+                        routerLink="/admin/schema" routerLinkActive="bg-primary text-white shadow-lg shadow-primary/20"
+                        [class.text-slate-400]="!mrlaSchema.isActive" [class.hover:text-white]="!mrlaSchema.isActive"
+                        [class.hover:bg-white/5]="!mrlaSchema.isActive" #mrlaSchema="routerLinkActive"
+                        (click)="closeMobileMenu()">
+                        <span
+                            class="material-symbols-outlined group-hover:text-primary transition-colors">data_object</span>
+                        <span class="text-sm font-medium">Data Schema</span>
+                    </a>
+                </div>
+                <div class="flex flex-col gap-1">
+                    <p class="px-3 text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Operations</p>
+                    <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all group cursor-pointer"
+                        routerLink="/admin/ads" routerLinkActive="bg-primary text-white shadow-lg shadow-primary/20"
+                        [class.text-slate-400]="!mrla8.isActive" [class.hover:text-white]="!mrla8.isActive"
+                        [class.hover:bg-white/5]="!mrla8.isActive" #mrla8="routerLinkActive"
+                        (click)="closeMobileMenu()">
+                        <span
+                            class="material-symbols-outlined group-hover:text-primary transition-colors">campaign</span>
+                        <span class="text-sm font-medium">Ad Manager</span>
+                    </a>
+                    <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all group cursor-pointer"
+                        routerLink="/admin/logs" routerLinkActive="bg-primary text-white shadow-lg shadow-primary/20"
+                        [class.text-slate-400]="!mrla9.isActive" [class.hover:text-white]="!mrla9.isActive"
+                        [class.hover:bg-white/5]="!mrla9.isActive" #mrla9="routerLinkActive"
+                        (click)="closeMobileMenu()">
+                        <span
+                            class="material-symbols-outlined group-hover:text-primary transition-colors">receipt_long</span>
+                        <span class="text-sm font-medium">System Logs</span>
+                    </a>
+                    <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all group cursor-pointer"
+                        routerLink="/admin/settings"
+                        routerLinkActive="bg-primary text-white shadow-lg shadow-primary/20"
+                        [class.text-slate-400]="!mrla10.isActive" [class.hover:text-white]="!mrla10.isActive"
+                        [class.hover:bg-white/5]="!mrla10.isActive" #mrla10="routerLinkActive"
+                        (click)="closeMobileMenu()">
+                        <span
+                            class="material-symbols-outlined group-hover:text-primary transition-colors">settings</span>
+                        <span class="text-sm font-medium">Settings</span>
+                    </a>
+                </div>
+                <div class="mt-auto p-4 rounded-xl bg-card-dark border border-slate-800">
+                    <div class="flex items-center gap-2 mb-2">
+                        <div class="size-2 rounded-full bg-accent-green animate-pulse"></div>
+                        <span class="text-xs font-bold text-white">System Online</span>
+                    </div>
+                    <div class="w-full bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                        <div class="bg-primary h-full w-[85%] rounded-full"></div>
+                    </div>
+                    <div class="flex justify-between mt-1">
+                        <span class="text-[10px] text-slate-500">CPU Usage</span>
+                        <span class="text-[10px] text-slate-300 font-mono">85%</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+    }
+
     <div class="flex-1 flex flex-col h-full overflow-hidden relative">
         <header
             class="h-16 flex items-center justify-between px-6 border-b border-slate-800 bg-[#101622]/80 backdrop-blur-md sticky top-0 z-20">
-            <button class="md:hidden text-slate-400 hover:text-white">
+            <button class="md:hidden text-slate-400 hover:text-white p-2 rounded-lg hover:bg-white/10 transition-colors"
+                (click)="toggleMobileMenu()">
                 <span class="material-symbols-outlined">menu</span>
             </button>
             <div class="hidden md:flex flex-1 max-w-lg">

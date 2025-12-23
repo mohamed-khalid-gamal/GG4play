@@ -52,10 +52,10 @@
                     <span>{{ downloadCount }} Downloads</span>
                 </div>
                 }
-                @if (game.genre) {
+                @if (game.genres?.length) {
                 <div class="flex items-center gap-1.5 text-slate-300">
                     <span class="material-symbols-outlined text-[18px]">category</span>
-                    <span>{{ game.genre }}</span>
+                    <span>{{ game.genres[0] }}</span>
                 </div>
                 }
             </div>
