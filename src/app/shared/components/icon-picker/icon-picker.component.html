@@ -2,7 +2,7 @@
     <!-- Search Input -->
     <div class="search-container">
         <span class="search-icon material-symbols-outlined">search</span>
-        <input type="text" [(ngModel)]="search" (input)="onSearch()" placeholder="Search any icon..."
+        <input type="text" [(ngModel)]="search" (ngModelChange)="onSearch()" placeholder="Search any icon..."
             class="search-input" />
         <button *ngIf="search" (click)="clearSearch()" class="clear-btn" type="button">
             <span class="material-symbols-outlined">close</span>
@@ -14,7 +14,7 @@
     <div class="results-label">
         <span *ngIf="search && filteredIcons.length > 0">Found {{ filteredIcons.length }} icons</span>
         <span *ngIf="search && filteredIcons.length === 0 && !isLoading">No icons found for "{{ search }}"</span>
-        <span *ngIf="!search && !isLoading">Showing {{ filteredIcons.length }} of {{ allIcons.length }} icons</span>
+        <span *ngIf="!search && !isLoading">Start typing to search icons...</span>
         <span *ngIf="isLoading">Loading icons...</span>
     </div>
 

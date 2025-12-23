@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout';
 import { HomeComponent } from './pages/home/home';
+import { PlatformGamesComponent } from './pages/platform-games/platform-games';
 import { CategoryComponent } from './pages/category/category';
 import { GameDetailComponent } from './pages/game-detail/game-detail';
 import { DownloadWaitingComponent } from './pages/download-waiting/download-waiting';
@@ -24,6 +25,7 @@ export const routes: Routes = [
         component: MainLayoutComponent,
         children: [
             { path: '', component: HomeComponent },
+            { path: 'platform/:slug', component: PlatformGamesComponent },
             { path: 'categories', component: CategoryComponent },
             { path: 'game/:id', component: GameDetailComponent }
         ]

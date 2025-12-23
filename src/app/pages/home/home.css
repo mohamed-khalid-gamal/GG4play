@@ -1,0 +1,8 @@
+/* Platform card host styling to prevent grid collapse */
+app-platform-card {
+    display: block;
+    height: 7rem;
+    /* h-28 equivalent */
+    position: relative;
+    width: 100%;
+}

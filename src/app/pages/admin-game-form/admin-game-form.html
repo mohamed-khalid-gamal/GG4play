@@ -84,19 +84,107 @@
                             <option value="Archived">Archived</option>
                         </select>
                     </div>
-                    <div>
-                        <label class="block text-sm font-medium text-slate-300 mb-1">Primary Genre</label>
-                        <select [ngModel]="gameRequest.genres![0]" (ngModelChange)="gameRequest.genres = [$event]"
-                            class="w-full bg-[#111318] border border-slate-700 rounded-lg px-3 py-2.5 text-sm text-white focus:ring-1 focus:ring-primary focus:border-primary">
-                            <option value="action">Action</option>
-                            <option value="rpg">RPG</option>
-                            <option value="strategy">Strategy</option>
-                            <option value="adventure">Adventure</option>
-                            <option value="simulation">Simulation</option>
-                            <option value="sports">Sports</option>
-                            <option value="racing">Racing</option>
-                            <option value="horror">Horror</option>
-                        </select>
+                </div>
+
+                <!-- Genres (Multi-select with ordering) -->
+                <div class="pt-4 border-t border-slate-700">
+                    <div class="flex items-center justify-between mb-3">
+                        <label class="text-sm font-medium text-slate-300">Genres (Subcategories)</label>
+                        <button type="button" (click)="addGenre()"
+                            class="text-xs font-bold text-primary hover:text-primary-light flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[14px]">add</span> Add Genre
+                        </button>
+                    </div>
+                    <div class="space-y-2">
+                        <div *ngFor="let genre of gameRequest.genres; let i = index; trackBy: trackByIndex"
+                            class="flex items-center gap-2 group">
+                            <span class="text-xs text-slate-500 w-4 text-right">{{ i + 1 }}.</span>
+                            <select [ngModel]="genre" (ngModelChange)="updateGenre(i, $event)"
+                                class="flex-1 bg-[#111318] border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:ring-1 focus:ring-primary focus:border-primary">
+                                <option value="action">Action</option>
+                                <option value="rpg">RPG</option>
+                                <option value="strategy">Strategy</option>
+                                <option value="adventure">Adventure</option>
+                                <option value="simulation">Simulation</option>
+                                <option value="sports">Sports</option>
+                                <option value="racing">Racing</option>
+                                <option value="horror">Horror</option>
+                            </select>
+                            <div class="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button type="button" (click)="moveGenre(i, -1)" [disabled]="i === 0"
+                                    class="p-1 rounded hover:bg-white/10 text-slate-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed"
+                                    title="Move Up">
+                                    <span class="material-symbols-outlined text-[16px]">arrow_upward</span>
+                                </button>
+                                <button type="button" (click)="moveGenre(i, 1)"
+                                    [disabled]="i === gameRequest.genres!.length - 1"
+                                    class="p-1 rounded hover:bg-white/10 text-slate-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed"
+                                    title="Move Down">
+                                    <span class="material-symbols-outlined text-[16px]">arrow_downward</span>
+                                </button>
+                                <button type="button" (click)="removeGenre(i)"
+                                    class="p-1 rounded hover:bg-red-500/20 text-slate-400 hover:text-red-500"
+                                    title="Remove">
+                                    <span class="material-symbols-outlined text-[16px]">close</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div *ngIf="!gameRequest.genres?.length" class="text-xs text-slate-500 italic py-2">
+                            No genres selected. Add at least one genre.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Platforms (Multi-select with ordering) -->
+                <div class="pt-4 border-t border-slate-700">
+                    <div class="flex items-center justify-between mb-3">
+                        <label class="text-sm font-medium text-slate-300">Platforms (Main Categories)</label>
+                        <button type="button" (click)="addPlatform()"
+                            class="text-xs font-bold text-primary hover:text-primary-light flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[14px]">add</span> Add Platform
+                        </button>
+                    </div>
+                    <div class="space-y-2">
+                        <div *ngFor="let platform of gameRequest.platforms; let i = index; trackBy: trackByIndex"
+                            class="flex items-center gap-2 group">
+                            <span class="text-xs text-slate-500 w-4 text-right">{{ i + 1 }}.</span>
+                            <select [ngModel]="platform" (ngModelChange)="updatePlatform(i, $event)"
+                                class="flex-1 bg-[#111318] border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:ring-1 focus:ring-primary focus:border-primary">
+                                <option value="pc">PC</option>
+                                <option value="ps5">PlayStation 5</option>
+                                <option value="ps4">PlayStation 4</option>
+                                <option value="ps3">PlayStation 3</option>
+                                <option value="ps2">PlayStation 2</option>
+                                <option value="ps1">PlayStation 1</option>
+                                <option value="xbox-series">Xbox Series X|S</option>
+                                <option value="xbox-one">Xbox One</option>
+                                <option value="xbox-360">Xbox 360</option>
+                                <option value="switch">Nintendo Switch</option>
+                                <option value="android">Android</option>
+                                <option value="ios">iOS</option>
+                            </select>
+                            <div class="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button type="button" (click)="movePlatform(i, -1)" [disabled]="i === 0"
+                                    class="p-1 rounded hover:bg-white/10 text-slate-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed"
+                                    title="Move Up">
+                                    <span class="material-symbols-outlined text-[16px]">arrow_upward</span>
+                                </button>
+                                <button type="button" (click)="movePlatform(i, 1)"
+                                    [disabled]="i === gameRequest.platforms!.length - 1"
+                                    class="p-1 rounded hover:bg-white/10 text-slate-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed"
+                                    title="Move Down">
+                                    <span class="material-symbols-outlined text-[16px]">arrow_downward</span>
+                                </button>
+                                <button type="button" (click)="removePlatform(i)"
+                                    class="p-1 rounded hover:bg-red-500/20 text-slate-400 hover:text-red-500"
+                                    title="Remove">
+                                    <span class="material-symbols-outlined text-[16px]">close</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div *ngIf="!gameRequest.platforms?.length" class="text-xs text-slate-500 italic py-2">
+                            No platforms selected. Add at least one platform.
+                        </div>
                     </div>
                 </div>
             </div>

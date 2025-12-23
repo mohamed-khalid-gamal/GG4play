@@ -12,18 +12,54 @@ export class GameService {
 
     // Platforms data (Main Categories - Devices/Consoles)
     private platforms: Platform[] = [
-        { id: 'pc', name: 'PC', slug: 'pc', shortName: 'PC', icon: 'computer', color: 'text-blue-500', order: 1 },
-        { id: 'ps5', name: 'PlayStation 5', slug: 'ps5', shortName: 'PS5', icon: 'sports_esports', color: 'text-indigo-500', order: 2 },
-        { id: 'ps4', name: 'PlayStation 4', slug: 'ps4', shortName: 'PS4', icon: 'sports_esports', color: 'text-blue-600', order: 3 },
-        { id: 'ps3', name: 'PlayStation 3', slug: 'ps3', shortName: 'PS3', icon: 'sports_esports', color: 'text-slate-500', order: 4 },
-        { id: 'ps2', name: 'PlayStation 2', slug: 'ps2', shortName: 'PS2', icon: 'sports_esports', color: 'text-slate-600', order: 5 },
-        { id: 'ps1', name: 'PlayStation 1', slug: 'ps1', shortName: 'PS1', icon: 'sports_esports', color: 'text-slate-700', order: 6 },
-        { id: 'xbox-series', name: 'Xbox Series X|S', slug: 'xbox-series', shortName: 'XSX', icon: 'sports_esports', color: 'text-green-500', order: 7 },
-        { id: 'xbox-one', name: 'Xbox One', slug: 'xbox-one', shortName: 'XB1', icon: 'sports_esports', color: 'text-green-600', order: 8 },
-        { id: 'xbox-360', name: 'Xbox 360', slug: 'xbox-360', shortName: 'X360', icon: 'sports_esports', color: 'text-green-700', order: 9 },
-        { id: 'switch', name: 'Nintendo Switch', slug: 'switch', shortName: 'NSW', icon: 'sports_esports', color: 'text-red-500', order: 10 },
-        { id: 'android', name: 'Android', slug: 'android', shortName: 'APK', icon: 'android', color: 'text-lime-500', order: 11 },
-        { id: 'ios', name: 'iOS', slug: 'ios', shortName: 'iOS', icon: 'phone_iphone', color: 'text-slate-400', order: 12 },
+        {
+            id: 'pc', name: 'PC', slug: 'pc', shortName: 'PC', icon: 'computer', color: 'text-blue-500', order: 1,
+            image: 'https://images.unsplash.com/photo-1593640408182-31c70c8268f5?q=80&w=600&auto=format&fit=crop' // PC Setup
+        },
+        {
+            id: 'ps5', name: 'PlayStation 5', slug: 'ps5', shortName: 'PS5', icon: 'sports_esports', color: 'text-indigo-500', order: 2,
+            image: 'https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?q=80&w=600&auto=format&fit=crop' // PS5 Controller
+        },
+        {
+            id: 'ps4', name: 'PlayStation 4', slug: 'ps4', shortName: 'PS4', icon: 'sports_esports', color: 'text-blue-600', order: 3,
+            image: 'https://images.unsplash.com/photo-1507457379470-08b800bebc67?q=80&w=600&auto=format&fit=crop' // PS4 Controller
+        },
+        {
+            id: 'ps3', name: 'PlayStation 3', slug: 'ps3', shortName: 'PS3', icon: 'sports_esports', color: 'text-slate-500', order: 4,
+            image: 'https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?q=80&w=600&auto=format&fit=crop' // Gaming Generic
+        },
+        {
+            id: 'ps2', name: 'PlayStation 2', slug: 'ps2', shortName: 'PS2', icon: 'sports_esports', color: 'text-slate-600', order: 5,
+            image: 'https://images.unsplash.com/photo-1592840496694-26d035b5a6fa?q=80&w=600&auto=format&fit=crop' // Retro
+        },
+        {
+            id: 'ps1', name: 'PlayStation 1', slug: 'ps1', shortName: 'PS1', icon: 'sports_esports', color: 'text-slate-700', order: 6,
+            image: 'https://images.unsplash.com/photo-1563298723-dcfebaa392e3?q=80&w=600&auto=format&fit=crop' // Retro console
+        },
+        {
+            id: 'xbox-series', name: 'Xbox Series X|S', slug: 'xbox-series', shortName: 'XSX', icon: 'sports_esports', color: 'text-green-500', order: 7,
+            image: 'https://images.unsplash.com/photo-1621259182903-f200652874ee?q=80&w=600&auto=format&fit=crop' // Xbox Series X
+        },
+        {
+            id: 'xbox-one', name: 'Xbox One', slug: 'xbox-one', shortName: 'XB1', icon: 'sports_esports', color: 'text-green-600', order: 8,
+            image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=600&auto=format&fit=crop' // Gaming
+        },
+        {
+            id: 'xbox-360', name: 'Xbox 360', slug: 'xbox-360', shortName: 'X360', icon: 'sports_esports', color: 'text-green-700', order: 9,
+            image: 'https://images.unsplash.com/photo-1605901309584-818e25960b8f?q=80&w=600&auto=format&fit=crop' // Xbox Controller
+        },
+        {
+            id: 'switch', name: 'Nintendo Switch', slug: 'switch', shortName: 'NSW', icon: 'sports_esports', color: 'text-red-500', order: 10,
+            image: 'https://images.unsplash.com/photo-1578303512597-81e6cc155b3e?q=80&w=600&auto=format&fit=crop' // Switch
+        },
+        {
+            id: 'android', name: 'Android', slug: 'android', shortName: 'APK', icon: 'android', color: 'text-lime-500', order: 11,
+            image: 'https://images.unsplash.com/photo-1626071477484-8123281245b0?q=80&w=600&auto=format&fit=crop' // Android Gaming
+        },
+        {
+            id: 'ios', name: 'iOS', slug: 'ios', shortName: 'iOS', icon: 'phone_iphone', color: 'text-slate-400', order: 12,
+            image: 'https://images.unsplash.com/photo-1512036666432-2181c1f26420?q=80&w=600&auto=format&fit=crop' // iPhone Gaming
+        },
     ];
 
     // Genres data (Subcategories - Game Types)

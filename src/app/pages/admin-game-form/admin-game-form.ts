@@ -83,6 +83,70 @@ export class AdminGameFormComponent {
 
   // === Nested Form Helpers ===
 
+  // Track by index for ngFor
+  trackByIndex(index: number): number {
+    return index;
+  }
+
+  // Genres
+  addGenre() {
+    if (!this.gameRequest.genres) this.gameRequest.genres = [];
+    // Add a default genre that's not already in the list
+    const availableGenres = ['action', 'rpg', 'strategy', 'adventure', 'simulation', 'sports', 'racing', 'horror'];
+    const nextGenre = availableGenres.find(g => !this.gameRequest.genres!.includes(g)) || 'action';
+    this.gameRequest.genres.push(nextGenre);
+  }
+
+  removeGenre(index: number) {
+    this.gameRequest.genres?.splice(index, 1);
+  }
+
+  updateGenre(index: number, value: string) {
+    if (this.gameRequest.genres) {
+      this.gameRequest.genres[index] = value;
+    }
+  }
+
+  moveGenre(index: number, direction: -1 | 1) {
+    if (!this.gameRequest.genres) return;
+    const newIndex = index + direction;
+    if (newIndex < 0 || newIndex >= this.gameRequest.genres.length) return;
+
+    // Swap the genres
+    const temp = this.gameRequest.genres[index];
+    this.gameRequest.genres[index] = this.gameRequest.genres[newIndex];
+    this.gameRequest.genres[newIndex] = temp;
+  }
+
+  // Platforms
+  addPlatform() {
+    if (!this.gameRequest.platforms) this.gameRequest.platforms = [];
+    const availablePlatforms = ['pc', 'ps5', 'ps4', 'ps3', 'ps2', 'ps1', 'xbox-series', 'xbox-one', 'xbox-360', 'switch', 'android', 'ios'];
+    const nextPlatform = availablePlatforms.find(p => !this.gameRequest.platforms!.includes(p)) || 'pc';
+    this.gameRequest.platforms.push(nextPlatform);
+  }
+
+  removePlatform(index: number) {
+    this.gameRequest.platforms?.splice(index, 1);
+  }
+
+  updatePlatform(index: number, value: string) {
+    if (this.gameRequest.platforms) {
+      this.gameRequest.platforms[index] = value;
+    }
+  }
+
+  movePlatform(index: number, direction: -1 | 1) {
+    if (!this.gameRequest.platforms) return;
+    const newIndex = index + direction;
+    if (newIndex < 0 || newIndex >= this.gameRequest.platforms.length) return;
+
+    // Swap the platforms
+    const temp = this.gameRequest.platforms[index];
+    this.gameRequest.platforms[index] = this.gameRequest.platforms[newIndex];
+    this.gameRequest.platforms[newIndex] = temp;
+  }
+
   // ScreenShots
   addScreenshot() {
     if (!this.gameRequest.screenshots) this.gameRequest.screenshots = [];

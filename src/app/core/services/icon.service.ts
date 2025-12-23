@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map, shareReplay } from 'rxjs';
+import { Observable, map, shareReplay, of } from 'rxjs';
 
 export interface NormalizedIcon {
     name: string;
@@ -15,52 +15,52 @@ export interface NormalizedIcon {
 })
 export class IconService {
     private http = inject(HttpClient);
-    private iconsCache$: Observable<NormalizedIcon[]> | null = null;
-
-    /**
-     * Load all icons from the local JSON file
-     * Results are cached after first load
-     */
-    getAllIcons(): Observable<NormalizedIcon[]> {
-        if (this.iconsCache$) {
-            return this.iconsCache$;
+    searchIcons(query: string): Observable<NormalizedIcon[]> {
+        if (!query || query.length < 2) {
+            return of([]);
         }
 
-        this.iconsCache$ = this.http.get<Record<string, any>>('assets/icons.json').pipe(
-            map(data => {
-                const icons: NormalizedIcon[] = [];
-
-                for (const [name, meta] of Object.entries(data)) {
-                    // Determine the best style (prefer solid > regular > brands)
-                    const styles = meta.styles || [];
-                    const freeStyles = meta.free || [];
-
-                    let style = 'solid';
-                    if (freeStyles.includes('solid')) {
-                        style = 'solid';
-                    } else if (freeStyles.includes('regular')) {
-                        style = 'regular';
-                    } else if (freeStyles.includes('brands')) {
-                        style = 'brands';
-                    } else if (styles.length > 0) {
-                        style = styles[0];
+        const graphqlQuery = {
+            query: `
+                query {
+                    search(version: "6.x", query: "${query}", first: 20) {
+                        id
+                        label
+                        familyStylesByLicense {
+                            free {
+                                style
+                            }
+                        }
                     }
-
-                    icons.push({
-                        name,
-                        label: meta.label || name,
-                        terms: meta.search?.terms || [],
-                        styles: freeStyles,
-                        cssClass: `fa-${style} fa-${name}`
-                    });
                 }
+            `
+        };
 
-                console.log(`Loaded ${icons.length} icons from icons.json`);
-                return icons;
-            }),
-            shareReplay(1)
+        return this.http.post<any>('https://api.fontawesome.com', graphqlQuery).pipe(
+            map(response => {
+                const icons = response.data?.search || [];
+                const mapped = icons.map((icon: any) => {
+                    // Determine style (prioritize solid)
+                    const freeStyles = icon.familyStylesByLicense?.free || [];
+                    const styles = freeStyles.map((s: any) => s.style);
+                    let style = 'solid';
+
+                    if (styles.includes('solid')) style = 'solid';
+                    else if (styles.includes('regular')) style = 'regular';
+                    else if (styles.includes('brands')) style = 'brands';
+                    else if (styles.length > 0) style = styles[0];
+
+                    return {
+                        name: icon.id,
+                        label: icon.label || icon.id,
+                        terms: [],
+                        styles: styles,
+                        cssClass: `fa-${style} fa-${icon.id}` // Use generic mapping for now
+                    };
+                });
+
+                return mapped.filter((icon: NormalizedIcon) => icon.styles.length > 0);
+            })
         );
-
-        return this.iconsCache$;
     }
 }

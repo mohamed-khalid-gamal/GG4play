@@ -1,6 +1,8 @@
-import { Component, EventEmitter, Input, Output, OnInit, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit, OnDestroy, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Subject, Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged, switchMap, tap, finalize } from 'rxjs/operators';
 import { IconService, NormalizedIcon } from '../../../core/services/icon.service';
 
 @Component({
@@ -10,47 +12,62 @@ import { IconService, NormalizedIcon } from '../../../core/services/icon.service
     templateUrl: './icon-picker.component.html',
     styleUrl: './icon-picker.component.css'
 })
-export class IconPickerComponent implements OnInit {
+export class IconPickerComponent implements OnInit, OnDestroy {
     private iconService = inject(IconService);
+    private cdr = inject(ChangeDetectorRef);
+    private searchSubject = new Subject<string>();
+    private searchSubscription: Subscription | null = null;
 
     @Input() selectedIcon: string = '';
     @Output() iconSelected = new EventEmitter<string>();
 
     search = '';
-    allIcons: NormalizedIcon[] = [];
     filteredIcons: NormalizedIcon[] = [];
-    isLoading = true;
+    isLoading = false;
     loadError = false;
 
     ngOnInit(): void {
-        this.iconService.getAllIcons().subscribe({
+        this.searchSubscription = this.searchSubject.pipe(
+            debounceTime(400),
+            distinctUntilChanged(),
+            tap((query) => {
+                this.isLoading = true;
+                this.loadError = false;
+                this.filteredIcons = [];
+                this.cdr.markForCheck(); // Mark for check
+            }),
+            switchMap(query => this.iconService.searchIcons(query).pipe(
+                finalize(() => {
+                    this.isLoading = false;
+                    this.cdr.markForCheck(); // Mark for check
+                })
+            ))
+        ).subscribe({
             next: (icons) => {
-                this.allIcons = icons;
-                this.filteredIcons = icons.slice(0, 50); // Show first 50 by default
-                this.isLoading = false;
-                console.log(`IconPicker loaded ${icons.length} icons`);
+                this.filteredIcons = icons;
+                this.cdr.detectChanges(); // Force detect changes
             },
             error: (err) => {
-                console.error('Failed to load icons:', err);
-                this.isLoading = false;
+                console.error('Failed to search icons:', err);
                 this.loadError = true;
+                this.isLoading = false;
+                this.cdr.markForCheck();
             }
         });
     }
 
+    ngOnDestroy(): void {
+        this.searchSubscription?.unsubscribe();
+    }
+
     onSearch(): void {
-        const query = this.search.toLowerCase().trim();
-
-        if (!query) {
-            this.filteredIcons = this.allIcons.slice(0, 50);
-            return;
+        const query = this.search.trim();
+        if (query.length >= 2) {
+            this.searchSubject.next(query);
+        } else {
+            this.filteredIcons = [];
+            this.cdr.markForCheck();
         }
-
-        this.filteredIcons = this.allIcons.filter(icon =>
-            icon.name.toLowerCase().includes(query) ||
-            icon.label.toLowerCase().includes(query) ||
-            icon.terms.some(term => term.toLowerCase().includes(query))
-        ).slice(0, 100);
     }
 
     selectIcon(icon: NormalizedIcon): void {
@@ -64,6 +81,7 @@ export class IconPickerComponent implements OnInit {
 
     clearSearch(): void {
         this.search = '';
-        this.filteredIcons = this.allIcons.slice(0, 50);
+        this.filteredIcons = [];
+        this.loadError = false;
     }
 }
