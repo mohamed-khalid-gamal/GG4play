@@ -77,4 +77,34 @@ export class AdminGameLibraryComponent {
     console.log('Admin testing download link:', link.url);
     window.open(link.url, '_blank');
   }
+
+  // Expanded versions for toggling visibility
+  expandedVersions = new Set<string>();
+
+  addEdition(): void {
+    console.log('Add Edition clicked - feature coming soon');
+    alert('Add Edition feature coming soon!');
+  }
+
+  toggleVersionExpand(versionName: string): void {
+    if (this.expandedVersions.has(versionName)) {
+      this.expandedVersions.delete(versionName);
+    } else {
+      this.expandedVersions.add(versionName);
+    }
+  }
+
+  isVersionExpanded(versionName: string): boolean {
+    return this.expandedVersions.has(versionName);
+  }
+
+  editLinks(updateName: string): void {
+    console.log('Edit Links clicked for:', updateName);
+    alert(`Edit Links for "${updateName}" - feature coming soon!`);
+  }
+
+  replyToReview(reviewId: string): void {
+    console.log('Reply to review:', reviewId);
+    alert('Reply feature coming soon!');
+  }
 }

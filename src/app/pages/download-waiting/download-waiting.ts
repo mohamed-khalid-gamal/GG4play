@@ -64,4 +64,8 @@ export class DownloadWaitingComponent implements OnInit {
       this.router.navigate(['/']);
     }
   }
+
+  startFreeTrial(): void {
+    alert('Pro Gamer Membership - Start your free trial! (Feature coming soon)');
+  }
 }

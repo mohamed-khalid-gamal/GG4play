@@ -29,11 +29,11 @@
                     to save the NUSA President.
                 </h2>
                 <div class="flex gap-3 pt-2">
-                    <button
+                    <button (click)="playNow()"
                         class="flex items-center justify-center rounded-lg h-12 px-6 bg-primary text-white text-base font-bold tracking-[0.015em] hover:bg-blue-600 transition-colors shadow-lg shadow-blue-900/20">
                         Play Now
                     </button>
-                    <button
+                    <button (click)="addToWishlist()"
                         class="flex items-center justify-center rounded-lg h-12 px-6 bg-white/10 text-white text-base font-bold tracking-[0.015em] hover:bg-white/20 transition-colors backdrop-blur-md">
                         <span class="material-symbols-outlined mr-2">add</span>
                         Wishlist
@@ -49,7 +49,8 @@
             <div class="bg-card-dark rounded-xl p-5 border border-border-dark">
                 <div class="flex items-center justify-between mb-4">
                     <h3 class="text-white text-lg font-bold">Filters</h3>
-                    <button class="text-primary text-xs font-bold hover:underline">Reset All</button>
+                    <button (click)="resetFilters()" class="text-primary text-xs font-bold hover:underline">Reset
+                        All</button>
                 </div>
                 <!-- Filter Groups using Details/Summary -->
                 <div class="space-y-4">
@@ -63,7 +64,7 @@
                         </summary>
                         <div class="flex flex-col gap-2 pb-2 pl-1">
                             <label class="flex items-center gap-3 cursor-pointer group/item">
-                                <input checked=""
+                                <input [checked]="isGenreSelected('Action RPG')" (change)="toggleGenre('Action RPG')"
                                     class="h-4 w-4 rounded border-border-dark bg-[#282e39] text-primary focus:ring-primary focus:ring-offset-[#101622]"
                                     type="checkbox" />
                                 <span
@@ -71,14 +72,15 @@
                                     RPG</span>
                             </label>
                             <label class="flex items-center gap-3 cursor-pointer group/item">
-                                <input
+                                <input [checked]="isGenreSelected('FPS')" (change)="toggleGenre('FPS')"
                                     class="h-4 w-4 rounded border-border-dark bg-[#282e39] text-primary focus:ring-primary focus:ring-offset-[#101622]"
                                     type="checkbox" />
                                 <span
                                     class="text-[#9ca6ba] text-sm group-hover/item:text-white transition-colors">FPS</span>
                             </label>
                             <label class="flex items-center gap-3 cursor-pointer group/item">
-                                <input
+                                <input [checked]="isGenreSelected('Battle Royale')"
+                                    (change)="toggleGenre('Battle Royale')"
                                     class="h-4 w-4 rounded border-border-dark bg-[#282e39] text-primary focus:ring-primary focus:ring-offset-[#101622]"
                                     type="checkbox" />
                                 <span
@@ -86,7 +88,8 @@
                                     Royale</span>
                             </label>
                             <label class="flex items-center gap-3 cursor-pointer group/item">
-                                <input
+                                <input [checked]="isGenreSelected('Hack & Slash')"
+                                    (change)="toggleGenre('Hack & Slash')"
                                     class="h-4 w-4 rounded border-border-dark bg-[#282e39] text-primary focus:ring-primary focus:ring-offset-[#101622]"
                                     type="checkbox" />
                                 <span class="text-[#9ca6ba] text-sm group-hover/item:text-white transition-colors">Hack
@@ -105,14 +108,16 @@
                         </summary>
                         <div class="flex flex-col gap-2 pb-2 pl-1">
                             <label class="flex items-center gap-3 cursor-pointer group/item">
-                                <input
+                                <input [checked]="isPlatformSelected('PC (Windows)')"
+                                    (change)="togglePlatform('PC (Windows)')"
                                     class="h-4 w-4 rounded border-border-dark bg-[#282e39] text-primary focus:ring-primary focus:ring-offset-[#101622]"
                                     type="checkbox" />
                                 <span class="text-[#9ca6ba] text-sm group-hover/item:text-white transition-colors">PC
                                     (Windows)</span>
                             </label>
                             <label class="flex items-center gap-3 cursor-pointer group/item">
-                                <input
+                                <input [checked]="isPlatformSelected('PlayStation 5')"
+                                    (change)="togglePlatform('PlayStation 5')"
                                     class="h-4 w-4 rounded border-border-dark bg-[#282e39] text-primary focus:ring-primary focus:ring-offset-[#101622]"
                                     type="checkbox" />
                                 <span
@@ -120,7 +125,8 @@
                                     5</span>
                             </label>
                             <label class="flex items-center gap-3 cursor-pointer group/item">
-                                <input
+                                <input [checked]="isPlatformSelected('Xbox Series X')"
+                                    (change)="togglePlatform('Xbox Series X')"
                                     class="h-4 w-4 rounded border-border-dark bg-[#282e39] text-primary focus:ring-primary focus:ring-offset-[#101622]"
                                     type="checkbox" />
                                 <span class="text-[#9ca6ba] text-sm group-hover/item:text-white transition-colors">Xbox
@@ -144,37 +150,53 @@
                 <!-- Sort Toolbar -->
                 <div class="flex items-center gap-2">
                     <div class="flex gap-1 bg-card-dark rounded-lg p-1 border border-border-dark">
-                        <button class="p-2 text-white bg-white/10 rounded hover:bg-white/20 transition-colors"
-                            title="Grid View">
+                        <button (click)="setViewMode('grid')" class="p-2 rounded hover:bg-white/20 transition-colors"
+                            [class.text-white]="viewMode() === 'grid'" [class.bg-white/10]="viewMode() === 'grid'"
+                            [class.text-slate-400]="viewMode() !== 'grid'" title="Grid View">
                             <span class="material-symbols-outlined text-[20px]">grid_view</span>
                         </button>
-                        <button class="p-2 text-[#9ca6ba] hover:text-white hover:bg-white/5 rounded transition-colors"
-                            title="List View">
+                        <button (click)="setViewMode('list')" class="p-2 rounded hover:bg-white/5 transition-colors"
+                            [class.text-white]="viewMode() === 'list'" [class.bg-white/10]="viewMode() === 'list'"
+                            [class.text-slate-400]="viewMode() !== 'list'" title="List View">
                             <span class="material-symbols-outlined text-[20px]">view_list</span>
                         </button>
                     </div>
-                    <button
-                        class="flex items-center gap-2 h-10 px-4 bg-card-dark border border-border-dark rounded-lg text-white text-sm font-medium hover:bg-[#282e39] transition-colors whitespace-nowrap">
-                        <span class="material-symbols-outlined text-[20px]">sort</span>
-                        <span>Sort by: <span class="text-primary font-bold">Popularity</span></span>
-                        <span class="material-symbols-outlined text-[16px]">keyboard_arrow_down</span>
-                    </button>
+                    <div class="relative">
+                        <button (click)="toggleSortDropdown()"
+                            class="flex items-center gap-2 h-10 px-4 bg-card-dark border border-border-dark rounded-lg text-white text-sm font-medium hover:bg-[#282e39] transition-colors whitespace-nowrap">
+                            <span class="material-symbols-outlined text-[20px]">sort</span>
+                            <span>Sort by: <span class="text-primary font-bold">{{ sortBy() | titlecase }}</span></span>
+                            <span class="material-symbols-outlined text-[16px]">keyboard_arrow_down</span>
+                        </button>
+                        <div *ngIf="showSortDropdown()"
+                            class="absolute top-full right-0 mt-1 w-48 bg-card-dark border border-border-dark rounded-lg shadow-xl z-50">
+                            <button (click)="setSortBy('popularity')"
+                                class="w-full text-left px-4 py-2 text-sm text-white hover:bg-white/5">Popularity</button>
+                            <button (click)="setSortBy('rating')"
+                                class="w-full text-left px-4 py-2 text-sm text-white hover:bg-white/5">Rating</button>
+                            <button (click)="setSortBy('newest')"
+                                class="w-full text-left px-4 py-2 text-sm text-white hover:bg-white/5">Newest</button>
+                            <button (click)="setSortBy('name')"
+                                class="w-full text-left px-4 py-2 text-sm text-white hover:bg-white/5">Name A-Z</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <!-- Game Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                <!-- Card 1 -->
-                <a routerLink="/game/starfield"
+            <!-- Game Grid / List -->
+            <div [class]="viewMode() === 'grid' ? 'game-grid' : 'game-list'">
+                @for (game of filteredGames(); track game.id) {
+                <a [routerLink]="'/game/' + game.id"
                     class="group relative flex flex-col bg-card-dark rounded-xl overflow-hidden border border-border-dark hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-1 cursor-pointer">
                     <div class="relative aspect-[3/4] overflow-hidden">
-                        <img alt="Space explorer looking at distant planet"
+                        <img [alt]="game.name"
                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                            data-alt="Space explorer looking at distant planet"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCx1X_eboOiqEadQKeXhEMdpyAgQ0r4mxOgDrEMKBRtMUkuHCL04y6H_Dack0t3tVbtfzbEa3jgrixm2V0I2EOyf22JudIc8vMfqEDirhCSysMmUzw8_h_ujHaFN1r7nO8ZlcsHyG4ttB6wma2AOqvK43J7unrklu8XKa3En_gxnNIONjzrrAIE54USA5kSQwFwHR5FdMdWdGv5pDN7Ug6lHyuk7KpRiuolENPXuwYroys8nb8tn_e8xx4BdXg9bJ8w9x7p4m3IkgU" />
+                            [src]="game.image" />
+                        @if (game.discount) {
                         <div
                             class="absolute top-2 right-2 bg-black/70 backdrop-blur-sm text-white text-xs font-bold px-2 py-1 rounded">
-                            -20%
+                            {{ game.discount }}
                         </div>
+                        }
                         <!-- Hover Overlay -->
                         <div
                             class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4">
@@ -188,256 +210,78 @@
                         <div class="flex justify-between items-start">
                             <h3
                                 class="text-white text-base font-bold line-clamp-1 group-hover:text-primary transition-colors">
-                                Starfield</h3>
+                                {{ game.name }}</h3>
                             <div class="flex items-center gap-1 text-yellow-400">
                                 <span class="material-symbols-outlined text-[16px] !leading-none">star</span>
-                                <span class="text-xs font-bold text-white">4.5</span>
+                                <span class="text-xs font-bold text-white">{{ game.rating }}</span>
                             </div>
                         </div>
                         <div class="flex items-center gap-2 text-[#9ca6ba] text-xs">
-                            <span class="bg-[#282e39] px-1.5 py-0.5 rounded">RPG</span>
-                            <span class="bg-[#282e39] px-1.5 py-0.5 rounded">Space</span>
+                            @for (genre of game.genres.slice(0, 2); track genre) {
+                            <span class="bg-[#282e39] px-1.5 py-0.5 rounded">{{ genre }}</span>
+                            }
                         </div>
                         <div class="mt-auto pt-2 flex items-center justify-between border-t border-border-dark/50">
                             <div class="flex items-center gap-2 text-[#9ca6ba]">
+                                @if (game.platforms.includes('PC (Windows)')) {
                                 <span class="material-symbols-outlined text-[18px]">desktop_windows</span>
+                                }
+                                @if (game.platforms.includes('PlayStation 5')) {
                                 <span class="material-symbols-outlined text-[18px]">stadia_controller</span>
-                            </div>
-                            <span class="text-primary font-bold">Free</span>
-                        </div>
-                    </div>
-                </a>
-                <!-- Card 2 -->
-                <a routerLink="/game/cyberpunk-2077"
-                    class="group relative flex flex-col bg-card-dark rounded-xl overflow-hidden border border-border-dark hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-1 cursor-pointer">
-                    <div class="relative aspect-[3/4] overflow-hidden">
-                        <img alt="Cyberpunk neon city street at night"
-                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                            data-alt="Cyberpunk neon city street at night"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuB91tbL_4N93xF4cMmNqA74u8nhrrlzcy4TPQtE-w1BEieRB5AjOE13JWmjnTTgcJA4IZcl_RCUW7ewhMWPZoYebuQuspNxHK7aBHBfZJ0Iyuul-Ii79sP4dnfmZ0xMv3OB55kaIRi8vub9QbKEYXFCXM_s1zVtmlIj80LEilrT9_mvvf4M8vhRSPcTgzdkT9RQ-3GgytSasPQKhLb3aNiWMC2-izgmvCC34uPNdcNRnGypPgxWBRLsubruq15Lqq3A5NejxNrAgBM" />
-                        <!-- Hover Overlay -->
-                        <div
-                            class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4">
-                            <button
-                                class="w-full h-10 bg-primary text-white text-sm font-bold rounded-lg shadow-lg hover:bg-blue-600 transition-colors transform translate-y-4 group-hover:translate-y-0 duration-300">
-                                View Details
-                            </button>
-                        </div>
-                    </div>
-                    <div class="p-4 flex flex-col gap-2 flex-1">
-                        <div class="flex justify-between items-start">
-                            <h3
-                                class="text-white text-base font-bold line-clamp-1 group-hover:text-primary transition-colors">
-                                Cyberpunk 2077</h3>
-                            <div class="flex items-center gap-1 text-yellow-400">
-                                <span class="material-symbols-outlined text-[16px] !leading-none">star</span>
-                                <span class="text-xs font-bold text-white">4.8</span>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-2 text-[#9ca6ba] text-xs">
-                            <span class="bg-[#282e39] px-1.5 py-0.5 rounded">Action</span>
-                            <span class="bg-[#282e39] px-1.5 py-0.5 rounded">Sci-Fi</span>
-                        </div>
-                        <div class="mt-auto pt-2 flex items-center justify-between border-t border-border-dark/50">
-                            <div class="flex items-center gap-2 text-[#9ca6ba]">
-                                <span class="material-symbols-outlined text-[18px]">desktop_windows</span>
+                                }
+                                @if (game.platforms.includes('Xbox Series X')) {
                                 <span class="material-symbols-outlined text-[18px]">gamepad</span>
+                                }
                             </div>
-                            <span class="text-primary font-bold">Free</span>
+                            <span class="text-primary font-bold">{{ game.price }}</span>
                         </div>
                     </div>
                 </a>
-                <!-- Card 3 -->
-                <a routerLink="/game/elden-ring"
-                    class="group relative flex flex-col bg-card-dark rounded-xl overflow-hidden border border-border-dark hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-1 cursor-pointer">
-                    <div class="relative aspect-[3/4] overflow-hidden">
-                        <img alt="Dark silhouette of a warrior in a fantasy forest"
-                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                            data-alt="Dark silhouette of a warrior in a fantasy forest"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGbONEqMduD9sJpInJYMYvJKOcMqKzl7q4EFlLTpTAHEIb7VWTzmqod_GVLOY-qOKAI179sRZAtaxIGrC5CHZzYJwF1Y5JpGV85RJw0NVHqorahYkGoPgDuyNRJThyzDKNTZVZExHhwoPeA7LZiaqqfaOO3aiLQu6JTfF9Lw8ST3P60h4uCeDUhUn7ocyRu3FDiATiY0Pf83X6qApLYXVm0-Q8kA_HQEiOeQ6j2jCFpXaX_CKnvSwBJ-6A3bvFNcvS2f0LFBS91R4" />
-                        <!-- Hover Overlay -->
-                        <div
-                            class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4">
-                            <button
-                                class="w-full h-10 bg-primary text-white text-sm font-bold rounded-lg shadow-lg hover:bg-blue-600 transition-colors transform translate-y-4 group-hover:translate-y-0 duration-300">
-                                View Details
-                            </button>
-                        </div>
-                    </div>
-                    <div class="p-4 flex flex-col gap-2 flex-1">
-                        <div class="flex justify-between items-start">
-                            <h3
-                                class="text-white text-base font-bold line-clamp-1 group-hover:text-primary transition-colors">
-                                Elden Ring</h3>
-                            <div class="flex items-center gap-1 text-yellow-400">
-                                <span class="material-symbols-outlined text-[16px] !leading-none">star</span>
-                                <span class="text-xs font-bold text-white">4.9</span>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-2 text-[#9ca6ba] text-xs">
-                            <span class="bg-[#282e39] px-1.5 py-0.5 rounded">Souls-like</span>
-                            <span class="bg-[#282e39] px-1.5 py-0.5 rounded">RPG</span>
-                        </div>
-                        <div class="mt-auto pt-2 flex items-center justify-between border-t border-border-dark/50">
-                            <div class="flex items-center gap-2 text-[#9ca6ba]">
-                                <span class="material-symbols-outlined text-[18px]">desktop_windows</span>
-                                <span class="material-symbols-outlined text-[18px]">gamepad</span>
-                            </div>
-                            <span class="text-primary font-bold">Free</span>
-                        </div>
-                    </div>
-                </a>
-                <!-- Card 4 -->
-                <a routerLink="/game/valorant"
-                    class="group relative flex flex-col bg-card-dark rounded-xl overflow-hidden border border-border-dark hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-1 cursor-pointer">
-                    <div class="relative aspect-[3/4] overflow-hidden">
-                        <img alt="Abstract low poly landscape in red and blue"
-                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                            data-alt="Abstract low poly landscape in red and blue"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRKkdxkrR_Lq2ynjb3FZMzO7zi_wI-zCEgg6l83ZjJw90Ccce6INBq_GrCq2FMMPjJL-z8RG6rGd_IWoFNWnZe4-QSjhV6yRMtKlk4RGXo37dMgsLMnpGdaLNsm4R-7sRZuDsb5Ov4Q3EfRoCjFmu8Gsdc4oYD8z6_CFCdYTSjSd0SjMjuI_-Zno3q6Na6H66w_9yUCjFmcv2qdj8GyjxmE-w157tyuGbOoT-jSpUHMccL1H3BQSTneS1emPdiMJNMXXgU0CF5OUc" />
-                        <div class="absolute top-2 right-2 bg-primary text-white text-xs font-bold px-2 py-1 rounded">
-                            Free
-                        </div>
-                        <!-- Hover Overlay -->
-                        <div
-                            class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4">
-                            <button
-                                class="w-full h-10 bg-primary text-white text-sm font-bold rounded-lg shadow-lg hover:bg-blue-600 transition-colors transform translate-y-4 group-hover:translate-y-0 duration-300">
-                                Play Now
-                            </button>
-                        </div>
-                    </div>
-                    <div class="p-4 flex flex-col gap-2 flex-1">
-                        <div class="flex justify-between items-start">
-                            <h3
-                                class="text-white text-base font-bold line-clamp-1 group-hover:text-primary transition-colors">
-                                Valorant</h3>
-                            <div class="flex items-center gap-1 text-yellow-400">
-                                <span class="material-symbols-outlined text-[16px] !leading-none">star</span>
-                                <span class="text-xs font-bold text-white">4.4</span>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-2 text-[#9ca6ba] text-xs">
-                            <span class="bg-[#282e39] px-1.5 py-0.5 rounded">Shooter</span>
-                            <span class="bg-[#282e39] px-1.5 py-0.5 rounded">Tac-FPS</span>
-                        </div>
-                        <div class="mt-auto pt-2 flex items-center justify-between border-t border-border-dark/50">
-                            <div class="flex items-center gap-2 text-[#9ca6ba]">
-                                <span class="material-symbols-outlined text-[18px]">desktop_windows</span>
-                            </div>
-                            <span class="text-primary font-bold">Free</span>
-                        </div>
-                    </div>
-                </a>
-                <!-- Card 5 -->
-                <a routerLink="/game/forza-horizon-5"
-                    class="group relative flex flex-col bg-card-dark rounded-xl overflow-hidden border border-border-dark hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-1 cursor-pointer">
-                    <div class="relative aspect-[3/4] overflow-hidden">
-                        <img alt="Toy car on a race track"
-                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                            data-alt="Toy car on a race track"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzPwEXCbTb3YD6M2WmJly3u-RDMnOTB5ZMDVLDsxEtFZl99i-cgF3eIBDtD560-AsGKzc0sB3iLuHrX7vyLocJutTHpOjzdFgJnQC0JABs2hVk87bIN4Bpr3KXaAp-nxrgNGrmsLIwyNDd6VrOpndETdiHVPg3UpV30uB-_ixILJsnsoDa2J8x3z3M1Rby3ijl4knkHrbNAXz-Xo2YFp8wDtNPavFrEZtH1cE43l2VgW57jT0yycapJWw16ls8RNJ1AVvIdvTjg98" />
-                        <!-- Hover Overlay -->
-                        <div
-                            class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4">
-                            <button
-                                class="w-full h-10 bg-primary text-white text-sm font-bold rounded-lg shadow-lg hover:bg-blue-600 transition-colors transform translate-y-4 group-hover:translate-y-0 duration-300">
-                                View Details
-                            </button>
-                        </div>
-                    </div>
-                    <div class="p-4 flex flex-col gap-2 flex-1">
-                        <div class="flex justify-between items-start">
-                            <h3
-                                class="text-white text-base font-bold line-clamp-1 group-hover:text-primary transition-colors">
-                                Forza Horizon 5</h3>
-                            <div class="flex items-center gap-1 text-yellow-400">
-                                <span class="material-symbols-outlined text-[16px] !leading-none">star</span>
-                                <span class="text-xs font-bold text-white">4.7</span>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-2 text-[#9ca6ba] text-xs">
-                            <span class="bg-[#282e39] px-1.5 py-0.5 rounded">Racing</span>
-                            <span class="bg-[#282e39] px-1.5 py-0.5 rounded">Open World</span>
-                        </div>
-                        <div class="mt-auto pt-2 flex items-center justify-between border-t border-border-dark/50">
-                            <div class="flex items-center gap-2 text-[#9ca6ba]">
-                                <span class="material-symbols-outlined text-[18px]">desktop_windows</span>
-                                <span class="material-symbols-outlined text-[18px]">gamepad</span>
-                            </div>
-                            <span class="text-primary font-bold">Free</span>
-                        </div>
-                    </div>
-                </a>
-                <!-- Card 6 -->
-                <a routerLink="/game/doom-eternal"
-                    class="group relative flex flex-col bg-card-dark rounded-xl overflow-hidden border border-border-dark hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-1 cursor-pointer">
-                    <div class="relative aspect-[3/4] overflow-hidden">
-                        <img alt="Red light glowing on a futuristic helmet"
-                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                            data-alt="Red light glowing on a futuristic helmet"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWV3yaOpUQtal_9R8lBhF5oL-1dZjesBHu2rq0eaIuHWBh_mso4bm7XtxLioYLPHPbbPraAAnlE5hpAr29jYkO5osfsXJl82L8K554nGVAHL0OogLvMZJzfau2PvW7X-Kqrf01kQMVh1ag6v4Nhj29gVjSSTDhQQpqMJ4BYugQlaTAk-JL8ABAB_am15Z7oKVdkz3hllnxplPoNp2SMlO3M4__5bE9h54b_YWtLLEGzckA7jEc26tERv1nQXwhP3CEFVlgLOdNU40" />
-                        <!-- Hover Overlay -->
-                        <div
-                            class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4">
-                            <button
-                                class="w-full h-10 bg-primary text-white text-sm font-bold rounded-lg shadow-lg hover:bg-blue-600 transition-colors transform translate-y-4 group-hover:translate-y-0 duration-300">
-                                View Details
-                            </button>
-                        </div>
-                    </div>
-                    <div class="p-4 flex flex-col gap-2 flex-1">
-                        <div class="flex justify-between items-start">
-                            <h3
-                                class="text-white text-base font-bold line-clamp-1 group-hover:text-primary transition-colors">
-                                Doom Eternal</h3>
-                            <div class="flex items-center gap-1 text-yellow-400">
-                                <span class="material-symbols-outlined text-[16px] !leading-none">star</span>
-                                <span class="text-xs font-bold text-white">4.8</span>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-2 text-[#9ca6ba] text-xs">
-                            <span class="bg-[#282e39] px-1.5 py-0.5 rounded">FPS</span>
-                            <span class="bg-[#282e39] px-1.5 py-0.5 rounded">Action</span>
-                        </div>
-                        <div class="mt-auto pt-2 flex items-center justify-between border-t border-border-dark/50">
-                            <div class="flex items-center gap-2 text-[#9ca6ba]">
-                                <span class="material-symbols-outlined text-[18px]">desktop_windows</span>
-                                <span class="material-symbols-outlined text-[18px]">stadia_controller</span>
-                                <span class="material-symbols-outlined text-[18px]">gamepad</span>
-                            </div>
-                            <span class="text-primary font-bold">Free</span>
-                        </div>
-                    </div>
-                </a>
+                } @empty {
+                <div class="col-span-full py-12 text-center text-[#9ca6ba]">
+                    <span class="material-symbols-outlined text-[48px] mb-4 block">search_off</span>
+                    <p class="text-lg">No games match your filters.</p>
+                    <button (click)="resetFilters()" class="mt-4 text-primary hover:underline">Reset Filters</button>
+                </div>
+                }
             </div>
             <!-- Pagination -->
             <div class="mt-12 flex justify-center">
                 <nav class="flex items-center gap-2 bg-card-dark rounded-lg p-2 border border-border-dark">
-                    <button
+                    <button (click)="prevPage()"
                         class="flex items-center justify-center w-10 h-10 rounded-lg text-[#9ca6ba] hover:bg-white/5 hover:text-white transition-colors"
-                        disabled="">
+                        [disabled]="currentPage() === 1">
                         <span class="material-symbols-outlined">chevron_left</span>
                     </button>
-                    <button
-                        class="flex items-center justify-center w-10 h-10 rounded-lg bg-primary text-white font-bold shadow-md shadow-primary/20">
+                    <button (click)="goToPage(1)"
+                        class="flex items-center justify-center w-10 h-10 rounded-lg font-bold transition-colors"
+                        [class.bg-primary]="currentPage() === 1" [class.text-white]="currentPage() === 1"
+                        [class.shadow-md]="currentPage() === 1" [class.shadow-primary/20]="currentPage() === 1"
+                        [class.text-slate-400]="currentPage() !== 1" [class.hover:bg-white/5]="currentPage() !== 1">
                         1
                     </button>
-                    <button
-                        class="flex items-center justify-center w-10 h-10 rounded-lg text-[#9ca6ba] hover:bg-white/5 hover:text-white transition-colors">
+                    <button (click)="goToPage(2)"
+                        class="flex items-center justify-center w-10 h-10 rounded-lg font-bold transition-colors"
+                        [class.bg-primary]="currentPage() === 2" [class.text-white]="currentPage() === 2"
+                        [class.text-slate-400]="currentPage() !== 2" [class.hover:bg-white/5]="currentPage() !== 2">
                         2
                     </button>
-                    <button
-                        class="flex items-center justify-center w-10 h-10 rounded-lg text-[#9ca6ba] hover:bg-white/5 hover:text-white transition-colors">
+                    <button (click)="goToPage(3)"
+                        class="flex items-center justify-center w-10 h-10 rounded-lg font-bold transition-colors"
+                        [class.bg-primary]="currentPage() === 3" [class.text-white]="currentPage() === 3"
+                        [class.text-slate-400]="currentPage() !== 3" [class.hover:bg-white/5]="currentPage() !== 3">
                         3
                     </button>
                     <div class="flex items-center justify-center w-10 h-10 text-[#9ca6ba]">...</div>
-                    <button
-                        class="flex items-center justify-center w-10 h-10 rounded-lg text-[#9ca6ba] hover:bg-white/5 hover:text-white transition-colors">
+                    <button (click)="goToPage(8)"
+                        class="flex items-center justify-center w-10 h-10 rounded-lg font-bold transition-colors"
+                        [class.bg-primary]="currentPage() === 8" [class.text-white]="currentPage() === 8"
+                        [class.text-slate-400]="currentPage() !== 8" [class.hover:bg-white/5]="currentPage() !== 8">
                         8
                     </button>
-                    <button
-                        class="flex items-center justify-center w-10 h-10 rounded-lg text-[#9ca6ba] hover:bg-white/5 hover:text-white transition-colors">
+                    <button (click)="nextPage()"
+                        class="flex items-center justify-center w-10 h-10 rounded-lg text-[#9ca6ba] hover:bg-white/5 hover:text-white transition-colors"
+                        [disabled]="currentPage() === totalPages">
                         <span class="material-symbols-outlined">chevron_right</span>
                     </button>
                 </nav>
